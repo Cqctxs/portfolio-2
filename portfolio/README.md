@@ -20,6 +20,12 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## 3D Models
+
+This project uses 3D models stored in `public/models/`. These files (particularly `Background.glb`) are excluded from version control due to their large file size.
+
+**Important:** The `public/models/` directory is ignored in `.gitignore` to prevent large binary files from being committed to the repository. Make sure to keep your 3D model files locally or use a separate asset hosting solution.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

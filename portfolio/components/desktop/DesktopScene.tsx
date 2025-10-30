@@ -1,11 +1,12 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useFrame, useThree, type ThreeElements } from "@react-three/fiber";
 import { useGLTF, useAnimations } from "@react-three/drei";
 import {
   AnimationMixer,
   PerspectiveCamera,
+  LoopRepeat,
   type Group,
   type Mesh,
   type MeshStandardMaterial,
@@ -13,6 +14,14 @@ import {
 import type { GLTF } from "three-stdlib";
 
 const MODEL_PATH = "/models/Background.glb";
+
+// Camera animation settings - adjust these values
+const CAMERA_ANIMATION = {
+  duration: 5, // seconds for one complete cycle
+  zOffset: -8, // how far to move on Z-axis (can be negative)
+  startY: 5, // starting Y position
+  easing: "linear", // "smooth" or "linear"
+} as const;
 
 useGLTF.preload(MODEL_PATH);
 
@@ -86,24 +95,34 @@ export function Model(props: ThreeElements["group"]) {
 export default function DesktopScene() {
   const { scene, animations, cameras } = useGLTF(MODEL_PATH);
   const { camera: canvasCamera, size } = useThree();
-  const mixerRef = useRef<AnimationMixer | null>(null);
+  const sceneMixerRef = useRef<AnimationMixer | null>(null);
+  const timeRef = useRef(0);
+  const initialCameraZ = useRef<number | null>(null);
 
+  // Set initial camera position
   useEffect(() => {
-    if (!cameras || cameras.length === 0) return;
+    if (canvasCamera instanceof PerspectiveCamera) {
+      // Store initial Z position if not set
+      if (initialCameraZ.current === null) {
+        initialCameraZ.current = cameras?.[0]?.position.z ?? 0;
+        canvasCamera.position.z = initialCameraZ.current;
+      }
 
-    const sourceCamera = cameras[0] as PerspectiveCamera;
-    if (
-      sourceCamera.isPerspectiveCamera &&
-      canvasCamera instanceof PerspectiveCamera
-    ) {
-      canvasCamera.fov = sourceCamera.fov;
-      canvasCamera.near = sourceCamera.near;
-      canvasCamera.far = sourceCamera.far;
+      // Set camera properties from GLTF camera if available
+      if (cameras && cameras.length > 0) {
+        const sourceCamera = cameras[0] as PerspectiveCamera;
+        if (sourceCamera.isPerspectiveCamera) {
+          canvasCamera.fov = sourceCamera.fov;
+          canvasCamera.near = sourceCamera.near;
+          canvasCamera.far = sourceCamera.far;
+          canvasCamera.position.x = sourceCamera.position.x;
+          canvasCamera.position.y = sourceCamera.position.y;
+          canvasCamera.quaternion.copy(sourceCamera.quaternion);
+        }
+      }
+
+      canvasCamera.updateProjectionMatrix();
     }
-
-    canvasCamera.position.copy(sourceCamera.position);
-    canvasCamera.quaternion.copy(sourceCamera.quaternion);
-    canvasCamera.updateProjectionMatrix();
   }, [cameras, canvasCamera]);
 
   useEffect(() => {
@@ -116,20 +135,41 @@ export default function DesktopScene() {
   useEffect(() => {
     if (!animations.length) return;
 
-    const mixer = new AnimationMixer(scene);
+    // Create mixer for scene animations (like Icosphere)
+    const sceneMixer = new AnimationMixer(scene);
+
     animations.forEach((clip) => {
-      mixer.clipAction(clip).play();
+      const action = sceneMixer.clipAction(clip);
+      action.setLoop(LoopRepeat, Infinity);
+      action.play();
+      console.log(`Playing scene animation: ${clip.name}`);
     });
-    mixerRef.current = mixer;
+
+    sceneMixerRef.current = sceneMixer;
 
     return () => {
-      mixer.stopAllAction();
-      mixerRef.current = null;
+      sceneMixer.stopAllAction();
+      sceneMixerRef.current = null;
     };
   }, [animations, scene]);
 
+  // Custom camera animation on each frame
   useFrame((_, delta) => {
-    mixerRef.current?.update(delta);
+    // Update scene animations
+    sceneMixerRef.current?.update(delta);
+
+    // Custom Z-axis camera animation
+    timeRef.current += delta;
+    const cycleDuration = CAMERA_ANIMATION.duration;
+    const normalizedTime = (timeRef.current % cycleDuration) / cycleDuration; // 0 to 1
+
+    // Calculate Z position with easing
+    let progress = normalizedTime;
+
+    // Apply Z animation
+    const startZ = initialCameraZ.current ?? 0;
+    const targetZ = startZ + CAMERA_ANIMATION.zOffset;
+    canvasCamera.position.z = startZ + (targetZ - startZ) * progress;
   });
 
   return <primitive object={scene} dispose={null} />;
