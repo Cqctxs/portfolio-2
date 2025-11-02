@@ -3,6 +3,13 @@
 import { Canvas } from "@react-three/fiber";
 import { Suspense, useRef } from "react";
 import { Model, CameraAnimation } from "./DesktopScene";
+import {
+  EffectComposer,
+  Bloom,
+  GodRays,
+  Scanline,
+} from "@react-three/postprocessing";
+import { BlendFunction } from "postprocessing";
 
 export default function DesktopBackground() {
   const icosphereRef = useRef<any>(null);
@@ -30,6 +37,39 @@ export default function DesktopBackground() {
         <Suspense fallback={null}>
           <Model icosphereRef={icosphereRef} />
         </Suspense>
+
+        {/* Postprocessing Effects */}
+        <EffectComposer>
+          {/* Bloom Effect */}
+          <Bloom
+            intensity={3}
+            luminanceThreshold={0.2}
+            luminanceSmoothing={0.9}
+            mipmapBlur={true}
+            radius={0.85}
+          />
+
+          {/* God Rays (Volumetric Light) from Icosphere */}
+          {icosphereRef.current && (
+            <GodRays
+              sun={icosphereRef.current}
+              blendFunction={BlendFunction.SCREEN}
+              samples={60} // Quality (30-100)
+              density={0.96} // Ray density (0-1)
+              decay={0.9} // Falloff (0-1)
+              weight={0.6} // Intensity (0-1)
+              exposure={0.6} // Brightness (0-1)
+              clampMax={1} // Maximum brightness
+            />
+          )}
+
+          {/* Scanlines */}
+          <Scanline
+            blendFunction={BlendFunction.OVERLAY}
+            density={1.25} // Line density (higher = more lines)
+            opacity={0.15} // Visibility (0-1)
+          />
+        </EffectComposer>
       </Canvas>
     </div>
   );
