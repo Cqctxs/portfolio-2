@@ -1,7 +1,7 @@
 "use client";
 
 import { Canvas } from "@react-three/fiber";
-import { Suspense, useRef } from "react";
+import { Suspense, useRef, useState } from "react";
 import { Model, CameraAnimation } from "./DesktopScene";
 import {
   EffectComposer,
@@ -13,6 +13,7 @@ import { BlendFunction } from "postprocessing";
 
 export default function DesktopBackground() {
   const icosphereRef = useRef<any>(null);
+  const [modelLoaded, setModelLoaded] = useState(false);
 
   return (
     <div className="absolute inset-0 -z-10">
@@ -35,7 +36,10 @@ export default function DesktopBackground() {
         <color attach="background" args={["#0d021d"]} />
         <CameraAnimation icosphereRef={icosphereRef} />
         <Suspense fallback={null}>
-          <Model icosphereRef={icosphereRef} />
+          <Model
+            icosphereRef={icosphereRef}
+            onLoad={() => setModelLoaded(true)}
+          />
         </Suspense>
 
         {/* Postprocessing Effects */}
@@ -50,8 +54,9 @@ export default function DesktopBackground() {
           />
 
           {/* God Rays (Volumetric Light) from Icosphere */}
-          {icosphereRef.current && (
+          {modelLoaded && icosphereRef.current && (
             <GodRays
+              key="godrays" // Force remount when model loads
               sun={icosphereRef.current}
               blendFunction={BlendFunction.SCREEN}
               samples={60} // Quality (30-100)

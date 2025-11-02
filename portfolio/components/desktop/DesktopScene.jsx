@@ -8,10 +8,17 @@ import { useGLTF, useAnimations } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 
-export function Model({ icosphereRef, ...props }) {
+export function Model({ icosphereRef, onLoad, ...props }) {
   const group = React.useRef();
   const { nodes, materials, animations } = useGLTF("/models/Background.glb");
   const { actions } = useAnimations(animations, group);
+
+  // Notify parent when icosphere is mounted
+  useEffect(() => {
+    if (icosphereRef.current && onLoad) {
+      onLoad();
+    }
+  }, [icosphereRef, onLoad]);
 
   return (
     <group ref={group} {...props} dispose={null}>
