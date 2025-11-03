@@ -1,7 +1,7 @@
 "use client";
 
 import { Canvas } from "@react-three/fiber";
-import { Suspense, useRef, useState } from "react";
+import { Suspense, use, useEffect, useRef, useState } from "react";
 import { Model, CameraAnimation } from "./DesktopScene";
 import {
   EffectComposer,
@@ -14,6 +14,24 @@ import { BlendFunction } from "postprocessing";
 export default function DesktopBackground() {
   const icosphereRef = useRef<any>(null);
   const [modelLoaded, setModelLoaded] = useState(false);
+  const mouseXRef = useRef(0);
+  const mouseYRef = useRef(0);
+
+  {
+    /* Track mouse position for interactive camera movement */
+  }
+  useEffect(() => {
+    const handleMouseMove = (event: MouseEvent) => {
+      // Normalize mouse position relative to screen center (-1 to 1)
+      mouseXRef.current = (event.clientX / window.innerWidth) * 2 - 1;
+      mouseYRef.current = (event.clientY / window.innerHeight) * 2 - 1; // Invert Y axis
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, []);
 
   return (
     <div className="absolute inset-0 -z-10">
@@ -34,7 +52,11 @@ export default function DesktopBackground() {
         }}
       >
         <color attach="background" args={["#0d021d"]} />
-        <CameraAnimation icosphereRef={icosphereRef} />
+        <CameraAnimation
+          icosphereRef={icosphereRef}
+          mouseXRef={mouseXRef}
+          mouseYRef={mouseYRef}
+        />
         <Suspense fallback={null}>
           <Model
             icosphereRef={icosphereRef}

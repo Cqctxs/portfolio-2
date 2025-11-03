@@ -89,19 +89,18 @@ useGLTF.preload("/models/Background.glb");
 const sharedAnimationTime = { current: 0 };
 
 // Camera Animation Component
-export function CameraAnimation({ icosphereRef }) {
+export function CameraAnimation({ icosphereRef, mouseXRef, mouseYRef }) {
   const { camera } = useThree();
   const startZRef = useRef(null);
+  const currentX = useRef(0);
+  const currentY = useRef(0);
+  const parallaxFactor = 0.5; // Adjusted for normalized coordinates
 
-  useEffect(() => {
+  useFrame((state, delta) => {
     // Store initial Z position
     if (startZRef.current === null) {
       startZRef.current = camera.position.z;
     }
-  }, [camera]);
-
-  useFrame((state, delta) => {
-    if (startZRef.current === null) return;
 
     // Increment shared time
     sharedAnimationTime.current += delta;
@@ -117,6 +116,20 @@ export function CameraAnimation({ icosphereRef }) {
     if (icosphereRef?.current) {
       icosphereRef.current.position.z = -321.833 + zOffset;
     }
+
+    // Smooth parallax effect with lerp (linear interpolation)
+    // This creates smooth, performant movement
+    const targetX = mouseXRef.current * parallaxFactor;
+    const targetY = mouseYRef.current * parallaxFactor;
+
+    // Lerp factor - higher value = faster response (0.05 = smooth, 0.1 = snappier)
+    const lerpFactor = 0.05;
+
+    currentX.current += (targetX - currentX.current) * lerpFactor;
+    currentY.current += (targetY - currentY.current) * lerpFactor;
+
+    camera.position.x = currentX.current;
+    camera.position.y = 0.74 + currentY.current;
   });
 
   return null;
