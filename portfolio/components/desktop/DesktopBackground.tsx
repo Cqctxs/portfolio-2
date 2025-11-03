@@ -38,7 +38,7 @@ export default function DesktopBackground() {
       <div
         className="absolute inset-0"
         style={{
-          background: "linear-gradient(to bottom, #0f0724, #1a0f38, #0d021d)",
+          background: "linear-gradient(to bottom, #0f0724, #E94C89, #0d021d)",
         }}
       />
       <Canvas
@@ -51,7 +51,8 @@ export default function DesktopBackground() {
           rotation: [0, 0, 0],
         }}
       >
-        <color attach="background" args={["#0d021d"]} />
+        {/* <color attach="background" args={["#0d021d"]} /> */}
+        <fog attach="fog" args={["#3d1a4d", 50, 400]} />
         <CameraAnimation
           icosphereRef={icosphereRef}
           mouseXRef={mouseXRef}
@@ -68,11 +69,11 @@ export default function DesktopBackground() {
         <EffectComposer>
           {/* Bloom Effect */}
           <Bloom
-            intensity={3}
+            intensity={1.5}
             luminanceThreshold={0.2}
             luminanceSmoothing={0.9}
             mipmapBlur={true}
-            radius={0.85}
+            radius={0.65}
           />
 
           {/* God Rays (Volumetric Light) from Icosphere */}
@@ -81,11 +82,11 @@ export default function DesktopBackground() {
               key="godrays" // Force remount when model loads
               sun={icosphereRef.current}
               blendFunction={BlendFunction.SCREEN}
-              samples={60} // Quality (30-100)
-              density={0.96} // Ray density (0-1)
-              decay={0.9} // Falloff (0-1)
-              weight={0.6} // Intensity (0-1)
-              exposure={0.6} // Brightness (0-1)
+              samples={100} // Higher samples = smoother rays (increased from 60)
+              density={0.98} // Higher density = smoother gradient (increased from 0.96)
+              decay={0.96} // Slightly higher for smoother falloff
+              weight={0.2} // Intensity (0-1)
+              exposure={0.3} // Brightness (0-1)
               clampMax={1} // Maximum brightness
             />
           )}

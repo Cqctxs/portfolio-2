@@ -94,7 +94,8 @@ export function CameraAnimation({ icosphereRef, mouseXRef, mouseYRef }) {
   const startZRef = useRef(null);
   const currentX = useRef(0);
   const currentY = useRef(0);
-  const parallaxFactor = 0.5; // Adjusted for normalized coordinates
+  const parallaxFactorX = 1; // Adjusted for normalized coordinates
+  const parallaxFactorY = 0.3; // Adjusted for normalized coordinates
 
   useFrame((state, delta) => {
     // Store initial Z position
@@ -119,8 +120,8 @@ export function CameraAnimation({ icosphereRef, mouseXRef, mouseYRef }) {
 
     // Smooth parallax effect with lerp (linear interpolation)
     // This creates smooth, performant movement
-    const targetX = mouseXRef.current * parallaxFactor;
-    const targetY = mouseYRef.current * parallaxFactor;
+    const targetX = mouseXRef.current * parallaxFactorX;
+    const targetY = mouseYRef.current * parallaxFactorY;
 
     // Lerp factor - higher value = faster response (0.05 = smooth, 0.1 = snappier)
     const lerpFactor = 0.05;
