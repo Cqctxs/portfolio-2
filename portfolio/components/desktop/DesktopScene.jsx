@@ -94,8 +94,8 @@ export function CameraAnimation({ icosphereRef, mouseXRef, mouseYRef }) {
   const startZRef = useRef(null);
   const currentX = useRef(0);
   const currentY = useRef(0);
-  const parallaxFactorX = 1; // Adjusted for normalized coordinates
-  const parallaxFactorY = 0.3; // Adjusted for normalized coordinates
+  const parallaxFactorX = -1; // Adjusted for normalized coordinates
+  const parallaxFactorY = 0.5; // Adjusted for normalized coordinates
 
   useFrame((state, delta) => {
     // Store initial Z position
