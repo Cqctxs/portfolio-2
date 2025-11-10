@@ -1,8 +1,9 @@
 import AboutWindow from "@/components/windows/AboutWindow";
-import CartWindow from "@/components/windows/CartWindow";
+import AchievementsWindow from "@/components/windows/AchievementsWindow";
 import ContactWindow from "@/components/windows/ContactWindow";
-import LookbookWindow from "@/components/windows/LookbookWindow";
-import ShopWindow from "@/components/windows/ShopWindow";
+import ProjectsWindow from "@/components/windows/ProjectsWindow";
+import ResumeWindow from "@/components/windows/ResumeWindow";
+import SkillsWindow from "@/components/windows/SkillsWindow";
 import type {
   DesktopIconConfig,
   DesktopWindowConfig,
@@ -11,34 +12,40 @@ import type {
 
 export const desktopWindows: DesktopWindowConfig[] = [
   {
-    id: "shop",
-    title: "Shop",
-    iconSrc: "/icons/shop.png",
-    component: ShopWindow,
-  },
-  {
-    id: "lookbook",
-    title: "Lookbook",
-    iconSrc: "/icons/lookbook.png",
-    component: LookbookWindow,
-  },
-  {
     id: "about",
-    title: "About",
+    title: "About Me",
     iconSrc: "/icons/about.png",
     component: AboutWindow,
+  },
+  {
+    id: "projects",
+    title: "Projects",
+    iconSrc: "/icons/lookbook.png",
+    component: ProjectsWindow,
+  },
+  {
+    id: "skills",
+    title: "Skills & Experience",
+    iconSrc: "/icons/shop.png",
+    component: SkillsWindow,
+  },
+  {
+    id: "achievements",
+    title: "Achievements",
+    iconSrc: "/icons/cart.png",
+    component: AchievementsWindow,
+  },
+  {
+    id: "resume",
+    title: "Resume",
+    iconSrc: "/file.svg",
+    component: ResumeWindow,
   },
   {
     id: "contact",
     title: "Contact",
     iconSrc: "/icons/contact.png",
     component: ContactWindow,
-  },
-  {
-    id: "cart",
-    title: "Cart",
-    iconSrc: "/icons/cart.png",
-    component: CartWindow,
   },
 ];
 

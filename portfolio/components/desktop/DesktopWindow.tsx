@@ -29,14 +29,9 @@ export default function DesktopWindow({
       className="flex w-[400px] flex-col"
       style={{
         border: "2px solid",
-        borderColor: isFocused
-          ? "rgba(236, 72, 153, 0.8)"
-          : "rgba(168, 85, 247, 0.5)",
-        background: "rgba(15, 15, 25, 0.85)",
-        boxShadow: isFocused
-          ? "0 0 30px rgba(236, 72, 153, 0.4), inset 1px 1px 0px rgba(255,255,255,0.1), inset -1px -1px 0px rgba(0,0,0,0.5)"
-          : "0 0 15px rgba(124, 58, 237, 0.3), inset 1px 1px 0px rgba(255,255,255,0.05), inset -1px -1px 0px rgba(0,0,0,0.5)",
-        backdropFilter: "blur(8px)",
+        borderColor: "#ffffff #000000 #000000 #ffffff",
+        background: "#c0c0c0",
+        boxShadow: "4px 4px 8px rgba(0,0,0,0.5)",
       }}
     >
       {/* Title Bar */}
@@ -44,10 +39,10 @@ export default function DesktopWindow({
         className="flex items-center justify-between px-2 py-1"
         style={{
           background: isFocused
-            ? "linear-gradient(90deg, #ec4899 0%, #d946ef 50%, #a855f7 100%)"
-            : "linear-gradient(90deg, #6b7280 0%, #9ca3af 100%)",
+            ? "linear-gradient(90deg, #000080 0%, #1084d0 100%)"
+            : "linear-gradient(90deg, #808080 0%, #808080 100%)",
           height: "24px",
-          borderBottom: "2px solid rgba(0,0,0,0.4)",
+          borderBottom: "1px solid #000000",
         }}
       >
         <div className="flex items-center gap-2">
@@ -55,8 +50,8 @@ export default function DesktopWindow({
             style={{
               width: "16px",
               height: "16px",
-              background: "linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%)",
-              border: "1px solid rgba(255,255,255,0.3)",
+              background: "#ffffff",
+              border: "1px solid rgba(0,0,0,0.3)",
               boxShadow:
                 "inset 1px 1px 0px rgba(255,255,255,0.4), inset -1px -1px 0px rgba(0,0,0,0.4)",
             }}
@@ -66,7 +61,7 @@ export default function DesktopWindow({
             style={{
               fontSize: "12px",
               color: "#ffffff",
-              textShadow: "1px 1px 2px rgba(0,0,0,0.8)",
+              textShadow: "1px 1px 1px rgba(0,0,0,0.8)",
               letterSpacing: "0.02em",
             }}
           >
@@ -144,10 +139,10 @@ export default function DesktopWindow({
       <div
         className="flex items-center gap-1 px-2 py-1"
         style={{
-          background: "linear-gradient(180deg, #d4d4d8 0%, #a1a1aa 100%)",
-          borderBottom: "2px solid rgba(0,0,0,0.3)",
+          background: "#c0c0c0",
+          borderBottom: "1px solid #808080",
           boxShadow:
-            "inset 1px 1px 0px rgba(255,255,255,0.5), inset -1px -1px 0px rgba(0,0,0,0.3)",
+            "inset 1px 1px 0px rgba(255,255,255,0.8), inset -1px -1px 0px rgba(0,0,0,0.2)",
           height: "22px",
         }}
       >
@@ -163,16 +158,12 @@ export default function DesktopWindow({
               border: "none",
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background =
-                "linear-gradient(180deg, #a855f7 0%, #9333ea 100%)";
+              e.currentTarget.style.background = "#000080";
               e.currentTarget.style.color = "#fff";
-              e.currentTarget.style.boxShadow =
-                "inset 1px 1px 0px rgba(255,255,255,0.3), inset -1px -1px 0px rgba(0,0,0,0.3)";
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.background = "transparent";
               e.currentTarget.style.color = "#000";
-              e.currentTarget.style.boxShadow = "none";
             }}
           >
             {menuItem}
@@ -182,14 +173,15 @@ export default function DesktopWindow({
 
       {/* Content Area */}
       <div
-        className="flex-1 overflow-hidden p-2"
+        className="flex-1 overflow-hidden"
         style={{
-          background: "rgba(15, 15, 25, 0.6)",
+          background: "#ffffff",
+          color: "#000000",
           border: "2px solid",
-          borderColor: "rgba(124, 58, 237, 0.3)",
-          boxShadow:
-            "inset -1px -1px 0px rgba(255,255,255,0.05), inset 2px 2px 4px rgba(0,0,0,0.5)",
+          borderColor: "#808080 #ffffff #ffffff #808080",
+          boxShadow: "inset 1px 1px 2px rgba(0,0,0,0.1)",
           margin: "2px",
+          fontFamily: "Courier New, monospace",
         }}
       >
         {children}

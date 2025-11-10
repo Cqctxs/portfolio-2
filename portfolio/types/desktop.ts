@@ -1,11 +1,12 @@
 import type { ComponentType } from "react";
 
 export type DesktopWindowId =
-  | "shop"
-  | "lookbook"
+  | "projects"
+  | "skills"
+  | "achievements"
+  | "resume"
   | "about"
-  | "contact"
-  | "cart";
+  | "contact";
 
 export interface DesktopWindowConfig {
   id: DesktopWindowId;
