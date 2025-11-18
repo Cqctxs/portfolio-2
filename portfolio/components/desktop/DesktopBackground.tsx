@@ -13,6 +13,7 @@ import { BlendFunction } from "postprocessing";
 
 export default function DesktopBackground() {
   const icosphereRef = useRef<any>(null);
+  const cactusRef = useRef<any>(null);
   const [modelLoaded, setModelLoaded] = useState(false);
   const mouseXRef = useRef(0);
   const mouseYRef = useRef(0);
@@ -61,21 +62,13 @@ export default function DesktopBackground() {
         <Suspense fallback={null}>
           <Model
             icosphereRef={icosphereRef}
+            cactusRef={cactusRef}
             onLoad={() => setModelLoaded(true)}
           />
         </Suspense>
 
         {/* Postprocessing Effects */}
         <EffectComposer>
-          {/* Bloom Effect */}
-          <Bloom
-            intensity={1.5}
-            luminanceThreshold={0.2}
-            luminanceSmoothing={0.9}
-            mipmapBlur={true}
-            radius={0.65}
-          />
-
           {/* God Rays (Volumetric Light) from Icosphere */}
           {modelLoaded && icosphereRef.current && (
             <GodRays
@@ -90,7 +83,14 @@ export default function DesktopBackground() {
               clampMax={1} // Maximum brightness
             />
           )}
-
+          {/* Bloom Effect */}
+          <Bloom
+            intensity={1.5}
+            luminanceThreshold={0.2}
+            luminanceSmoothing={0.9}
+            mipmapBlur={true}
+            radius={0.65}
+          />
           {/* Scanlines */}
           <Scanline
             blendFunction={BlendFunction.OVERLAY}

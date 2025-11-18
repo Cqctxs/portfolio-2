@@ -8,9 +8,9 @@ import { useGLTF, useAnimations } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 
-export function Model({ icosphereRef, onLoad, ...props }) {
+export function Model({ icosphereRef, cactusRef, onLoad, ...props }) {
   const group = React.useRef();
-  const { nodes, materials, animations } = useGLTF("/models/Compressed_Background.glb");
+  const { nodes, materials, animations } = useGLTF("/models/Background_compressed.glb", true);
   const { actions } = useAnimations(animations, group);
 
   // Notify parent when icosphere is mounted
@@ -23,16 +23,73 @@ export function Model({ icosphereRef, onLoad, ...props }) {
   return (
     <group ref={group} {...props} dispose={null}>
       <group name="Scene">
-        <mesh name="Plane" geometry={nodes.Plane.geometry} material={materials['Material.004']} />
-        <mesh name="Cactus1" geometry={nodes.Cactus1.geometry} material={materials['Material.003']} position={[-0.252, 0, 0]} />
-        <mesh name="Plane001" geometry={nodes.Plane001.geometry} material={materials['Material.006']} />
-        <mesh name="Icosphere" geometry={nodes.Icosphere.geometry} material={materials['Material.005']} position={[0, 0.014, -321.833]} scale={52.712} />
+        <group name="Empty" position={[0, 0, -8]} />
+        <mesh
+          name="Plane"
+          geometry={nodes.Plane.geometry}
+          material={materials["Material.004"]}
+        />
+        <mesh
+          ref={cactusRef}
+          name="Cactus1"
+          geometry={nodes.Cactus1.geometry}
+          material={materials["Material.003"]}
+          position={[-0.252, 0, 0]}
+        />
+        <mesh
+          ref={cactusRef}
+          name="Cactus1003"
+          geometry={nodes.Cactus1003.geometry}
+          material={materials["Material.003"]}
+          position={[0.299, 0, 0]}
+        />
+        <mesh
+          ref={cactusRef}
+          name="Cactus1004"
+          geometry={nodes.Cactus1004.geometry}
+          material={materials["Material.003"]}
+          position={[0.315, 0, 0]}
+        />
+        <mesh
+          ref={cactusRef}
+          name="Cactus1005"
+          geometry={nodes.Cactus1005.geometry}
+          material={materials["Material.003"]}
+          position={[-0.173, 0, 0]}
+        />
+        <mesh
+          ref={cactusRef}
+          name="Cactus1006"
+          geometry={nodes.Cactus1006.geometry}
+          material={materials["Material.003"]}
+          position={[0.236, 0, 0]}
+        />
+        <mesh
+          ref={cactusRef}
+          name="Cactus1007"
+          geometry={nodes.Cactus1007.geometry}
+          material={materials["Material.003"]}
+          position={[-0.504, 0, 0]}
+        />
+        <mesh
+          name="Plane001"
+          geometry={nodes.Plane001.geometry}
+          material={materials["Material.006"]}
+        />
+        <mesh
+          name="Icosphere"
+          ref={icosphereRef}
+          geometry={nodes.Icosphere.geometry}
+          material={materials["Material.005"]}
+          position={[0, 0.014, -321.833]}
+          scale={52.712}
+        />
       </group>
     </group>
-  )
+  );
 }
 
-useGLTF.preload("/models/Compressed_Background.glb");
+  useGLTF.preload("/models/Background_compressed.glb", true);
 
 // Shared animation time
 const sharedAnimationTime = { current: 0 };
