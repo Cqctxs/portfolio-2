@@ -10,7 +10,7 @@ import * as THREE from "three";
 
 export function Model({ icosphereRef, cactusRef, onLoad, ...props }) {
   const group = React.useRef();
-  const { nodes, materials, animations } = useGLTF("/models/Background_compressed.glb", true);
+  const { nodes, materials, animations } = useGLTF("/models/Background.glb", true);
   const { actions } = useAnimations(animations, group);
 
   // Notify parent when icosphere is mounted
@@ -89,7 +89,7 @@ export function Model({ icosphereRef, cactusRef, onLoad, ...props }) {
   );
 }
 
-  useGLTF.preload("/models/Background_compressed.glb", true);
+  useGLTF.preload("/models/Background.glb", true);
 
 // Shared animation time
 const sharedAnimationTime = { current: 0 };
