@@ -2,7 +2,6 @@ import type { ComponentType } from "react";
 
 export type DesktopWindowId =
   | "projects"
-  | "skills"
   | "achievements"
   | "resume"
   | "about"

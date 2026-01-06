@@ -3,7 +3,6 @@ import AchievementsWindow from "@/components/windows/AchievementsWindow";
 import ContactWindow from "@/components/windows/ContactWindow";
 import ProjectsWindow from "@/components/windows/ProjectsWindow";
 import ResumeWindow from "@/components/windows/ResumeWindow";
-import SkillsWindow from "@/components/windows/SkillsWindow";
 import type {
   DesktopIconConfig,
   DesktopWindowConfig,
@@ -14,37 +13,31 @@ export const desktopWindows: DesktopWindowConfig[] = [
   {
     id: "about",
     title: "About Me",
-    iconSrc: "/icons/about.png",
+    iconSrc: "/icons/win98/about.ico",
     component: AboutWindow,
   },
   {
     id: "projects",
     title: "Projects",
-    iconSrc: "/icons/lookbook.png",
+    iconSrc: "/icons/win98/projects.ico",
     component: ProjectsWindow,
-  },
-  {
-    id: "skills",
-    title: "Skills & Experience",
-    iconSrc: "/icons/shop.png",
-    component: SkillsWindow,
   },
   {
     id: "achievements",
     title: "Achievements",
-    iconSrc: "/icons/cart.png",
+    iconSrc: "/icons/win98/achievements.ico",
     component: AchievementsWindow,
   },
   {
     id: "resume",
     title: "Resume",
-    iconSrc: "/file.svg",
+    iconSrc: "/icons/win98/resume.ico",
     component: ResumeWindow,
   },
   {
     id: "contact",
     title: "Contact",
-    iconSrc: "/icons/contact.png",
+    iconSrc: "/icons/win98/contact.ico",
     component: ContactWindow,
   },
 ];

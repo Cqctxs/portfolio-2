@@ -8,7 +8,7 @@ export default function IconDock() {
   const { openWindow } = useDesktopState();
 
   return (
-    <nav className="flex w-32 flex-col items-center gap-6 px-4 py-10">
+    <nav className="relative z-0 flex w-28 flex-col items-center gap-4 px-2 py-6">
       {desktopIcons.map((icon) => (
         <DesktopIcon
           key={icon.id}

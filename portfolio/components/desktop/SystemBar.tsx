@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
+import { useDesktopState } from "@/stores/desktopState";
+import { desktopWindowRecord } from "@/config/desktop";
 
 function formatTime(date: Date) {
   return date.toLocaleTimeString([], {
@@ -16,6 +18,9 @@ export default function SystemBar() {
   const [startMenuOpen, setStartMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const startButtonRef = useRef<HTMLButtonElement>(null);
+
+  const { openWindows, focusedWindow, windowStates, restoreWindow } =
+    useDesktopState();
 
   useEffect(() => {
     const interval = setInterval(() => setNow(new Date()), 1000);
@@ -174,7 +179,7 @@ export default function SystemBar() {
 
       {/* Taskbar */}
       <footer
-        className="absolute bottom-0 left-0 right-0 flex items-center justify-between px-1 py-1"
+        className="absolute bottom-0 left-0 right-0 flex items-center px-1 py-1 gap-1"
         style={{
           height: "32px",
           background: "#c0c0c0",
@@ -183,6 +188,7 @@ export default function SystemBar() {
           zIndex: 999,
         }}
       >
+        {/* Start Button */}
         <button
           ref={startButtonRef}
           onMouseDown={() => setStartPressed(true)}
@@ -191,7 +197,7 @@ export default function SystemBar() {
             handleStartClick();
           }}
           onMouseLeave={() => setStartPressed(false)}
-          className="flex items-center gap-2 px-3 py-1 font-bold"
+          className="flex items-center gap-2 px-3 py-1 font-bold shrink-0"
           style={{
             background: startPressed ? "#c0c0c0" : "#c0c0c0",
             boxShadow: startPressed
@@ -209,8 +215,71 @@ export default function SystemBar() {
           <span>Start</span>
         </button>
 
+        {/* Separator */}
         <div
-          className="flex items-center gap-2 px-3 py-1"
+          style={{
+            width: "2px",
+            height: "24px",
+            borderLeft: "1px solid #808080",
+            borderRight: "1px solid #ffffff",
+            marginLeft: "2px",
+            marginRight: "2px",
+          }}
+        />
+
+        {/* Open Windows */}
+        <div className="flex flex-1 gap-1 overflow-hidden">
+          {openWindows.map((windowId) => {
+            const windowConfig = desktopWindowRecord[windowId];
+            const windowState = windowStates[windowId];
+            if (!windowConfig) return null;
+
+            const isActive =
+              focusedWindow === windowId && !windowState?.isMinimized;
+
+            return (
+              <button
+                key={windowId}
+                onClick={() => restoreWindow(windowId)}
+                className="flex items-center gap-1 px-2 py-1 min-w-0"
+                style={{
+                  maxWidth: "150px",
+                  height: "24px",
+                  background: "#c0c0c0",
+                  boxShadow: isActive
+                    ? "inset -1px -1px 0px #ffffff, inset 1px 1px 0px #808080"
+                    : "inset 1px 1px 0px #ffffff, inset -1px -1px 0px #808080",
+                  border: "1px solid #000000",
+                  fontSize: "11px",
+                  color: "#000000",
+                  cursor: "pointer",
+                  overflow: "hidden",
+                }}
+              >
+                <img
+                  src={windowConfig.iconSrc}
+                  alt=""
+                  style={{ width: "16px", height: "16px", flexShrink: 0 }}
+                  draggable={false}
+                />
+                <span
+                  style={{
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    whiteSpace: "nowrap",
+                    fontWeight: isActive ? "bold" : "normal",
+                  }}
+                >
+                  {windowConfig.title}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* System Tray */}
+        <div
+          className="flex items-center gap-2 px-3 py-1 shrink-0"
           style={{
             background: "#c0c0c0",
             boxShadow: "inset -1px -1px 0px #ffffff, inset 1px 1px 0px #808080",

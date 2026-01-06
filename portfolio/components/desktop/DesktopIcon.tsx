@@ -8,7 +8,11 @@ type DesktopIconProps = {
   onActivate: () => void;
 };
 
-export default function DesktopIcon({ label, onActivate }: DesktopIconProps) {
+export default function DesktopIcon({
+  label,
+  iconSrc,
+  onActivate,
+}: DesktopIconProps) {
   const handleKeyDown = useCallback(
     (event: React.KeyboardEvent<HTMLButtonElement>) => {
       if (event.key === "Enter" || event.key === " ") {
@@ -21,14 +25,26 @@ export default function DesktopIcon({ label, onActivate }: DesktopIconProps) {
 
   return (
     <button
-      onDoubleClick={onActivate}
+      onClick={onActivate}
       onKeyDown={handleKeyDown}
-      className="flex w-full flex-col items-center gap-2 rounded-md border border-white/10 bg-white/5 px-2 py-3 text-xs uppercase tracking-[0.14em] transition hover:border-white/40 focus:border-white focus:outline-none"
+      className="flex w-full flex-col items-center gap-1 rounded p-2 text-xs transition hover:bg-white/20 focus:bg-white/30 focus:outline-none"
+      style={{
+        textShadow: "1px 1px 2px rgba(0,0,0,0.8)",
+      }}
     >
-      <div className="flex aspect-square w-14 items-center justify-center rounded bg-white/10">
-        <span className="text-[10px]">ICON</span>
+      <div className="flex h-12 w-12 items-center justify-center">
+        <img
+          src={iconSrc}
+          alt={label}
+          className="h-10 w-10 object-contain"
+          style={{
+            imageRendering: "pixelated",
+            filter: "drop-shadow(1px 1px 1px rgba(0,0,0,0.5))",
+          }}
+          draggable={false}
+        />
       </div>
-      <span>{label}</span>
+      <span className="text-center text-[11px] leading-tight">{label}</span>
     </button>
   );
 }

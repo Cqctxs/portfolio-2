@@ -5,28 +5,52 @@ import { useDesktopState } from "@/stores/desktopState";
 import DesktopWindow from "./DesktopWindow";
 
 export default function WindowManager() {
-  const { openWindows, focusedWindow, closeWindow, focusWindow } =
-    useDesktopState();
+  const {
+    openWindows,
+    focusedWindow,
+    windowStates,
+    closeWindow,
+    focusWindow,
+    minimizeWindow,
+    maximizeWindow,
+    updateWindowPosition,
+    updateWindowSize,
+  } = useDesktopState();
 
   return (
-    <div className="flex flex-1 flex-wrap gap-6 px-8 py-10">
+    <div className="absolute inset-0" style={{ pointerEvents: "none" }}>
       {openWindows.map((windowId) => {
         const windowConfig = desktopWindowRecord[windowId];
-        if (!windowConfig) {
+        const windowState = windowStates[windowId];
+
+        if (!windowConfig || !windowState) {
           return null;
         }
+
         const WindowComponent = windowConfig.component;
+
         return (
-          <DesktopWindow
-            key={windowId}
-            id={windowId}
-            title={windowConfig.title}
-            isFocused={focusedWindow === windowId}
-            onClose={() => closeWindow(windowId)}
-            onFocus={() => focusWindow(windowId)}
-          >
-            <WindowComponent />
-          </DesktopWindow>
+          <div key={windowId} style={{ pointerEvents: "auto" }}>
+            <DesktopWindow
+              id={windowId}
+              title={windowConfig.title}
+              icon={windowConfig.iconSrc}
+              isFocused={focusedWindow === windowId}
+              position={windowState.position}
+              size={windowState.size}
+              zIndex={windowState.zIndex}
+              isMinimized={windowState.isMinimized}
+              isMaximized={windowState.isMaximized}
+              onClose={() => closeWindow(windowId)}
+              onFocus={() => focusWindow(windowId)}
+              onMinimize={() => minimizeWindow(windowId)}
+              onMaximize={() => maximizeWindow(windowId)}
+              onPositionChange={(pos) => updateWindowPosition(windowId, pos)}
+              onSizeChange={(size) => updateWindowSize(windowId, size)}
+            >
+              <WindowComponent />
+            </DesktopWindow>
+          </div>
         );
       })}
     </div>
