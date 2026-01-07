@@ -18,7 +18,7 @@ Feel free to take notes about:
   return (
     <div
       style={{
-        background: "#ffffff",
+        background: "#c0c0c0",
         color: "#000000",
         fontFamily: "'W98UI', Tahoma, sans-serif",
         fontSize: "11px",
