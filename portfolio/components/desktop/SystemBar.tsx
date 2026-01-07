@@ -84,19 +84,19 @@ export default function SystemBar() {
               gap: "8px",
             }}
           >
-            <span style={{ fontSize: "24px" }}>🪟</span>
+            <img src="/icons/win98/windows.png" alt="" width="24" height="24" />
             <span style={{ fontSize: "18px" }}>Windows 98</span>
           </div>
 
           {/* Menu Items */}
           <div style={{ padding: "2px" }}>
             {[
-              { icon: "📁", label: "Programs", hasArrow: true },
-              { icon: "📄", label: "Documents", hasArrow: true },
-              { icon: "⚙️", label: "Settings", hasArrow: true },
-              { icon: "🔍", label: "Find", hasArrow: true },
-              { icon: "❓", label: "Help" },
-              { icon: "▶️", label: "Run..." },
+              { icon: "■", label: "Programs", hasArrow: true },
+              { icon: "□", label: "Documents", hasArrow: true },
+              { icon: "⚙", label: "Settings", hasArrow: true },
+              { icon: "?", label: "Find", hasArrow: true },
+              { icon: "i", label: "Help" },
+              { icon: ">", label: "Run..." },
             ].map((item, index) => (
               <button
                 key={index}
@@ -143,8 +143,8 @@ export default function SystemBar() {
 
             {/* Bottom Items */}
             {[
-              { icon: "🔌", label: "Log Off..." },
-              { icon: "🔴", label: "Shut Down..." },
+              { icon: "○", label: "Log Off..." },
+              { icon: "●", label: "Shut Down..." },
             ].map((item, index) => (
               <button
                 key={index}
@@ -211,7 +211,13 @@ export default function SystemBar() {
             cursor: "pointer",
           }}
         >
-          <span style={{ fontSize: "16px", fontWeight: "bold" }}>⊞</span>
+          <img
+            src="/icons/win98/windows.png"
+            alt="Start"
+            width="16"
+            height="16"
+            style={{ flexShrink: 0 }}
+          />
           <span>Start</span>
         </button>
 
@@ -291,7 +297,7 @@ export default function SystemBar() {
           }}
           suppressHydrationWarning
         >
-          🔊 {formatTime(now)}
+          {formatTime(now)}
         </div>
       </footer>
     </>

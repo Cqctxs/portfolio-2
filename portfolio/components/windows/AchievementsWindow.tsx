@@ -7,143 +7,116 @@ export default function AchievementsWindow() {
       subtitle: "1st Place Overall",
       description: "Canada's national youth cybersecurity competition",
       date: "May 2025",
-      icon: "🥇",
-      color: "#FFD700",
     },
     {
       title: "CyberPatriot National Finals 2025",
       subtitle: "Cisco 2nd Place, 6th Overall",
       description: "National cybersecurity defense competition",
       date: "March 2025",
-      icon: "🥈",
-      color: "#C0C0C0",
     },
     {
       title: "Hack the 6ix 2025",
       subtitle: "Best App Made with Vellum",
-      description: 'Winner for "Patchy" - AI cybersecurity platform',
+      description: '"Patchy" - AI cybersecurity platform',
       date: "July 2025",
-      icon: "🏆",
-      color: "#00ffff",
     },
     {
       title: "CCC Senior 2025",
       subtitle: "Distinction",
       description: "Canadian Computing Competition",
       date: "2025",
-      icon: "⭐",
-      color: "#ff00ff",
     },
     {
       title: "CCC Senior 2024",
       subtitle: "Distinction",
       description: "Canadian Computing Competition",
       date: "2024",
-      icon: "⭐",
-      color: "#ff00ff",
     },
     {
       title: "CCC Junior 2023",
       subtitle: "Perfect Score",
       description: "Canadian Computing Competition",
       date: "2023",
-      icon: "💯",
-      color: "#00ff00",
     },
   ];
 
   return (
-    <div className="h-full overflow-y-auto p-4" style={{ color: "#ffffff" }}>
+    <div
+      className="h-full overflow-y-auto p-2"
+      style={{
+        background: "#ffffff",
+        color: "#000000",
+        fontFamily: "'MS Sans Serif', Tahoma, sans-serif",
+        fontSize: "11px",
+      }}
+    >
       <div
-        className="mb-4 text-center"
         style={{
-          fontSize: "14px",
+          background: "#000080",
+          color: "#ffffff",
+          padding: "4px 8px",
+          marginBottom: "8px",
           fontWeight: "bold",
-          color: "#ffff00",
-          textShadow: "2px 2px 4px rgba(0,0,0,0.8)",
         }}
       >
-        🏆 Awards & Achievements 🏆
+        Awards & Achievements
       </div>
 
-      <div className="space-y-3">
+      {/* Achievement List */}
+      <div
+        style={{
+          border: "2px solid",
+          borderColor: "#808080 #ffffff #ffffff #808080",
+          background: "#ffffff",
+        }}
+      >
         {achievements.map((achievement, index) => (
           <div
             key={index}
             style={{
-              background: "rgba(0, 0, 0, 0.4)",
-              border: "2px solid",
-              borderColor: "#ffffff #808080 #808080 #ffffff",
-              padding: "12px",
-              boxShadow: "2px 2px 4px rgba(0,0,0,0.3)",
+              padding: "6px 8px",
+              borderBottom:
+                index < achievements.length - 1 ? "1px solid #c0c0c0" : "none",
+              display: "flex",
+              alignItems: "flex-start",
+              gap: "8px",
             }}
           >
-            <div className="flex items-start gap-3">
-              {/* Icon */}
-              <div
-                style={{
-                  fontSize: "32px",
-                  lineHeight: "1",
-                  textShadow: "2px 2px 4px rgba(0,0,0,0.8)",
-                }}
-              >
-                {achievement.icon}
-              </div>
-
-              {/* Content */}
-              <div className="flex-1">
-                <div
-                  className="font-bold"
-                  style={{
-                    fontSize: "13px",
-                    color: achievement.color,
-                    textShadow: "1px 1px 2px rgba(0,0,0,0.8)",
-                  }}
-                >
-                  {achievement.title}
-                </div>
-                <div
-                  className="font-bold"
-                  style={{
-                    fontSize: "12px",
-                    color: "#ffffff",
-                    marginTop: "2px",
-                  }}
-                >
-                  {achievement.subtitle}
-                </div>
-                <div
-                  style={{
-                    fontSize: "11px",
-                    color: "#c0c0c0",
-                    marginTop: "4px",
-                  }}
-                >
-                  {achievement.description}
-                </div>
-                <div
-                  style={{
-                    fontSize: "10px",
-                    color: "#808080",
-                    marginTop: "4px",
-                    fontStyle: "italic",
-                  }}
-                >
-                  {achievement.date}
-                </div>
+            <div
+              style={{
+                width: "16px",
+                height: "16px",
+                background: "#ffff00",
+                border: "1px solid #808080",
+                flexShrink: 0,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: "10px",
+                fontWeight: "bold",
+              }}
+            >
+              *
+            </div>
+            <div style={{ flex: 1 }}>
+              <div style={{ fontWeight: "bold" }}>{achievement.title}</div>
+              <div style={{ color: "#000080" }}>{achievement.subtitle}</div>
+              <div style={{ color: "#808080", fontSize: "10px" }}>
+                {achievement.description} - {achievement.date}
               </div>
             </div>
           </div>
         ))}
       </div>
 
-      {/* Footer Message */}
       <div
-        className="mt-6 text-center"
         style={{
-          fontSize: "11px",
-          color: "#00ffff",
-          fontStyle: "italic",
+          marginTop: "8px",
+          padding: "4px",
+          background: "#c0c0c0",
+          border: "1px solid #808080",
+          textAlign: "center",
+          fontSize: "10px",
         }}
       >
         Specializing in Cybersecurity & AI Development

@@ -17,6 +17,7 @@ type DesktopWindowProps = {
   onFocus: () => void;
   onMinimize: () => void;
   onMaximize: () => void;
+  onRestore: () => void;
   onPositionChange: (position: WindowPosition) => void;
   onSizeChange: (size: WindowSize) => void;
   children: React.ReactNode;
@@ -38,6 +39,7 @@ export default function DesktopWindow({
   onFocus,
   onMinimize,
   onMaximize,
+  onRestore,
   onPositionChange,
   onSizeChange,
   children,
@@ -193,10 +195,9 @@ export default function DesktopWindow({
         width: size.width,
         height: size.height,
         zIndex,
-        border: "2px solid",
-        borderColor: "#ffffff #000000 #000000 #ffffff",
+        border: "2px outset #c0c0c0",
         background: "#c0c0c0",
-        boxShadow: "4px 4px 8px rgba(0,0,0,0.5)",
+        boxShadow: "1px 1px 0px #000000",
       }}
     >
       {/* Resize handles */}
@@ -235,51 +236,47 @@ export default function DesktopWindow({
 
       {/* Title Bar */}
       <header
-        className="flex items-center justify-between px-2 py-1 cursor-move select-none"
+        className="flex items-center justify-between px-1 cursor-move select-none"
         onMouseDown={handleMouseDown}
         style={{
           background: isFocused
             ? "linear-gradient(90deg, #000080 0%, #1084d0 100%)"
-            : "linear-gradient(90deg, #808080 0%, #808080 100%)",
-          height: "24px",
-          borderBottom: "1px solid #000000",
+            : "linear-gradient(90deg, #808080 0%, #a0a0a0 100%)",
+          height: "18px",
           flexShrink: 0,
         }}
       >
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1">
           {icon ? (
             <img
               src={icon}
               alt=""
-              style={{ width: "16px", height: "16px" }}
+              style={{ width: "14px", height: "14px" }}
               draggable={false}
             />
           ) : (
             <div
               style={{
-                width: "16px",
-                height: "16px",
+                width: "14px",
+                height: "14px",
                 background: "#ffffff",
-                border: "1px solid rgba(0,0,0,0.3)",
-                boxShadow:
-                  "inset 1px 1px 0px rgba(255,255,255,0.4), inset -1px -1px 0px rgba(0,0,0,0.4)",
+                border: "1px solid #808080",
               }}
             />
           )}
           <span
-            className="font-bold"
             style={{
-              fontSize: "12px",
+              fontSize: "11px",
+              fontWeight: "bold",
               color: "#ffffff",
-              textShadow: "1px 1px 1px rgba(0,0,0,0.8)",
-              letterSpacing: "0.02em",
+              fontFamily: "'MS Sans Serif', Tahoma, sans-serif",
             }}
           >
             {title}
           </span>
         </div>
 
-        <div className="flex gap-1">
+        <div className="flex gap-0.5">
           {/* Minimize button */}
           <button
             onMouseDown={(e) => {
@@ -294,22 +291,18 @@ export default function DesktopWindow({
             onMouseLeave={() => setMinPressed(false)}
             className="flex items-center justify-center"
             style={{
-              width: "18px",
-              height: "18px",
-              background: minPressed
-                ? "linear-gradient(180deg, #a1a1aa 0%, #d4d4d8 100%)"
-                : "linear-gradient(180deg, #d4d4d8 0%, #a1a1aa 100%)",
-              border: "1px solid rgba(0,0,0,0.3)",
+              width: "16px",
+              height: "14px",
+              background: "#c0c0c0",
+              border: "none",
               boxShadow: minPressed
-                ? "inset -1px -1px 0px rgba(255,255,255,0.3), inset 1px 1px 0px rgba(0,0,0,0.4)"
-                : "inset 1px 1px 0px rgba(255,255,255,0.6), inset -1px -1px 0px rgba(0,0,0,0.3)",
-              fontSize: "10px",
-              fontWeight: "bold",
-              color: "#000",
-              transform: minPressed ? "translate(1px, 1px)" : "none",
+                ? "inset -1px -1px 0px #ffffff, inset 1px 1px 0px #808080"
+                : "inset 1px 1px 0px #ffffff, inset -1px -1px 0px #808080",
             }}
           >
-            _
+            <svg width="8" height="8" viewBox="0 0 8 8">
+              <rect x="0" y="6" width="6" height="2" fill="#000" />
+            </svg>
           </button>
           {/* Maximize/Restore button */}
           <button
@@ -320,27 +313,58 @@ export default function DesktopWindow({
             onMouseUp={(e) => {
               e.stopPropagation();
               setMaxPressed(false);
-              onMaximize();
+              if (isMaximized) {
+                onRestore();
+              } else {
+                onMaximize();
+              }
             }}
             onMouseLeave={() => setMaxPressed(false)}
             className="flex items-center justify-center"
             style={{
-              width: "18px",
-              height: "18px",
-              background: maxPressed
-                ? "linear-gradient(180deg, #a1a1aa 0%, #d4d4d8 100%)"
-                : "linear-gradient(180deg, #d4d4d8 0%, #a1a1aa 100%)",
-              border: "1px solid rgba(0,0,0,0.3)",
+              width: "16px",
+              height: "14px",
+              background: "#c0c0c0",
+              border: "none",
               boxShadow: maxPressed
-                ? "inset -1px -1px 0px rgba(255,255,255,0.3), inset 1px 1px 0px rgba(0,0,0,0.4)"
-                : "inset 1px 1px 0px rgba(255,255,255,0.6), inset -1px -1px 0px rgba(0,0,0,0.3)",
-              fontSize: "9px",
-              fontWeight: "bold",
-              color: "#000",
-              transform: maxPressed ? "translate(1px, 1px)" : "none",
+                ? "inset -1px -1px 0px #ffffff, inset 1px 1px 0px #808080"
+                : "inset 1px 1px 0px #ffffff, inset -1px -1px 0px #808080",
             }}
           >
-            {isMaximized ? "❐" : "□"}
+            {isMaximized ? (
+              <svg width="9" height="9" viewBox="0 0 9 9">
+                <rect
+                  x="2"
+                  y="0"
+                  width="7"
+                  height="7"
+                  fill="none"
+                  stroke="#000"
+                  strokeWidth="1"
+                />
+                <rect
+                  x="0"
+                  y="2"
+                  width="7"
+                  height="7"
+                  fill="#c0c0c0"
+                  stroke="#000"
+                  strokeWidth="1"
+                />
+              </svg>
+            ) : (
+              <svg width="9" height="9" viewBox="0 0 9 9">
+                <rect
+                  x="0"
+                  y="0"
+                  width="9"
+                  height="9"
+                  fill="none"
+                  stroke="#000"
+                  strokeWidth="1.5"
+                />
+              </svg>
+            )}
           </button>
           {/* Close button */}
           <button
@@ -356,48 +380,59 @@ export default function DesktopWindow({
             onMouseLeave={() => setClosePressed(false)}
             className="flex items-center justify-center"
             style={{
-              width: "18px",
-              height: "18px",
-              background: closePressed
-                ? "linear-gradient(180deg, #a1a1aa 0%, #d4d4d8 100%)"
-                : "linear-gradient(180deg, #d4d4d8 0%, #a1a1aa 100%)",
-              border: "1px solid rgba(0,0,0,0.3)",
+              width: "16px",
+              height: "14px",
+              background: "#c0c0c0",
+              border: "none",
               boxShadow: closePressed
-                ? "inset -1px -1px 0px rgba(255,255,255,0.3), inset 1px 1px 0px rgba(0,0,0,0.4)"
-                : "inset 1px 1px 0px rgba(255,255,255,0.6), inset -1px -1px 0px rgba(0,0,0,0.3)",
-              fontSize: "11px",
-              fontWeight: "bold",
-              color: "#000",
-              transform: closePressed ? "translate(1px, 1px)" : "none",
+                ? "inset -1px -1px 0px #ffffff, inset 1px 1px 0px #808080"
+                : "inset 1px 1px 0px #ffffff, inset -1px -1px 0px #808080",
             }}
           >
-            ×
+            <svg width="8" height="8" viewBox="0 0 8 8">
+              <line
+                x1="0"
+                y1="0"
+                x2="8"
+                y2="8"
+                stroke="#000"
+                strokeWidth="1.5"
+              />
+              <line
+                x1="8"
+                y1="0"
+                x2="0"
+                y2="8"
+                stroke="#000"
+                strokeWidth="1.5"
+              />
+            </svg>
           </button>
         </div>
       </header>
 
       {/* Menu Bar */}
       <div
-        className="flex items-center gap-1 px-2 py-1"
+        className="flex items-center px-1"
         style={{
           background: "#c0c0c0",
           borderBottom: "1px solid #808080",
-          boxShadow:
-            "inset 1px 1px 0px rgba(255,255,255,0.8), inset -1px -1px 0px rgba(0,0,0,0.2)",
-          height: "22px",
+          height: "18px",
           flexShrink: 0,
         }}
       >
         {["File", "Edit", "View", "Help"].map((menuItem) => (
           <button
             key={menuItem}
-            className="px-2 py-0.5"
+            className="px-2"
             style={{
               fontSize: "11px",
               color: "#000",
-              fontFamily: "Arial, sans-serif",
+              fontFamily: "'MS Sans Serif', Tahoma, sans-serif",
               background: "transparent",
               border: "none",
+              height: "16px",
+              lineHeight: "16px",
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.background = "#000080";
@@ -421,9 +456,9 @@ export default function DesktopWindow({
           color: "#000000",
           border: "2px solid",
           borderColor: "#808080 #ffffff #ffffff #808080",
-          boxShadow: "inset 1px 1px 2px rgba(0,0,0,0.1)",
           margin: "2px",
-          fontFamily: "Courier New, monospace",
+          fontFamily: "'MS Sans Serif', Tahoma, sans-serif",
+          fontSize: "11px",
           minHeight: 0,
         }}
       >

@@ -2,212 +2,215 @@
 
 export default function ResumeWindow() {
   return (
-    <div className="h-full overflow-y-auto p-4" style={{ color: "#ffffff" }}>
+    <div
+      className="h-full overflow-y-auto"
+      style={{
+        background: "#ffffff",
+        color: "#000000",
+        fontFamily: "Tahoma, 'MS Sans Serif', sans-serif",
+        fontSize: "11px",
+      }}
+    >
       {/* Header */}
-      <div className="mb-4 text-center">
-        <h1
-          className="font-bold"
-          style={{
-            fontSize: "18px",
-            color: "#00ffff",
-            textShadow: "2px 2px 4px rgba(0,0,0,0.8)",
-          }}
-        >
-          Sean Zhao
-        </h1>
-        <div style={{ fontSize: "11px", color: "#c0c0c0", marginTop: "4px" }}>
+      <div
+        style={{
+          background: "#000080",
+          color: "#ffffff",
+          padding: "8px 12px",
+          textAlign: "center",
+        }}
+      >
+        <div style={{ fontSize: "14px", fontWeight: "bold" }}>Sean Zhao</div>
+        <div style={{ fontSize: "11px", marginTop: "2px" }}>
           Computer Engineering Student | Cybersecurity Enthusiast | Full-Stack
           Developer
         </div>
+      </div>
+
+      <div style={{ padding: "12px" }}>
+        {/* Contact Info Bar */}
         <div
-          className="mt-2 flex flex-wrap justify-center gap-2"
-          style={{ fontSize: "10px" }}
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: "12px",
+            justifyContent: "center",
+            padding: "8px",
+            background: "#c0c0c0",
+            border: "1px solid #808080",
+            marginBottom: "12px",
+            fontSize: "11px",
+          }}
         >
-          <span>📧 yixiang.s.zhao@gmail.com</span>
-          <span>📱 +1-647-333-1548</span>
-        </div>
-        <div
-          className="mt-1 flex flex-wrap justify-center gap-3"
-          style={{ fontSize: "10px" }}
-        >
+          <span>yixiang.s.zhao@gmail.com</span>
+          <span>|</span>
+          <span>+1-647-333-1548</span>
+          <span>|</span>
           <a
             href="https://linkedin.com/in/cqctxs"
             target="_blank"
             rel="noopener noreferrer"
-            style={{ color: "#00ffff" }}
+            style={{ color: "#0000ff", textDecoration: "underline" }}
           >
-            💼 LinkedIn
+            LinkedIn
           </a>
+          <span>|</span>
           <a
             href="https://github.com/Cqctxs"
             target="_blank"
             rel="noopener noreferrer"
-            style={{ color: "#00ffff" }}
+            style={{ color: "#0000ff", textDecoration: "underline" }}
           >
-            📁 GitHub
+            GitHub
           </a>
         </div>
-      </div>
 
-      {/* Education */}
-      <div className="mb-4">
-        <div
-          className="mb-2 font-bold"
-          style={{
-            fontSize: "13px",
-            color: "#ffff00",
-            borderBottom: "2px solid #808080",
-            paddingBottom: "4px",
-          }}
-        >
-          🎓 EDUCATION
-        </div>
-        <div
-          style={{
-            background: "rgba(192, 192, 192, 0.1)",
-            border: "1px solid #808080",
-            padding: "8px",
-            marginBottom: "8px",
-          }}
-        >
-          <div className="font-bold" style={{ fontSize: "12px" }}>
-            University of Toronto
-          </div>
-          <div style={{ fontSize: "11px", color: "#c0c0c0" }}>
-            Bachelor of Arts in Computer Engineering
-          </div>
-          <div style={{ fontSize: "10px", color: "#808080" }}>
-            Sept. 2025 – April 2030
-          </div>
-          <div
-            className="mt-1"
-            style={{ fontSize: "10px", fontStyle: "italic" }}
-          >
-            Coursework: APS111, Calculus I, Linear Algebra
-          </div>
-        </div>
-        <div
-          style={{
-            background: "rgba(192, 192, 192, 0.1)",
-            border: "1px solid #808080",
-            padding: "8px",
-          }}
-        >
-          <div className="font-bold" style={{ fontSize: "12px" }}>
-            William Lyon Mackenzie C.I.
-          </div>
-          <div style={{ fontSize: "11px", color: "#c0c0c0" }}>
-            MaCS Program Graduate - Specialized Math & CS
-          </div>
-          <div style={{ fontSize: "10px", color: "#808080" }}>
-            Sept. 2021 – June 2025
-          </div>
-        </div>
-      </div>
-
-      {/* Quick Stats */}
-      <div className="mb-4">
-        <div
-          className="mb-2 font-bold"
-          style={{
-            fontSize: "13px",
-            color: "#ffff00",
-            borderBottom: "2px solid #808080",
-            paddingBottom: "4px",
-          }}
-        >
-          📊 QUICK STATS
-        </div>
-        <div
-          className="grid grid-cols-2 gap-2"
-          style={{
-            fontSize: "11px",
-          }}
-        >
+        {/* Education Section */}
+        <div style={{ marginBottom: "12px" }}>
           <div
             style={{
               background: "#000080",
-              border: "1px solid #ffffff",
-              padding: "6px",
-              textAlign: "center",
+              color: "#ffffff",
+              padding: "2px 8px",
+              fontWeight: "bold",
+              fontSize: "11px",
             }}
           >
-            <div style={{ fontSize: "16px" }}>🥇</div>
-            <div>National Champion</div>
+            EDUCATION
           </div>
           <div
             style={{
-              background: "#000080",
-              border: "1px solid #ffffff",
-              padding: "6px",
-              textAlign: "center",
+              border: "2px solid",
+              borderColor: "#808080 #ffffff #ffffff #808080",
+              borderTop: "none",
             }}
           >
-            <div style={{ fontSize: "16px" }}>🏆</div>
-            <div>Hackathon Winner</div>
-          </div>
-          <div
-            style={{
-              background: "#000080",
-              border: "1px solid #ffffff",
-              padding: "6px",
-              textAlign: "center",
-            }}
-          >
-            <div style={{ fontSize: "16px" }}>⚡</div>
-            <div>10x Speed Boost</div>
-          </div>
-          <div
-            style={{
-              background: "#000080",
-              border: "1px solid #ffffff",
-              padding: "6px",
-              textAlign: "center",
-            }}
-          >
-            <div style={{ fontSize: "16px" }}>🤖</div>
-            <div>AI Integration</div>
+            {/* University */}
+            <div style={{ padding: "8px", borderBottom: "1px solid #c0c0c0" }}>
+              <div style={{ fontWeight: "bold" }}>University of Toronto</div>
+              <div>Bachelor of Arts in Computer Engineering</div>
+              <div style={{ color: "#808080", fontSize: "10px" }}>
+                Sept. 2025 - April 2030
+              </div>
+              <div
+                style={{
+                  fontStyle: "italic",
+                  marginTop: "4px",
+                  fontSize: "10px",
+                }}
+              >
+                Coursework: APS111, Calculus I, Linear Algebra
+              </div>
+            </div>
+            {/* High School */}
+            <div style={{ padding: "8px" }}>
+              <div style={{ fontWeight: "bold" }}>
+                William Lyon Mackenzie C.I.
+              </div>
+              <div>MaCS Program Graduate - Specialized Math &amp; CS</div>
+              <div style={{ color: "#808080", fontSize: "10px" }}>
+                Sept. 2021 - June 2025
+              </div>
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Download Button */}
-      <div className="mt-6 text-center">
-        <a
-          href="/resume.pdf"
-          download
+        {/* Highlights Section */}
+        <div style={{ marginBottom: "12px" }}>
+          <div
+            style={{
+              background: "#000080",
+              color: "#ffffff",
+              padding: "2px 8px",
+              fontWeight: "bold",
+              fontSize: "11px",
+            }}
+          >
+            HIGHLIGHTS
+          </div>
+          <div
+            style={{
+              border: "2px solid",
+              borderColor: "#808080 #ffffff #ffffff #808080",
+              borderTop: "none",
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+            }}
+          >
+            <div
+              style={{
+                padding: "8px",
+                borderRight: "1px solid #c0c0c0",
+                borderBottom: "1px solid #c0c0c0",
+              }}
+            >
+              <div style={{ fontWeight: "bold" }}>National Champion</div>
+              <div style={{ fontSize: "10px", color: "#808080" }}>
+                1st Place
+              </div>
+            </div>
+            <div style={{ padding: "8px", borderBottom: "1px solid #c0c0c0" }}>
+              <div style={{ fontWeight: "bold" }}>Hackathon Winner</div>
+              <div style={{ fontSize: "10px", color: "#808080" }}>
+                Competition Winner
+              </div>
+            </div>
+            <div style={{ padding: "8px", borderRight: "1px solid #c0c0c0" }}>
+              <div style={{ fontWeight: "bold" }}>Speed Boost</div>
+              <div style={{ fontSize: "10px", color: "#808080" }}>
+                10x Performance
+              </div>
+            </div>
+            <div style={{ padding: "8px" }}>
+              <div style={{ fontWeight: "bold" }}>AI Integration</div>
+              <div style={{ fontSize: "10px", color: "#808080" }}>
+                ML/AI Experience
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Download Button */}
+        <div style={{ textAlign: "center", marginTop: "16px" }}>
+          <a
+            href="/resume.pdf"
+            download
+            style={{
+              display: "inline-block",
+              background: "#c0c0c0",
+              border: "2px solid",
+              borderColor: "#ffffff #808080 #808080 #ffffff",
+              padding: "6px 20px",
+              fontSize: "11px",
+              color: "#000000",
+              textDecoration: "none",
+              fontWeight: "bold",
+              cursor: "pointer",
+            }}
+            onMouseDown={(e) => {
+              e.currentTarget.style.borderColor =
+                "#808080 #ffffff #ffffff #808080";
+            }}
+            onMouseUp={(e) => {
+              e.currentTarget.style.borderColor =
+                "#ffffff #808080 #808080 #ffffff";
+            }}
+          >
+            Download Full Resume (PDF)
+          </a>
+        </div>
+
+        {/* Last Updated */}
+        <div
           style={{
-            display: "inline-block",
-            background: "linear-gradient(180deg, #d4d4d8 0%, #a1a1aa 100%)",
-            border: "2px solid",
-            borderColor: "#ffffff #000000 #000000 #ffffff",
-            boxShadow: "inset 1px 1px 0px #ffffff, inset -1px -1px 0px #808080",
-            padding: "8px 24px",
-            fontSize: "12px",
-            color: "#000000",
-            textDecoration: "none",
-            fontWeight: "bold",
-          }}
-          onMouseDown={(e) => {
-            e.currentTarget.style.boxShadow =
-              "inset -1px -1px 0px #ffffff, inset 1px 1px 0px #808080";
-            e.currentTarget.style.transform = "translate(1px, 1px)";
-          }}
-          onMouseUp={(e) => {
-            e.currentTarget.style.boxShadow =
-              "inset 1px 1px 0px #ffffff, inset -1px -1px 0px #808080";
-            e.currentTarget.style.transform = "none";
+            marginTop: "12px",
+            textAlign: "center",
+            fontSize: "10px",
+            color: "#808080",
           }}
         >
-          📄 Download Full Resume (PDF)
-        </a>
-      </div>
-
-      <div
-        className="mt-4 text-center"
-        style={{ fontSize: "10px", color: "#808080", fontStyle: "italic" }}
-      >
-        Last updated: November 2025
+          Last updated: November 2025
+        </div>
       </div>
     </div>
   );

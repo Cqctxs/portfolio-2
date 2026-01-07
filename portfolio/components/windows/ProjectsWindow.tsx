@@ -4,12 +4,12 @@ export default function ProjectsWindow() {
   const projects = [
     {
       title: "Patchy",
-      award: "🏆 Best App Made with Vellum - Hack the 6ix 2025",
+      award: "Winner - Best App Made with Vellum (Hack the 6ix 2025)",
       description:
         "AI cybersecurity platform identifying codebase vulnerabilities and suggesting secure code fixes",
       highlights: [
         "Developed complete backend with GitHub API integration",
-        "Optimized AI analysis: 6+ minutes → 45 seconds",
+        "Optimized AI analysis: 6+ minutes to 45 seconds",
         "Automated pull request creation with security patches",
       ],
       tech: [
@@ -25,7 +25,7 @@ export default function ProjectsWindow() {
     },
     {
       title: "Wanderlust",
-      award: "🤖 Gemini AI Developer Competition",
+      award: "Gemini AI Developer Competition Entry",
       description:
         "AI-powered travel planning platform generating customized itineraries with activities and locations",
       highlights: [
@@ -47,160 +47,114 @@ export default function ProjectsWindow() {
   ];
 
   return (
-    <div className="h-full overflow-y-auto p-4" style={{ color: "#000000" }}>
-      <div className="space-y-6">
-        {projects.map((project, index) => (
+    <div
+      className="h-full overflow-y-auto p-2"
+      style={{
+        background: "#ffffff",
+        color: "#000000",
+        fontFamily: "'MS Sans Serif', Tahoma, sans-serif",
+        fontSize: "11px",
+      }}
+    >
+      {projects.map((project, index) => (
+        <fieldset
+          key={index}
+          style={{
+            border: "1px solid #808080",
+            padding: "8px",
+            marginBottom: "8px",
+          }}
+        >
+          <legend style={{ padding: "0 4px", fontWeight: "bold" }}>
+            {project.title}
+          </legend>
+
           <div
-            key={index}
             style={{
-              background: "rgba(192, 192, 192, 0.1)",
-              border: "2px solid",
-              borderColor: "#ffffff #808080 #808080 #ffffff",
-              padding: "12px",
+              background: "#ffffcc",
+              border: "1px solid #808080",
+              padding: "4px",
+              marginBottom: "8px",
+              fontSize: "10px",
             }}
           >
-            {/* Project Header */}
-            <div className="mb-2">
-              <h3
-                className="font-bold"
-                style={{
-                  fontSize: "16px",
-                  color: "#000080",
-                  textShadow: "none",
-                }}
-              >
-                {project.title}
-              </h3>
-              <div
-                className="mt-1"
-                style={{
-                  fontSize: "11px",
-                  color: "#008000",
-                  fontWeight: "bold",
-                }}
-              >
-                {project.award}
-              </div>
-              <div
-                className="mt-1"
-                style={{
-                  fontSize: "10px",
-                  color: "#808080",
-                }}
-              >
-                {project.date}
-              </div>
+            {project.award}
+          </div>
+
+          <p style={{ marginBottom: "8px", lineHeight: "1.4" }}>
+            {project.description}
+          </p>
+
+          <div style={{ marginBottom: "8px" }}>
+            <div style={{ fontWeight: "bold", marginBottom: "4px" }}>
+              Key Achievements:
             </div>
+            <ul style={{ margin: 0, paddingLeft: "16px" }}>
+              {project.highlights.map((highlight, i) => (
+                <li key={i}>{highlight}</li>
+              ))}
+            </ul>
+          </div>
 
-            {/* Description */}
-            <p
-              className="mb-3"
-              style={{
-                fontSize: "12px",
-                lineHeight: "1.5",
-                color: "#000000",
-              }}
-            >
-              {project.description}
-            </p>
-
-            {/* Highlights */}
-            <div className="mb-3">
-              <div
-                className="mb-1 font-bold"
-                style={{ fontSize: "11px", color: "#800080" }}
-              >
-                Key Achievements:
-              </div>
-              <ul
-                className="space-y-1"
-                style={{ fontSize: "11px", color: "#000000" }}
-              >
-                {project.highlights.map((highlight, i) => (
-                  <li key={i} style={{ paddingLeft: "12px" }}>
-                    • {highlight}
-                  </li>
-                ))}
-              </ul>
+          <div style={{ marginBottom: "8px" }}>
+            <div style={{ fontWeight: "bold", marginBottom: "4px" }}>
+              Technologies:
             </div>
-
-            {/* Tech Stack */}
-            <div className="mb-3">
-              <div
-                className="mb-2 font-bold"
-                style={{ fontSize: "11px", color: "#008000" }}
-              >
-                Tech Stack:
-              </div>
-              <div className="flex flex-wrap gap-1">
-                {project.tech.map((tech, i) => (
-                  <span
-                    key={i}
-                    style={{
-                      background: "#000080",
-                      border: "1px solid #ffffff",
-                      padding: "2px 6px",
-                      fontSize: "10px",
-                      color: "#ffffff",
-                      boxShadow:
-                        "inset 1px 1px 0px rgba(255,255,255,0.3), 1px 1px 2px rgba(0,0,0,0.5)",
-                    }}
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {/* Links */}
-            <div className="flex gap-2">
-              <a
-                href={project.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  background:
-                    "linear-gradient(180deg, #d4d4d8 0%, #a1a1aa 100%)",
-                  border: "1px solid #000000",
-                  boxShadow:
-                    "inset 1px 1px 0px #ffffff, inset -1px -1px 0px #808080",
-                  padding: "4px 12px",
-                  fontSize: "11px",
-                  color: "#000000",
-                  textDecoration: "none",
-                  display: "inline-block",
-                }}
-                onMouseDown={(e) => {
-                  e.currentTarget.style.boxShadow =
-                    "inset -1px -1px 0px #ffffff, inset 1px 1px 0px #808080";
-                }}
-                onMouseUp={(e) => {
-                  e.currentTarget.style.boxShadow =
-                    "inset 1px 1px 0px #ffffff, inset -1px -1px 0px #808080";
-                }}
-              >
-                📁 View on GitHub
-              </a>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "4px" }}>
+              {project.tech.map((tech, i) => (
+                <span
+                  key={i}
+                  style={{
+                    background: "#c0c0c0",
+                    border: "1px solid",
+                    borderColor: "#ffffff #808080 #808080 #ffffff",
+                    padding: "1px 4px",
+                    fontSize: "10px",
+                  }}
+                >
+                  {tech}
+                </span>
+              ))}
             </div>
           </div>
-        ))}
-      </div>
 
-      {/* More Projects Note */}
-      <div
-        className="mt-6 text-center"
-        style={{
-          fontSize: "11px",
-          color: "#808080",
-          fontStyle: "italic",
-        }}
-      >
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <a
+              href={project.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                background: "#c0c0c0",
+                border: "2px solid",
+                borderColor: "#ffffff #808080 #808080 #ffffff",
+                padding: "2px 8px",
+                color: "#000000",
+                textDecoration: "none",
+                fontSize: "11px",
+              }}
+            >
+              View on GitHub
+            </a>
+            <span style={{ color: "#808080", fontSize: "10px" }}>
+              {project.date}
+            </span>
+          </div>
+        </fieldset>
+      ))}
+
+      <div style={{ textAlign: "center", color: "#808080", marginTop: "8px" }}>
         More projects available on{" "}
         <a
           href="https://github.com/Cqctxs"
           target="_blank"
           rel="noopener noreferrer"
-          style={{ color: "#000080", textDecoration: "underline" }}
+          style={{ color: "#0000ff" }}
         >
           GitHub
         </a>

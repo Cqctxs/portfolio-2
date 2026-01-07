@@ -13,6 +13,7 @@ export default function WindowManager() {
     focusWindow,
     minimizeWindow,
     maximizeWindow,
+    restoreWindow,
     updateWindowPosition,
     updateWindowSize,
   } = useDesktopState();
@@ -45,6 +46,7 @@ export default function WindowManager() {
               onFocus={() => focusWindow(windowId)}
               onMinimize={() => minimizeWindow(windowId)}
               onMaximize={() => maximizeWindow(windowId)}
+              onRestore={() => restoreWindow(windowId)}
               onPositionChange={(pos) => updateWindowPosition(windowId, pos)}
               onSizeChange={(size) => updateWindowSize(windowId, size)}
             >
