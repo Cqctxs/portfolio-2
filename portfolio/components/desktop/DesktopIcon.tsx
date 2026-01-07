@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 
 type DesktopIconProps = {
   label: string;
@@ -13,6 +13,9 @@ export default function DesktopIcon({
   iconSrc,
   onActivate,
 }: DesktopIconProps) {
+  const [isHovered, setIsHovered] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
+
   const handleKeyDown = useCallback(
     (event: React.KeyboardEvent<HTMLButtonElement>) => {
       if (event.key === "Enter" || event.key === " ") {
@@ -23,16 +26,31 @@ export default function DesktopIcon({
     [onActivate]
   );
 
+  const isSelected = isHovered || isFocused;
+
   return (
     <button
       onClick={onActivate}
       onKeyDown={handleKeyDown}
-      className="flex w-full flex-col items-center gap-1 rounded p-2 text-xs transition hover:bg-white/20 focus:bg-white/30 focus:outline-none"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onFocus={() => setIsFocused(true)}
+      onBlur={() => setIsFocused(false)}
+      className="flex w-full flex-col items-center gap-1 p-2 text-xs"
       style={{
         textShadow: "1px 1px 2px rgba(0,0,0,0.8)",
+        background: "transparent",
+        border: "none",
+        cursor: "pointer",
+        fontFamily: "'W98UI', Tahoma, sans-serif",
       }}
     >
-      <div className="flex h-12 w-12 items-center justify-center">
+      <div
+        className="flex h-12 w-12 items-center justify-center"
+        style={{
+          border: isSelected ? "1px dotted #ffffff" : "1px solid transparent",
+        }}
+      >
         <img
           src={iconSrc}
           alt={label}
@@ -44,7 +62,15 @@ export default function DesktopIcon({
           draggable={false}
         />
       </div>
-      <span className="text-center text-[11px] leading-tight">{label}</span>
+      <span
+        className="text-center text-[11px] leading-tight px-1"
+        style={{
+          background: isSelected ? "#000080" : "transparent",
+          color: "#ffffff",
+        }}
+      >
+        {label}
+      </span>
     </button>
   );
 }

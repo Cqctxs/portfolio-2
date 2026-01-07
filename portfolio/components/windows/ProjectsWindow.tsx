@@ -52,7 +52,7 @@ export default function ProjectsWindow() {
       style={{
         background: "#ffffff",
         color: "#000000",
-        fontFamily: "'MS Sans Serif', Tahoma, sans-serif",
+        fontFamily: "'W98UI', Tahoma, sans-serif",
         fontSize: "11px",
       }}
     >

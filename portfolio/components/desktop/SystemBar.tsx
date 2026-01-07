@@ -60,7 +60,7 @@ export default function SystemBar() {
           ref={menuRef}
           className="absolute"
           style={{
-            bottom: "32px",
+            bottom: "40px",
             left: "0",
             width: "200px",
             background: "#c0c0c0",
@@ -68,6 +68,7 @@ export default function SystemBar() {
             borderColor: "#ffffff #000000 #000000 #ffffff",
             boxShadow: "2px 2px 4px rgba(0,0,0,0.3)",
             zIndex: 1000,
+            fontFamily: "'W98UI', Tahoma, sans-serif",
           }}
         >
           {/* Menu Header */}
@@ -84,8 +85,8 @@ export default function SystemBar() {
               gap: "8px",
             }}
           >
-            <img src="/icons/win98/windows.png" alt="" width="24" height="24" />
-            <span style={{ fontSize: "18px" }}>Windows 98</span>
+            <img src="/icons/win98/windows.png" alt="" width="32" height="32" />
+            <span style={{ fontSize: "18px" }}>Cactus OS</span>
           </div>
 
           {/* Menu Items */}
@@ -181,11 +182,12 @@ export default function SystemBar() {
       <footer
         className="absolute bottom-0 left-0 right-0 flex items-center px-1 py-1 gap-1"
         style={{
-          height: "32px",
+          height: "40px",
           background: "#c0c0c0",
           boxShadow: "inset 1px 1px 0px #ffffff, inset -1px -1px 0px #808080",
           borderTop: "2px solid #ffffff",
           zIndex: 999,
+          fontFamily: "'W98UI', Tahoma, sans-serif",
         }}
       >
         {/* Start Button */}
@@ -207,15 +209,16 @@ export default function SystemBar() {
             fontSize: "13px",
             color: "#000000",
             transform: startPressed ? "translate(1px, 1px)" : "none",
-            height: "24px",
+            height: "30px",
             cursor: "pointer",
+            fontFamily: "'W98UI', Tahoma, sans-serif",
           }}
         >
           <img
             src="/icons/win98/windows.png"
             alt="Start"
-            width="16"
-            height="16"
+            width="24"
+            height="24"
             style={{ flexShrink: 0 }}
           />
           <span>Start</span>
@@ -225,7 +228,7 @@ export default function SystemBar() {
         <div
           style={{
             width: "2px",
-            height: "24px",
+            height: "30px",
             borderLeft: "1px solid #808080",
             borderRight: "1px solid #ffffff",
             marginLeft: "2px",
@@ -250,7 +253,7 @@ export default function SystemBar() {
                 className="flex items-center gap-1 px-2 py-1 min-w-0"
                 style={{
                   maxWidth: "150px",
-                  height: "24px",
+                  height: "30px",
                   background: "#c0c0c0",
                   boxShadow: isActive
                     ? "inset -1px -1px 0px #ffffff, inset 1px 1px 0px #808080"
@@ -260,6 +263,7 @@ export default function SystemBar() {
                   color: "#000000",
                   cursor: "pointer",
                   overflow: "hidden",
+                  fontFamily: "'W98UI', Tahoma, sans-serif",
                 }}
               >
                 <img
@@ -292,8 +296,8 @@ export default function SystemBar() {
             border: "1px solid #808080",
             fontSize: "11px",
             color: "#000000",
-            fontFamily: "monospace",
-            height: "24px",
+            fontFamily: "'W98UI', Tahoma, sans-serif",
+            height: "30px",
           }}
           suppressHydrationWarning
         >

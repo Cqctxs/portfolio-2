@@ -7,7 +7,7 @@ export default function ResumeWindow() {
       style={{
         background: "#ffffff",
         color: "#000000",
-        fontFamily: "Tahoma, 'MS Sans Serif', sans-serif",
+        fontFamily: "W98UI",
         fontSize: "11px",
       }}
     >

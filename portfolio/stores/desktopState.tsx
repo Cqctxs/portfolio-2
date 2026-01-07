@@ -168,7 +168,7 @@ export function DesktopStateProvider({
           },
         };
       }
-      // Maximize: save current state and go fullscreen
+      // Maximize: save current state and go fullscreen (accounting for 40px taskbar)
       return {
         ...prev,
         [id]: {
@@ -177,7 +177,7 @@ export function DesktopStateProvider({
           preMaximizePosition: current.position,
           preMaximizeSize: current.size,
           position: { x: 0, y: 0 },
-          size: { width: window.innerWidth, height: window.innerHeight - 32 },
+          size: { width: window.innerWidth, height: window.innerHeight - 40 },
         },
       };
     });
@@ -185,10 +185,31 @@ export function DesktopStateProvider({
   }, []);
 
   const restoreWindow = useCallback((id: DesktopWindowId) => {
-    setWindowStates((prev) => ({
-      ...prev,
-      [id]: { ...prev[id], isMinimized: false, zIndex: nextZIndex++ },
-    }));
+    setWindowStates((prev) => {
+      const current = prev[id];
+      if (!current) return prev;
+
+      // If maximized, restore to previous size/position
+      if (current.isMaximized) {
+        return {
+          ...prev,
+          [id]: {
+            ...current,
+            isMinimized: false,
+            isMaximized: false,
+            position: current.preMaximizePosition || current.position,
+            size: current.preMaximizeSize || current.size,
+            zIndex: nextZIndex++,
+          },
+        };
+      }
+
+      // Otherwise just restore from minimized state
+      return {
+        ...prev,
+        [id]: { ...current, isMinimized: false, zIndex: nextZIndex++ },
+      };
+    });
     setFocusedWindow(id);
   }, []);
 
