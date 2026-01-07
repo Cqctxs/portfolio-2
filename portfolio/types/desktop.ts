@@ -5,7 +5,10 @@ export type DesktopWindowId =
   | "achievements"
   | "resume"
   | "about"
-  | "contact";
+  | "contact"
+  | "terminal"
+  | "notepad"
+  | "paint";
 
 export interface DesktopWindowConfig {
   id: DesktopWindowId;

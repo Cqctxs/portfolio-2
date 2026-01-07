@@ -189,7 +189,19 @@ export function DesktopStateProvider({
       const current = prev[id];
       if (!current) return prev;
 
-      // If maximized, restore to previous size/position
+      // If minimized and maximized, just un-minimize (keep maximized state)
+      if (current.isMinimized && current.isMaximized) {
+        return {
+          ...prev,
+          [id]: {
+            ...current,
+            isMinimized: false,
+            zIndex: nextZIndex++,
+          },
+        };
+      }
+
+      // If maximized (but not minimized), restore to previous size/position
       if (current.isMaximized) {
         return {
           ...prev,

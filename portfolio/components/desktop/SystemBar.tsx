@@ -19,8 +19,14 @@ export default function SystemBar() {
   const menuRef = useRef<HTMLDivElement>(null);
   const startButtonRef = useRef<HTMLButtonElement>(null);
 
-  const { openWindows, focusedWindow, windowStates, restoreWindow } =
-    useDesktopState();
+  const {
+    openWindows,
+    focusedWindow,
+    windowStates,
+    restoreWindow,
+    focusWindow,
+    openWindow,
+  } = useDesktopState();
 
   useEffect(() => {
     const interval = setInterval(() => setNow(new Date()), 1000);
@@ -92,15 +98,29 @@ export default function SystemBar() {
           {/* Menu Items */}
           <div style={{ padding: "2px" }}>
             {[
-              { icon: "■", label: "Programs", hasArrow: true },
-              { icon: "□", label: "Documents", hasArrow: true },
-              { icon: "⚙", label: "Settings", hasArrow: true },
-              { icon: "?", label: "Find", hasArrow: true },
-              { icon: "i", label: "Help" },
-              { icon: ">", label: "Run..." },
+              {
+                icon: "/icons/win98/terminal.ico",
+                label: "Terminal",
+                id: "terminal",
+              },
+              {
+                icon: "/icons/win98/notepad.ico",
+                label: "Notepad",
+                id: "notepad",
+              },
+              { icon: "/icons/win98/paint.ico", label: "Paint", id: "paint" },
+              {
+                icon: "/icons/win98/computer.ico",
+                label: "My Computer",
+                id: "about",
+              },
             ].map((item, index) => (
               <button
                 key={index}
+                onClick={() => {
+                  openWindow(item.id as any);
+                  setStartMenuOpen(false);
+                }}
                 style={{
                   width: "100%",
                   display: "flex",
@@ -112,6 +132,7 @@ export default function SystemBar() {
                   border: "none",
                   textAlign: "left",
                   cursor: "pointer",
+                  color: "#000000",
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.background = "#000080";
@@ -125,10 +146,15 @@ export default function SystemBar() {
                 <span
                   style={{ display: "flex", alignItems: "center", gap: "8px" }}
                 >
-                  <span>{item.icon}</span>
+                  <img
+                    src={item.icon}
+                    alt=""
+                    width="16"
+                    height="16"
+                    style={{ imageRendering: "pixelated" }}
+                  />
                   <span>{item.label}</span>
                 </span>
-                {item.hasArrow && <span>▶</span>}
               </button>
             ))}
 
@@ -142,13 +168,19 @@ export default function SystemBar() {
               }}
             />
 
-            {/* Bottom Items */}
+            {/* More Applications */}
             {[
-              { icon: "○", label: "Log Off..." },
-              { icon: "●", label: "Shut Down..." },
+              { icon: "📋", label: "Projects", id: "projects" },
+              { icon: "🏆", label: "Achievements", id: "achievements" },
+              { icon: "📄", label: "Resume", id: "resume" },
+              { icon: "📧", label: "Contact", id: "contact" },
             ].map((item, index) => (
               <button
                 key={index}
+                onClick={() => {
+                  openWindow(item.id as any);
+                  setStartMenuOpen(false);
+                }}
                 style={{
                   width: "100%",
                   display: "flex",
@@ -160,6 +192,7 @@ export default function SystemBar() {
                   border: "none",
                   textAlign: "left",
                   cursor: "pointer",
+                  color: "#000000",
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.background = "#000080";
@@ -249,7 +282,11 @@ export default function SystemBar() {
             return (
               <button
                 key={windowId}
-                onClick={() => restoreWindow(windowId)}
+                onClick={() =>
+                  windowState?.isMinimized
+                    ? restoreWindow(windowId)
+                    : focusWindow(windowId)
+                }
                 className="flex items-center gap-1 px-2 py-1 min-w-0"
                 style={{
                   maxWidth: "150px",
@@ -301,6 +338,13 @@ export default function SystemBar() {
           }}
           suppressHydrationWarning
         >
+          <img
+            src="/icons/win98/clock.ico"
+            alt="Clock"
+            width="16"
+            height="16"
+            style={{ flexShrink: 0 }}
+          />
           {formatTime(now)}
         </div>
       </footer>

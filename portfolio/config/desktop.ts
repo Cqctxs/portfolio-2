@@ -3,6 +3,9 @@ import AchievementsWindow from "@/components/windows/AchievementsWindow";
 import ContactWindow from "@/components/windows/ContactWindow";
 import ProjectsWindow from "@/components/windows/ProjectsWindow";
 import ResumeWindow from "@/components/windows/ResumeWindow";
+import TerminalWindow from "@/components/windows/TerminalWindow";
+import NotepadWindow from "@/components/windows/NotepadWindow";
+import PaintWindow from "@/components/windows/PaintWindow";
 import type {
   DesktopIconConfig,
   DesktopWindowConfig,
@@ -39,6 +42,24 @@ export const desktopWindows: DesktopWindowConfig[] = [
     title: "Contact",
     iconSrc: "/icons/win98/contact.ico",
     component: ContactWindow,
+  },
+  {
+    id: "terminal",
+    title: "Terminal",
+    iconSrc: "/icons/win98/terminal.ico",
+    component: TerminalWindow,
+  },
+  {
+    id: "notepad",
+    title: "Notepad",
+    iconSrc: "/icons/win98/notepad.ico",
+    component: NotepadWindow,
+  },
+  {
+    id: "paint",
+    title: "Paint",
+    iconSrc: "/icons/win98/paint.ico",
+    component: PaintWindow,
   },
 ];
 
