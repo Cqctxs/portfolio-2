@@ -111,19 +111,21 @@ export default function SystemBar() {
 
           {/* Menu Items */}
           <div style={{ padding: "2px", minWidth: "180px" }}>
-            {([
-              {
-                icon: "/icons/win98/terminal.ico",
-                label: "Terminal",
-                id: "terminal",
-              },
-              {
-                icon: "/icons/win98/notepad.ico",
-                label: "Notepad",
-                id: "notepad",
-              },
-              { icon: "/icons/win98/paint.ico", label: "Paint", id: "paint" },
-            ] as { icon: string; label: string; id: DesktopWindowId }[]).map((item, index) => (
+            {(
+              [
+                {
+                  icon: "/icons/win98/terminal.ico",
+                  label: "Terminal",
+                  id: "terminal",
+                },
+                {
+                  icon: "/icons/win98/notepad.ico",
+                  label: "Notepad",
+                  id: "notepad",
+                },
+                { icon: "/icons/win98/paint.ico", label: "Paint", id: "paint" },
+              ] as { icon: string; label: string; id: DesktopWindowId }[]
+            ).map((item, index) => (
               <button
                 key={index}
                 onClick={() => {
@@ -178,28 +180,30 @@ export default function SystemBar() {
             />
 
             {/* More Applications */}
-            {([
-              {
-                icon: "/icons/win98/projects.ico",
-                label: "Projects",
-                id: "projects",
-              },
-              {
-                icon: "/icons/win98/achievements.ico",
-                label: "Achievements",
-                id: "achievements",
-              },
-              {
-                icon: "/icons/win98/resume.ico",
-                label: "Resume",
-                id: "resume",
-              },
-              {
-                icon: "/icons/win98/contact.ico",
-                label: "Contact",
-                id: "contact",
-              },
-            ] as { icon: string; label: string; id: DesktopWindowId }[]).map((item, index) => (
+            {(
+              [
+                {
+                  icon: "/icons/win98/projects.ico",
+                  label: "Projects",
+                  id: "projects",
+                },
+                {
+                  icon: "/icons/win98/achievements.ico",
+                  label: "Achievements",
+                  id: "achievements",
+                },
+                {
+                  icon: "/icons/win98/resume.ico",
+                  label: "Resume",
+                  id: "resume",
+                },
+                {
+                  icon: "/icons/win98/contact.ico",
+                  label: "Contact",
+                  id: "contact",
+                },
+              ] as { icon: string; label: string; id: DesktopWindowId }[]
+            ).map((item, index) => (
               <button
                 key={index}
                 onClick={() => {
@@ -249,13 +253,15 @@ export default function SystemBar() {
               }}
             />
             {/* Credits */}
-            {([
-              {
-                icon: "/icons/win98/computer.ico",
-                label: "My Computer",
-                id: "credits",
-              },
-            ] as { icon: string; label: string; id: DesktopWindowId }[]).map((item, index) => (
+            {(
+              [
+                {
+                  icon: "/icons/win98/computer.ico",
+                  label: "My Computer",
+                  id: "credits",
+                },
+              ] as { icon: string; label: string; id: DesktopWindowId }[]
+            ).map((item, index) => (
               <button
                 key={index}
                 onClick={() => {

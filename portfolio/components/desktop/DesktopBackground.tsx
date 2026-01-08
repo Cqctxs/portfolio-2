@@ -8,7 +8,7 @@ import {
   Bloom,
   GodRays,
   Scanline,
-  Pixelation
+  Pixelation,
 } from "@react-three/postprocessing";
 import { BlendFunction } from "postprocessing";
 import * as THREE from "three";
@@ -71,7 +71,7 @@ export default function DesktopBackground() {
 
         {/* Postprocessing Effects */}
         <EffectComposer>
-          <Pixelation granularity={3}/>
+          <Pixelation granularity={3} />
           {/* God Rays (Volumetric Light) from Icosphere */}
           {modelLoaded && icosphereRef.current ? (
             <GodRays
