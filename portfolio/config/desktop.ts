@@ -6,6 +6,7 @@ import ResumeWindow from "@/components/windows/ResumeWindow";
 import TerminalWindow from "@/components/windows/TerminalWindow";
 import NotepadWindow from "@/components/windows/NotepadWindow";
 import PaintWindow from "@/components/windows/PaintWindow";
+import CreditsWindow from "@/components/windows/CreditsWindow";
 import type {
   DesktopIconConfig,
   DesktopWindowConfig,
@@ -61,15 +62,21 @@ export const desktopWindows: DesktopWindowConfig[] = [
     iconSrc: "/icons/win98/paint.ico",
     component: PaintWindow,
   },
-];
+  {
+    id: "credits",
+    title: "Credits",
+    iconSrc: "/icons/win98/computer.ico",
+    component: CreditsWindow,
+  },
+] as const;
 
-export const desktopIcons: DesktopIconConfig[] = desktopWindows.map(
-  ({ id, title, iconSrc }) => ({
+export const desktopIcons: DesktopIconConfig[] = desktopWindows
+  .filter((window) => window.id !== "credits") // Exclude credits from desktop icons
+  .map(({ id, title, iconSrc }) => ({
     id,
     label: title,
     iconSrc,
-  })
-);
+  }));
 
 export const desktopWindowRecord = desktopWindows.reduce(
   (acc, windowConfig) => {

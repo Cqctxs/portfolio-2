@@ -68,35 +68,48 @@ export default function SystemBar() {
           style={{
             bottom: "40px",
             left: "0",
-            width: "200px",
+            display: "flex",
             background: "#c0c0c0",
             border: "2px solid",
             borderColor: "#ffffff #000000 #000000 #ffffff",
             boxShadow: "2px 2px 4px rgba(0,0,0,0.3)",
             zIndex: 1000,
-            fontFamily: "'W98UI', Tahoma, sans-serif",
+            fontFamily: "'W98UI', 'Segoe UI', sans-serif",
           }}
         >
-          {/* Menu Header */}
+          {/* Vertical Sidebar - Windows 98 Style */}
           <div
             style={{
-              background: "linear-gradient(90deg, #000080 0%, #1084d0 100%)",
-              color: "#ffffff",
-              padding: "4px 8px",
-              fontSize: "20px",
-              fontWeight: "bold",
-              borderBottom: "2px solid #808080",
+              width: "28px",
+              background: "linear-gradient(180deg, #000080 0%, #1084d0 100%)",
               display: "flex",
-              alignItems: "center",
-              gap: "8px",
+              alignItems: "flex-end",
+              justifyContent: "center",
+              paddingBottom: "8px",
             }}
           >
-            <img src="/icons/win98/windows.png" alt="" width="32" height="32" />
-            <span style={{ fontSize: "18px" }}>Cactus OS</span>
+            <div
+              style={{
+                writingMode: "vertical-rl",
+                transform: "rotate(180deg)",
+                color: "#ffffff",
+                fontSize: "20px",
+                fontWeight: "bold",
+                letterSpacing: "1px",
+                fontFamily: "Franklin Gothic Medium, Tahoma, sans-serif",
+                textShadow: "1px 1px 2px rgba(0,0,0,0.5)",
+                display: "flex",
+                alignItems: "center",
+                gap: "2px",
+              }}
+            >
+              <span style={{ color: "#ffffff" }}>Cactus</span>
+              <span style={{ color: "#c0c0c0", fontStyle: "italic" }}>OS</span>
+            </div>
           </div>
 
           {/* Menu Items */}
-          <div style={{ padding: "2px" }}>
+          <div style={{ padding: "2px", minWidth: "180px" }}>
             {[
               {
                 icon: "/icons/win98/terminal.ico",
@@ -109,11 +122,6 @@ export default function SystemBar() {
                 id: "notepad",
               },
               { icon: "/icons/win98/paint.ico", label: "Paint", id: "paint" },
-              {
-                icon: "/icons/win98/computer.ico",
-                label: "My Computer",
-                id: "about",
-              },
             ].map((item, index) => (
               <button
                 key={index}
@@ -229,6 +237,62 @@ export default function SystemBar() {
                 <span>{item.label}</span>
               </button>
             ))}
+
+            {/* Separator */}
+            <div
+              style={{
+                height: "2px",
+                margin: "2px 0",
+                borderTop: "1px solid #808080",
+                borderBottom: "1px solid #ffffff",
+              }}
+            />
+            {/* Credits */}
+            {[
+              {
+                icon: "/icons/win98/computer.ico",
+                label: "Credits",
+                id: "credits",
+              },
+            ].map((item, index) => (
+              <button
+                key={index}
+                onClick={() => {
+                  openWindow(item.id as any);
+                  setStartMenuOpen(false);
+                }}
+                style={{
+                  width: "100%",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "8px",
+                  padding: "4px 8px",
+                  fontSize: "11px",
+                  background: "transparent",
+                  border: "none",
+                  textAlign: "left",
+                  cursor: "pointer",
+                  color: "#000000",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = "#000080";
+                  e.currentTarget.style.color = "#ffffff";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = "transparent";
+                  e.currentTarget.style.color = "#000000";
+                }}
+              >
+                <img
+                  src={item.icon}
+                  alt=""
+                  width="16"
+                  height="16"
+                  style={{ imageRendering: "pixelated" }}
+                />
+                <span>{item.label}</span>
+              </button>
+            ))}
           </div>
         </div>
       )}
@@ -242,7 +306,7 @@ export default function SystemBar() {
           boxShadow: "inset 1px 1px 0px #ffffff, inset -1px -1px 0px #808080",
           borderTop: "2px solid #ffffff",
           zIndex: 999,
-          fontFamily: "'W98UI', Tahoma, sans-serif",
+          fontFamily: "Tahoma, 'Segoe UI', sans-serif",
         }}
       >
         {/* Start Button */}

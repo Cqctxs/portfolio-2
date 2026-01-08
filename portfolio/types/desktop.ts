@@ -8,7 +8,8 @@ export type DesktopWindowId =
   | "contact"
   | "terminal"
   | "notepad"
-  | "paint";
+  | "paint"
+  | "credits";
 
 export interface DesktopWindowConfig {
   id: DesktopWindowId;

@@ -36,6 +36,7 @@ export default function PaintWindow() {
     const container = containerRef.current;
     if (!canvas || !container) return;
 
+    // Initialize canvas
     const rect = container.getBoundingClientRect();
     canvas.width = rect.width;
     canvas.height = rect.height;
@@ -46,6 +47,45 @@ export default function PaintWindow() {
       context.fillRect(0, 0, canvas.width, canvas.height);
       contextRef.current = context;
     }
+
+    // Handle resize - save current drawing, resize, then restore
+    const handleResize = () => {
+      if (!canvas || !contextRef.current) return;
+
+      // Save current canvas content
+      const imageData = contextRef.current.getImageData(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+      );
+      const tempCanvas = document.createElement("canvas");
+      tempCanvas.width = canvas.width;
+      tempCanvas.height = canvas.height;
+      const tempCtx = tempCanvas.getContext("2d");
+      if (tempCtx) {
+        tempCtx.putImageData(imageData, 0, 0);
+      }
+
+      // Resize canvas
+      const newRect = container.getBoundingClientRect();
+      canvas.width = newRect.width;
+      canvas.height = newRect.height;
+
+      // Restore background
+      contextRef.current.fillStyle = "#ffffff";
+      contextRef.current.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Restore previous drawing
+      contextRef.current.drawImage(tempCanvas, 0, 0);
+    };
+
+    const resizeObserver = new ResizeObserver(handleResize);
+    resizeObserver.observe(container);
+
+    return () => {
+      resizeObserver.disconnect();
+    };
   }, []);
 
   const getCanvasCoordinates = (e: React.MouseEvent<HTMLCanvasElement>) => {
@@ -127,43 +167,6 @@ export default function PaintWindow() {
           flexShrink: 0,
         }}
       >
-        {/* Color Picker */}
-        <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>
-          <label style={{ fontSize: "11px", color: "#000000" }}>Color:</label>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(8, 16px)",
-              gap: "2px",
-              padding: "2px",
-              background: "#c0c0c0",
-              border: "2px solid",
-              borderColor: "#808080 #ffffff #ffffff #808080",
-            }}
-          >
-            {win98Colors.map((c) => (
-              <div
-                key={c}
-                onClick={() => {
-                  setColor(c);
-                  setIsEraser(false);
-                }}
-                style={{
-                  width: "16px",
-                  height: "16px",
-                  backgroundColor: c,
-                  cursor: "pointer",
-                  border:
-                    color === c && !isEraser
-                      ? "2px solid #000000"
-                      : "1px solid #808080",
-                  boxSizing: "border-box",
-                }}
-              />
-            ))}
-          </div>
-        </div>
-
         {/* Tool Buttons */}
         <div style={{ display: "flex", gap: "4px" }}>
           {/* Pen Button */}
@@ -214,6 +217,43 @@ export default function PaintWindow() {
               height="16"
             />
           </button>
+        </div>
+
+        {/* Color Picker */}
+        <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>
+          <label style={{ fontSize: "11px", color: "#000000" }}>Color:</label>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(8, 16px)",
+              gap: "2px",
+              padding: "2px",
+              background: "#c0c0c0",
+              border: "2px solid",
+              borderColor: "#808080 #ffffff #ffffff #808080",
+            }}
+          >
+            {win98Colors.map((c) => (
+              <div
+                key={c}
+                onClick={() => {
+                  setColor(c);
+                  setIsEraser(false);
+                }}
+                style={{
+                  width: "16px",
+                  height: "16px",
+                  backgroundColor: c,
+                  cursor: "pointer",
+                  border:
+                    color === c && !isEraser
+                      ? "2px solid #000000"
+                      : "1px solid #808080",
+                  boxSizing: "border-box",
+                }}
+              />
+            ))}
+          </div>
         </div>
 
         {/* Brush Size */}
