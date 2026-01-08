@@ -177,7 +177,9 @@ export default function ResumeWindow() {
         <div style={{ textAlign: "center", marginTop: "16px" }}>
           <a
             href="/resume.pdf"
-            download
+            download="Sean_Zhao_Resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
             style={{
               display: "inline-block",
               background: "#c0c0c0",
