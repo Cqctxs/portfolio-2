@@ -12,7 +12,9 @@ export default function TerminalWindow() {
     {
       input: "",
       output: [
-        "Welcome to Sean's Portfolio Terminal",
+        "Starting cactus terminal...\n",
+        "Cactus OS 1.0",
+        "  (C) 2026 Sean Zhao\n",
         "Type 'help' for available commands",
       ],
     },
@@ -43,42 +45,48 @@ export default function TerminalWindow() {
       case "help":
         output = [
           "Available commands:",
-          "  about       - Learn about Sean",
-          "  projects    - View projects",
-          "  skills      - View skills",
-          "  contact     - Contact information",
-          "  github      - Open GitHub",
-          "  linkedin    - Open LinkedIn",
+          "  about       - Learn about me",
+          "  projects    - View my projects",
+          "  skills      - View my skills",
+          "  contact     - Get my contact info",
+          "  github      - Open my GitHub",
+          "  linkedin    - Open my LinkedIn",
           "  clear       - Clear terminal",
           "  help        - Show this help",
         ];
         break;
       case "about":
         output = [
-          "Sean Zhao - Computer Engineering Student",
-          "Cybersecurity Enthusiast | Full-Stack Developer",
-          "University of Toronto | Class of 2030",
-          "Interested in: AI, Cybersecurity, Web Development",
+          "Hey! I'm Sean Zhao",
+          "Computer Engineering @ UofT (Class of 2030)",
+          "Cybersecurity nerd, hackathon enthusiast, full-stack dev",
+          "I love building things that solve real problems!",
         ];
         break;
       case "projects":
         output = [
-          "Patchy - AI cybersecurity platform (Winner: Hack the 6)",
-          "Wanderlust - AI travel planning app (Gemini Developer Competition)",
-          "View details in the Projects window",
+          "Some stuff I've built:",
+          "",
+          "Patchy - AI security scanner (Won Best App @ Hack the 6ix)",
+          "Cursequence - Card battler game (Won Best Game @ Counterspell)",
+          "Wanderlust - AI travel planner (Gemini Developer Competition)",
+          "",
+          "Check out the Projects window for more!",
         ];
         break;
       case "skills":
         output = [
-          "Languages: JavaScript, TypeScript, Python, Java, C++",
-          "Frontend: React, Next.js, TailwindCSS, Three.js",
-          "Backend: Node.js, Express.js, MongoDB, PostgreSQL",
-          "Tools: Git, Docker, AWS, Firebase",
-          "Specializations: AI/ML, Cybersecurity, Full-Stack",
+          "Languages: JavaScript, TypeScript, Python, Java, C/C++",
+          "Frontend: React, Next.js, TailwindCSS",
+          "Backend: Node.js, Express.js, MongoDB",
+          "AI/APIs: OpenAI, Gemini, Vellum, GitHub API",
+          "Cloud: GCP, Oracle Cloud, Docker, Vercel",
         ];
         break;
       case "contact":
         output = [
+          "Let's connect!",
+          "",
           "Email: yixiang.s.zhao@gmail.com",
           "Phone: +1-647-333-1548",
           "LinkedIn: linkedin.com/in/cqctxs",

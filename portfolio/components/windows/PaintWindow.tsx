@@ -219,23 +219,44 @@ export default function PaintWindow() {
         {/* Brush Size */}
         <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>
           <label style={{ fontSize: "11px", color: "#000000" }}>Size:</label>
-          <input
-            type="range"
-            min="1"
-            max="10"
-            value={brushSize}
-            onChange={(e) => setBrushSize(Number(e.target.value))}
+          <div
             style={{
-              width: "80px",
-              height: "18px",
-              cursor: "pointer",
+              display: "flex",
+              gap: "2px",
             }}
-          />
-          <span
-            style={{ fontSize: "11px", color: "#000000", minWidth: "20px" }}
           >
-            {brushSize}px
-          </span>
+            {[1, 2, 3, 5, 8].map((size) => (
+              <button
+                key={size}
+                onClick={() => setBrushSize(size)}
+                style={{
+                  width: "24px",
+                  height: "24px",
+                  background: brushSize === size ? "#ffffff" : "#c0c0c0",
+                  border: "2px solid",
+                  borderColor:
+                    brushSize === size
+                      ? "#808080 #ffffff #ffffff #808080"
+                      : "#ffffff #808080 #808080 #ffffff",
+                  cursor: "pointer",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  padding: 0,
+                }}
+                title={`${size}px`}
+              >
+                <div
+                  style={{
+                    width: `${Math.min(size * 2, 16)}px`,
+                    height: `${Math.min(size * 2, 16)}px`,
+                    background: "#000000",
+                    borderRadius: "50%",
+                  }}
+                />
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Clear Button */}

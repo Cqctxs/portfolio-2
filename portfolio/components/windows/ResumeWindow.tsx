@@ -88,9 +88,11 @@ export default function ResumeWindow() {
             {/* University */}
             <div style={{ padding: "8px", borderBottom: "1px solid #c0c0c0" }}>
               <div style={{ fontWeight: "bold" }}>University of Toronto</div>
-              <div>Bachelor of Arts in Computer Engineering</div>
+              <div>
+                Bachelor of Applied Science in Computer Engineering + PEY Co-op
+              </div>
               <div style={{ color: "#808080", fontSize: "10px" }}>
-                Sept. 2025 - April 2030
+                Sept. 2025 - April 2030 | GPA: 3.94/4.00
               </div>
               <div
                 style={{
@@ -99,7 +101,8 @@ export default function ResumeWindow() {
                   fontSize: "10px",
                 }}
               >
-                Coursework: APS111, Calculus I, Linear Algebra
+                Coursework: Computer Fundamentals, Calculus, Linear Algebra,
+                Electrical Fundamentals
               </div>
             </div>
             {/* High School */}

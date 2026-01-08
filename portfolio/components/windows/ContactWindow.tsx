@@ -58,8 +58,8 @@ export default function ContactWindow() {
             fontSize: "11px",
           }}
         >
-          I&apos;m always interested in hearing about new opportunities,
-          collaborations, or just chatting about tech, cybersecurity, and AI!
+          I&apos;m always down to chat about tech, collaborate on projects, or
+          hear about new opportunities. Feel free to reach out!
         </div>
 
         {/* Contact Methods List */}

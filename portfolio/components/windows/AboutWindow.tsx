@@ -54,12 +54,13 @@ export default function AboutWindow() {
           About Me
         </legend>
         <p style={{ lineHeight: "1.5", marginBottom: "8px" }}>
-          Hey! I&apos;m Sean, a Computer Engineering student at the University
-          of Toronto with a passion for cybersecurity and AI development.
+          Hey there! I&apos;m a Computer Engineering student at UofT with a deep
+          passion for cybersecurity and building cool stuff with AI.
         </p>
         <p style={{ lineHeight: "1.5" }}>
-          I&apos;m a CyberTitan National Champion and love building innovative
-          solutions that combine security with cutting-edge technology.
+          When I&apos;m not studying, you&apos;ll find me at hackathons, leading
+          cybersecurity workshops, or tinkering with new projects. I love
+          turning complex problems into elegant solutions!
         </p>
       </fieldset>
 
@@ -90,13 +91,13 @@ export default function AboutWindow() {
         }}
       >
         <legend style={{ padding: "0 4px", fontWeight: "bold" }}>
-          Currently
+          What I&apos;m Up To
         </legend>
         <ul style={{ margin: 0, paddingLeft: "16px" }}>
-          <li>Studying Computer Engineering at UofT</li>
-          <li>Exploring advanced cybersecurity techniques</li>
-          <li>Building AI-powered applications</li>
-          <li>Contributing to open source projects</li>
+          <li>First-year Computer Engineering @ UofT</li>
+          <li>Learning lower-level systems & hardware</li>
+          <li>Always down to hack at a hackathon</li>
+          <li>Building projects that solve real problems</li>
         </ul>
       </fieldset>
     </div>

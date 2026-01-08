@@ -3,16 +3,17 @@
 import { useState } from "react";
 
 export default function NotepadWindow() {
-  const [text, setText] = useState(`Portfolio Notes
+  const [text, setText] = useState(`Welcome to my portfolio!
 
-This is a simple notepad application.
-You can write and edit text here!
+Feel free to use this notepad to jot down anything.
+Maybe some project ideas? Or notes from exploring my site?
 
-Feel free to take notes about:
-- Project ideas
-- Skills to learn
-- Contact information
-- Random thoughts
+Quick links:
+- GitHub: github.com/Cqctxs
+- LinkedIn: linkedin.com/in/cqctxs
+- Email: yixiang.s.zhao@gmail.com
+
+Thanks for visiting! :)
 `);
 
   return (

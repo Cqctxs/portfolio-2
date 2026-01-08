@@ -170,10 +170,26 @@ export default function SystemBar() {
 
             {/* More Applications */}
             {[
-              { icon: "📋", label: "Projects", id: "projects" },
-              { icon: "🏆", label: "Achievements", id: "achievements" },
-              { icon: "📄", label: "Resume", id: "resume" },
-              { icon: "📧", label: "Contact", id: "contact" },
+              {
+                icon: "/icons/win98/projects.ico",
+                label: "Projects",
+                id: "projects",
+              },
+              {
+                icon: "/icons/win98/achievements.ico",
+                label: "Achievements",
+                id: "achievements",
+              },
+              {
+                icon: "/icons/win98/resume.ico",
+                label: "Resume",
+                id: "resume",
+              },
+              {
+                icon: "/icons/win98/contact.ico",
+                label: "Contact",
+                id: "contact",
+              },
             ].map((item, index) => (
               <button
                 key={index}
@@ -203,7 +219,13 @@ export default function SystemBar() {
                   e.currentTarget.style.color = "#000000";
                 }}
               >
-                <span>{item.icon}</span>
+                <img
+                  src={item.icon}
+                  alt=""
+                  width="16"
+                  height="16"
+                  style={{ imageRendering: "pixelated" }}
+                />
                 <span>{item.label}</span>
               </button>
             ))}
