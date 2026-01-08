@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "CactuOS",
+  title: "CactusOS",
   description: "Portfolio by Sean Zhao",
 };
 
