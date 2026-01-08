@@ -56,10 +56,10 @@ export default function CreditsWindow() {
               <strong>Three.js</strong> - 3D graphics library
             </li>
             <li>
-              <strong>TypeScript</strong> - Type-safe JavaScript
+              <strong>TypeScript</strong>
             </li>
             <li>
-              <strong>Tailwind CSS</strong> - Utility-first CSS framework
+              <strong>Tailwind CSS</strong>
             </li>
           </ul>
         </div>
@@ -77,26 +77,14 @@ export default function CreditsWindow() {
           </h3>
           <ul style={{ marginLeft: "20px", marginBottom: "12px" }}>
             <li>Windows 98 UI/UX design</li>
-            <li>Retro computing aesthetics</li>
-            <li>Classic desktop metaphor</li>
+            <li>Synthwave</li>
+            <li>Inspired by: https://www.based.gg/</li>
           </ul>
         </div>
 
         <div style={{ marginBottom: "20px" }}>
-          <h3
-            style={{
-              fontSize: "13px",
-              fontWeight: "bold",
-              marginBottom: "8px",
-              color: "#000000",
-            }}
-          >
-            Special Thanks
-          </h3>
           <ul style={{ marginLeft: "20px", marginBottom: "12px" }}>
-            <li>React Three Fiber community</li>
-            <li>pmndrs/drei for 3D helpers</li>
-            <li>All open source contributors</li>
+            <li>3D Models created with Blender</li>
           </ul>
         </div>
 
