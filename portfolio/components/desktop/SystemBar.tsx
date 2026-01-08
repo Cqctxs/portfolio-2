@@ -3,6 +3,7 @@
 import { useEffect, useState, useRef } from "react";
 import { useDesktopState } from "@/stores/desktopState";
 import { desktopWindowRecord } from "@/config/desktop";
+import type { DesktopWindowId } from "@/types/desktop";
 
 function formatTime(date: Date) {
   return date.toLocaleTimeString([], {
@@ -110,7 +111,7 @@ export default function SystemBar() {
 
           {/* Menu Items */}
           <div style={{ padding: "2px", minWidth: "180px" }}>
-            {[
+            {([
               {
                 icon: "/icons/win98/terminal.ico",
                 label: "Terminal",
@@ -122,11 +123,11 @@ export default function SystemBar() {
                 id: "notepad",
               },
               { icon: "/icons/win98/paint.ico", label: "Paint", id: "paint" },
-            ].map((item, index) => (
+            ] as { icon: string; label: string; id: DesktopWindowId }[]).map((item, index) => (
               <button
                 key={index}
                 onClick={() => {
-                  openWindow(item.id as any);
+                  openWindow(item.id);
                   setStartMenuOpen(false);
                 }}
                 style={{
@@ -177,7 +178,7 @@ export default function SystemBar() {
             />
 
             {/* More Applications */}
-            {[
+            {([
               {
                 icon: "/icons/win98/projects.ico",
                 label: "Projects",
@@ -198,11 +199,11 @@ export default function SystemBar() {
                 label: "Contact",
                 id: "contact",
               },
-            ].map((item, index) => (
+            ] as { icon: string; label: string; id: DesktopWindowId }[]).map((item, index) => (
               <button
                 key={index}
                 onClick={() => {
-                  openWindow(item.id as any);
+                  openWindow(item.id);
                   setStartMenuOpen(false);
                 }}
                 style={{
@@ -248,17 +249,17 @@ export default function SystemBar() {
               }}
             />
             {/* Credits */}
-            {[
+            {([
               {
                 icon: "/icons/win98/computer.ico",
-                label: "Credits",
+                label: "My Computer",
                 id: "credits",
               },
-            ].map((item, index) => (
+            ] as { icon: string; label: string; id: DesktopWindowId }[]).map((item, index) => (
               <button
                 key={index}
                 onClick={() => {
-                  openWindow(item.id as any);
+                  openWindow(item.id);
                   setStartMenuOpen(false);
                 }}
                 style={{

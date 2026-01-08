@@ -1,7 +1,7 @@
 "use client";
 
 import { Canvas } from "@react-three/fiber";
-import { Suspense, use, useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { Model, CameraAnimation } from "./DesktopScene";
 import {
   EffectComposer,
@@ -11,10 +11,11 @@ import {
   Pixelation
 } from "@react-three/postprocessing";
 import { BlendFunction } from "postprocessing";
+import * as THREE from "three";
 
 export default function DesktopBackground() {
-  const icosphereRef = useRef<any>(null);
-  const cactusRef = useRef<any>(null);
+  const icosphereRef = useRef<THREE.Mesh>(null);
+  const cactusRef = useRef<THREE.Group>(null);
   const [modelLoaded, setModelLoaded] = useState(false);
   const mouseXRef = useRef(0);
   const mouseYRef = useRef(0);
@@ -72,7 +73,7 @@ export default function DesktopBackground() {
         <EffectComposer>
           <Pixelation granularity={3}/>
           {/* God Rays (Volumetric Light) from Icosphere */}
-          {modelLoaded && icosphereRef.current && (
+          {modelLoaded && icosphereRef.current ? (
             <GodRays
               key="godrays" // Force remount when model loads
               sun={icosphereRef.current}
@@ -84,6 +85,8 @@ export default function DesktopBackground() {
               exposure={0.3} // Brightness (0-1)
               clampMax={1} // Maximum brightness
             />
+          ) : (
+            <></>
           )}
           {/* Bloom Effect */}
           <Bloom
