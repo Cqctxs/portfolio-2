@@ -1,7 +1,6 @@
 "use client";
 
 import { Canvas } from "@react-three/fiber";
-import { Stats } from "@react-three/drei";
 import { Suspense, use, useEffect, useRef, useState } from "react";
 import { Model, CameraAnimation } from "./DesktopScene";
 import {
@@ -54,7 +53,6 @@ export default function DesktopBackground() {
           rotation: [0, 0, 0],
         }}
       >
-        <Stats showPanel={0} className="top-0 left-0" />
         {/* <color attach="background" args={["#0d021d"]} /> */}
         <fog attach="fog" args={["#3d1a4d", 50, 400]} />
         <CameraAnimation
