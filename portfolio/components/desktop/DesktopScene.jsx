@@ -10,8 +10,7 @@ import * as THREE from "three";
 
 export function Model({ icosphereRef, cactusRef, onLoad, ...props }) {
   const group = React.useRef();
-  const { nodes, materials, animations } = useGLTF("/models/Background.glb", true);
-  const { actions } = useAnimations(animations, group);
+  const { nodes, materials } = useGLTF("/models/Background.glb", true);
 
   // Notify parent when icosphere is mounted
   useEffect(() => {

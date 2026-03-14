@@ -20,7 +20,6 @@ export default function TerminalWindow() {
     },
   ]);
   const [input, setInput] = useState("");
-  const [cursorVisible, setCursorVisible] = useState(true);
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -29,13 +28,6 @@ export default function TerminalWindow() {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
   }, [commands]);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCursorVisible((v) => !v);
-    }, 500);
-    return () => clearInterval(interval);
-  }, []);
 
   const executeCommand = (cmd: string) => {
     const trimmed = cmd.trim().toLowerCase();
@@ -125,7 +117,7 @@ export default function TerminalWindow() {
         ];
     }
 
-    setCommands([...commands, { input: cmd, output }]);
+    setCommands(prev => [...prev, { input: cmd, output }]);
     setInput("");
   };
 
@@ -169,6 +161,12 @@ export default function TerminalWindow() {
           </div>
         ))}
         {/* Current input line */}
+        <style>{`
+          @keyframes terminal-cursor-blink {
+            0%, 49% { background-color: #ffffff; }
+            50%, 100% { background-color: transparent; }
+          }
+        `}</style>
         <div style={{ display: "flex" }}>
           <span style={{ color: "#ffffff" }}>C:\&gt; </span>
           <div style={{ position: "relative", flex: 1 }}>
@@ -178,11 +176,11 @@ export default function TerminalWindow() {
                 display: "inline-block",
                 width: "8px",
                 height: "2px",
-                backgroundColor: cursorVisible ? "#ffffff" : "transparent",
                 marginLeft: "0px",
                 verticalAlign: "baseline",
                 position: "relative",
                 top: "2px",
+                animation: "terminal-cursor-blink 1s step-start infinite"
               }}
             />
             <input

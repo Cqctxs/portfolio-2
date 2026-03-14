@@ -13,6 +13,29 @@ function formatTime(date: Date) {
   });
 }
 
+const MAIN_APPS = [
+  { icon: "/icons/win98/terminal.ico", label: "Terminal", id: "terminal" as DesktopWindowId },
+  { icon: "/icons/win98/notepad.ico", label: "Notepad", id: "notepad" as DesktopWindowId },
+  { icon: "/icons/win98/paint.ico", label: "Paint", id: "paint" as DesktopWindowId },
+];
+
+const MORE_APPS = [
+  { icon: "/icons/win98/projects.ico", label: "Projects", id: "projects" as DesktopWindowId },
+  { icon: "/icons/win98/achievements.ico", label: "Achievements", id: "achievements" as DesktopWindowId },
+  { icon: "/icons/win98/resume.ico", label: "Resume", id: "resume" as DesktopWindowId },
+  { icon: "/icons/win98/contact.ico", label: "Contact", id: "contact" as DesktopWindowId },
+];
+
+const handleMenuItemEnter = (e: React.MouseEvent<HTMLButtonElement>) => {
+  e.currentTarget.style.background = "#000080";
+  e.currentTarget.style.color = "#ffffff";
+};
+
+const handleMenuItemLeave = (e: React.MouseEvent<HTMLButtonElement>) => {
+  e.currentTarget.style.background = "transparent";
+  e.currentTarget.style.color = "#000000";
+};
+
 export default function SystemBar() {
   const [now, setNow] = useState(new Date());
   const [startPressed, setStartPressed] = useState(false);
@@ -111,21 +134,7 @@ export default function SystemBar() {
 
           {/* Menu Items */}
           <div style={{ padding: "2px", minWidth: "180px" }}>
-            {(
-              [
-                {
-                  icon: "/icons/win98/terminal.ico",
-                  label: "Terminal",
-                  id: "terminal",
-                },
-                {
-                  icon: "/icons/win98/notepad.ico",
-                  label: "Notepad",
-                  id: "notepad",
-                },
-                { icon: "/icons/win98/paint.ico", label: "Paint", id: "paint" },
-              ] as { icon: string; label: string; id: DesktopWindowId }[]
-            ).map((item, index) => (
+            {MAIN_APPS.map((item, index) => (
               <button
                 key={index}
                 onClick={() => {
@@ -145,14 +154,8 @@ export default function SystemBar() {
                   cursor: "pointer",
                   color: "#000000",
                 }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "#000080";
-                  e.currentTarget.style.color = "#ffffff";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = "transparent";
-                  e.currentTarget.style.color = "#000000";
-                }}
+                onMouseEnter={handleMenuItemEnter}
+                onMouseLeave={handleMenuItemLeave}
               >
                 <span
                   style={{ display: "flex", alignItems: "center", gap: "8px" }}
@@ -180,30 +183,7 @@ export default function SystemBar() {
             />
 
             {/* More Applications */}
-            {(
-              [
-                {
-                  icon: "/icons/win98/projects.ico",
-                  label: "Projects",
-                  id: "projects",
-                },
-                {
-                  icon: "/icons/win98/achievements.ico",
-                  label: "Achievements",
-                  id: "achievements",
-                },
-                {
-                  icon: "/icons/win98/resume.ico",
-                  label: "Resume",
-                  id: "resume",
-                },
-                {
-                  icon: "/icons/win98/contact.ico",
-                  label: "Contact",
-                  id: "contact",
-                },
-              ] as { icon: string; label: string; id: DesktopWindowId }[]
-            ).map((item, index) => (
+            {MORE_APPS.map((item, index) => (
               <button
                 key={index}
                 onClick={() => {
@@ -223,14 +203,8 @@ export default function SystemBar() {
                   cursor: "pointer",
                   color: "#000000",
                 }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "#000080";
-                  e.currentTarget.style.color = "#ffffff";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = "transparent";
-                  e.currentTarget.style.color = "#000000";
-                }}
+                onMouseEnter={handleMenuItemEnter}
+                onMouseLeave={handleMenuItemLeave}
               >
                 <img
                   src={item.icon}
