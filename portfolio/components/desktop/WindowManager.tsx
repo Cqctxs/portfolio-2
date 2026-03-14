@@ -3,6 +3,7 @@
 import { desktopWindowRecord } from "@/config/desktop";
 import { useDesktopState } from "@/stores/desktopState";
 import DesktopWindow from "./DesktopWindow";
+import { useCallback } from "react";
 
 export default function WindowManager() {
   const {
@@ -42,13 +43,13 @@ export default function WindowManager() {
               zIndex={windowState.zIndex}
               isMinimized={windowState.isMinimized}
               isMaximized={windowState.isMaximized}
-              onClose={() => closeWindow(windowId)}
-              onFocus={() => focusWindow(windowId)}
-              onMinimize={() => minimizeWindow(windowId)}
-              onMaximize={() => maximizeWindow(windowId)}
-              onRestore={() => restoreWindow(windowId)}
-              onPositionChange={(pos) => updateWindowPosition(windowId, pos)}
-              onSizeChange={(size) => updateWindowSize(windowId, size)}
+              onClose={closeWindow}
+              onFocus={focusWindow}
+              onMinimize={minimizeWindow}
+              onMaximize={maximizeWindow}
+              onRestore={restoreWindow}
+              onPositionChange={updateWindowPosition}
+              onSizeChange={updateWindowSize}
             >
               <WindowComponent />
             </DesktopWindow>

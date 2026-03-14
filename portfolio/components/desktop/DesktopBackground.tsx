@@ -78,19 +78,19 @@ export default function DesktopBackground() {
               key="godrays" // Force remount when model loads
               sun={icosphereRef.current}
               blendFunction={BlendFunction.SCREEN}
-              samples={100} // Higher samples = smoother rays (increased from 60)
-              density={0.98} // Higher density = smoother gradient (increased from 0.96)
-              decay={0.96} // Slightly higher for smoother falloff
-              weight={0.2} // Intensity (0-1)
-              exposure={0.3} // Brightness (0-1)
-              clampMax={1} // Maximum brightness
+              samples={40} // Reduced for performance (was 100)
+              density={0.98}
+              decay={0.96}
+              weight={0.2}
+              exposure={0.3}
+              clampMax={1}
             />
           ) : (
             <></>
           )}
           {/* Bloom Effect */}
           <Bloom
-            intensity={1.5}
+            intensity={1.2}
             luminanceThreshold={0.2}
             luminanceSmoothing={0.9}
             mipmapBlur={true}

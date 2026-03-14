@@ -3,17 +3,20 @@
 import { desktopIcons } from "@/config/desktop";
 import { useDesktopState } from "@/stores/desktopState";
 import DesktopIcon from "./DesktopIcon";
+import { useMemo } from "react";
 
 export default function IconDock() {
   const { openWindow } = useDesktopState();
 
-  // Split icons into two groups
-  const mainApps = desktopIcons.filter(
-    (icon) => !["terminal", "notepad", "paint"].includes(icon.id)
-  );
-  const miscApps = desktopIcons.filter((icon) =>
-    ["terminal", "notepad", "paint"].includes(icon.id)
-  );
+  const { mainApps, miscApps } = useMemo(() => {
+    const main = desktopIcons.filter(
+      (icon) => !["terminal", "notepad", "paint"].includes(icon.id)
+    );
+    const misc = desktopIcons.filter((icon) =>
+      ["terminal", "notepad", "paint"].includes(icon.id)
+    );
+    return { mainApps: main, miscApps: misc };
+  }, []);
 
   return (
     <>
