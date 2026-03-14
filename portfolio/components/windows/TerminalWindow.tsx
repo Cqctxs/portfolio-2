@@ -1,11 +1,31 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, memo } from "react";
 
 type Command = {
   input: string;
   output: string[];
 };
+
+const CommandHistory = memo(({ commands }: { commands: Command[] }) => {
+  return (
+    <>
+      {commands.map((cmd, idx) => (
+        <div key={idx}>
+          {cmd.input && (
+            <div>
+              <span style={{ color: "#ffffff" }}>C:\&gt; </span>
+              <span>{cmd.input}</span>
+            </div>
+          )}
+          {cmd.output.map((line, lineIdx) => (
+            <div key={lineIdx}>{line}</div>
+          ))}
+        </div>
+      ))}
+    </>
+  );
+});
 
 export default function TerminalWindow() {
   const [commands, setCommands] = useState<Command[]>([
@@ -20,7 +40,6 @@ export default function TerminalWindow() {
     },
   ]);
   const [input, setInput] = useState("");
-  const [cursorVisible, setCursorVisible] = useState(true);
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -29,13 +48,6 @@ export default function TerminalWindow() {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
   }, [commands]);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCursorVisible((v) => !v);
-    }, 500);
-    return () => clearInterval(interval);
-  }, []);
 
   const executeCommand = (cmd: string) => {
     const trimmed = cmd.trim().toLowerCase();
@@ -155,20 +167,14 @@ export default function TerminalWindow() {
           cursor: "text",
         }}
       >
-        {commands.map((cmd, idx) => (
-          <div key={idx}>
-            {cmd.input && (
-              <div>
-                <span style={{ color: "#ffffff" }}>C:\&gt; </span>
-                <span>{cmd.input}</span>
-              </div>
-            )}
-            {cmd.output.map((line, lineIdx) => (
-              <div key={lineIdx}>{line}</div>
-            ))}
-          </div>
-        ))}
+        <CommandHistory commands={commands} />
         {/* Current input line */}
+        <style>{`
+          @keyframes terminal-blink {
+            0%, 49.9% { background-color: #ffffff; }
+            50%, 100% { background-color: transparent; }
+          }
+        `}</style>
         <div style={{ display: "flex" }}>
           <span style={{ color: "#ffffff" }}>C:\&gt; </span>
           <div style={{ position: "relative", flex: 1 }}>
@@ -178,7 +184,7 @@ export default function TerminalWindow() {
                 display: "inline-block",
                 width: "8px",
                 height: "2px",
-                backgroundColor: cursorVisible ? "#ffffff" : "transparent",
+                animation: "terminal-blink 1s infinite",
                 marginLeft: "0px",
                 verticalAlign: "baseline",
                 position: "relative",

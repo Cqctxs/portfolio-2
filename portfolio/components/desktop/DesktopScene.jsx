@@ -10,8 +10,7 @@ import * as THREE from "three";
 
 export function Model({ icosphereRef, cactusRef, onLoad, ...props }) {
   const group = React.useRef();
-  const { nodes, materials, animations } = useGLTF("/models/Background.glb", true);
-  const { actions } = useAnimations(animations, group);
+  const { nodes, materials } = useGLTF("/models/Background.glb", true);
 
   // Notify parent when icosphere is mounted
   useEffect(() => {
@@ -29,48 +28,44 @@ export function Model({ icosphereRef, cactusRef, onLoad, ...props }) {
           geometry={nodes.Plane.geometry}
           material={materials["Material.004"]}
         />
-        <mesh
-          ref={cactusRef}
-          name="Cactus1"
-          geometry={nodes.Cactus1.geometry}
-          material={materials["Material.003"]}
-          position={[-0.252, 0, 0]}
-        />
-        <mesh
-          ref={cactusRef}
-          name="Cactus1003"
-          geometry={nodes.Cactus1003.geometry}
-          material={materials["Material.003"]}
-          position={[0.299, 0, 0]}
-        />
-        <mesh
-          ref={cactusRef}
-          name="Cactus1004"
-          geometry={nodes.Cactus1004.geometry}
-          material={materials["Material.003"]}
-          position={[0.315, 0, 0]}
-        />
-        <mesh
-          ref={cactusRef}
-          name="Cactus1005"
-          geometry={nodes.Cactus1005.geometry}
-          material={materials["Material.003"]}
-          position={[-0.173, 0, 0]}
-        />
-        <mesh
-          ref={cactusRef}
-          name="Cactus1006"
-          geometry={nodes.Cactus1006.geometry}
-          material={materials["Material.003"]}
-          position={[0.236, 0, 0]}
-        />
-        <mesh
-          ref={cactusRef}
-          name="Cactus1007"
-          geometry={nodes.Cactus1007.geometry}
-          material={materials["Material.003"]}
-          position={[-0.504, 0, 0]}
-        />
+        <group ref={cactusRef}>
+          <mesh
+            name="Cactus1"
+            geometry={nodes.Cactus1.geometry}
+            material={materials["Material.003"]}
+            position={[-0.252, 0, 0]}
+          />
+          <mesh
+            name="Cactus1003"
+            geometry={nodes.Cactus1003.geometry}
+            material={materials["Material.003"]}
+            position={[0.299, 0, 0]}
+          />
+          <mesh
+            name="Cactus1004"
+            geometry={nodes.Cactus1004.geometry}
+            material={materials["Material.003"]}
+            position={[0.315, 0, 0]}
+          />
+          <mesh
+            name="Cactus1005"
+            geometry={nodes.Cactus1005.geometry}
+            material={materials["Material.003"]}
+            position={[-0.173, 0, 0]}
+          />
+          <mesh
+            name="Cactus1006"
+            geometry={nodes.Cactus1006.geometry}
+            material={materials["Material.003"]}
+            position={[0.236, 0, 0]}
+          />
+          <mesh
+            name="Cactus1007"
+            geometry={nodes.Cactus1007.geometry}
+            material={materials["Material.003"]}
+            position={[-0.504, 0, 0]}
+          />
+        </group>
         <mesh
           name="Plane001"
           geometry={nodes.Plane001.geometry}

@@ -48,24 +48,18 @@ export default function PaintWindow() {
       contextRef.current = context;
     }
 
+    // Create a single reusable temporary canvas to avoid GC pressure
+    const tempCanvas = document.createElement("canvas");
+    const tempCtx = tempCanvas.getContext("2d");
+
     // Handle resize - save current drawing, resize, then restore
     const handleResize = () => {
-      if (!canvas || !contextRef.current) return;
+      if (!canvas || !contextRef.current || !tempCtx) return;
 
-      // Save current canvas content
-      const imageData = contextRef.current.getImageData(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-      );
-      const tempCanvas = document.createElement("canvas");
+      // Save current canvas content to our reusable temp canvas
       tempCanvas.width = canvas.width;
       tempCanvas.height = canvas.height;
-      const tempCtx = tempCanvas.getContext("2d");
-      if (tempCtx) {
-        tempCtx.putImageData(imageData, 0, 0);
-      }
+      tempCtx.drawImage(canvas, 0, 0);
 
       // Resize canvas
       const newRect = container.getBoundingClientRect();
@@ -89,14 +83,9 @@ export default function PaintWindow() {
   }, []);
 
   const getCanvasCoordinates = (e: React.MouseEvent<HTMLCanvasElement>) => {
-    const canvas = canvasRef.current;
-    if (!canvas) return { x: 0, y: 0 };
-
-    const rect = canvas.getBoundingClientRect();
-
     return {
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
+      x: e.nativeEvent.offsetX,
+      y: e.nativeEvent.offsetY,
     };
   };
 

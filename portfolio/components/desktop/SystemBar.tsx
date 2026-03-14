@@ -20,14 +20,25 @@ export default function SystemBar() {
   const menuRef = useRef<HTMLDivElement>(null);
   const startButtonRef = useRef<HTMLButtonElement>(null);
 
-  const {
-    openWindows,
-    focusedWindow,
-    windowStates,
-    restoreWindow,
-    focusWindow,
-    openWindow,
-  } = useDesktopState();
+  const openWindows = useDesktopState((state) => state.openWindows);
+  const focusedWindow = useDesktopState((state) => state.focusedWindow);
+  const windowStates = useDesktopState(
+    (state) => state.windowStates,
+    (oldState, newState) => {
+      if (!oldState || !newState) return oldState === newState;
+      const oldKeys = Object.keys(oldState);
+      const newKeys = Object.keys(newState);
+      if (oldKeys.length !== newKeys.length) return false;
+      for (const key of newKeys) {
+        if (!oldState[key]) return false;
+        if (oldState[key].minimized !== newState[key].minimized) return false;
+      }
+      return true;
+    }
+  );
+  const restoreWindow = useDesktopState((state) => state.restoreWindow);
+  const focusWindow = useDesktopState((state) => state.focusWindow);
+  const openWindow = useDesktopState((state) => state.openWindow);
 
   useEffect(() => {
     const interval = setInterval(() => setNow(new Date()), 1000);
