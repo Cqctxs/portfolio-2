@@ -1,8 +1,58 @@
 "use client";
 
+import React, { memo, useCallback } from "react";
 import { desktopWindowRecord } from "@/config/desktop";
 import { useDesktopState } from "@/stores/desktopState";
 import DesktopWindow from "./DesktopWindow";
+
+const WindowNode = memo(function WindowNode({
+  windowId,
+  windowConfig,
+  windowState,
+  isFocused,
+  closeWindow,
+  focusWindow,
+  minimizeWindow,
+  maximizeWindow,
+  restoreWindow,
+  updateWindowPosition,
+  updateWindowSize,
+}: any) {
+  const onClose = useCallback(() => closeWindow(windowId), [closeWindow, windowId]);
+  const onFocus = useCallback(() => focusWindow(windowId), [focusWindow, windowId]);
+  const onMinimize = useCallback(() => minimizeWindow(windowId), [minimizeWindow, windowId]);
+  const onMaximize = useCallback(() => maximizeWindow(windowId), [maximizeWindow, windowId]);
+  const onRestore = useCallback(() => restoreWindow(windowId), [restoreWindow, windowId]);
+  const onPositionChange = useCallback((pos: any) => updateWindowPosition(windowId, pos), [updateWindowPosition, windowId]);
+  const onSizeChange = useCallback((size: any) => updateWindowSize(windowId, size), [updateWindowSize, windowId]);
+
+  const WindowComponent = windowConfig.component;
+
+  return (
+    <div style={{ pointerEvents: "auto" }}>
+      <DesktopWindow
+        id={windowId}
+        title={windowConfig.title}
+        icon={windowConfig.iconSrc}
+        isFocused={isFocused}
+        position={windowState.position}
+        size={windowState.size}
+        zIndex={windowState.zIndex}
+        isMinimized={windowState.isMinimized}
+        isMaximized={windowState.isMaximized}
+        onClose={onClose}
+        onFocus={onFocus}
+        onMinimize={onMinimize}
+        onMaximize={onMaximize}
+        onRestore={onRestore}
+        onPositionChange={onPositionChange}
+        onSizeChange={onSizeChange}
+      >
+        <WindowComponent />
+      </DesktopWindow>
+    </div>
+  );
+});
 
 export default function WindowManager() {
   const {
@@ -28,31 +78,21 @@ export default function WindowManager() {
           return null;
         }
 
-        const WindowComponent = windowConfig.component;
-
         return (
-          <div key={windowId} style={{ pointerEvents: "auto" }}>
-            <DesktopWindow
-              id={windowId}
-              title={windowConfig.title}
-              icon={windowConfig.iconSrc}
-              isFocused={focusedWindow === windowId}
-              position={windowState.position}
-              size={windowState.size}
-              zIndex={windowState.zIndex}
-              isMinimized={windowState.isMinimized}
-              isMaximized={windowState.isMaximized}
-              onClose={() => closeWindow(windowId)}
-              onFocus={() => focusWindow(windowId)}
-              onMinimize={() => minimizeWindow(windowId)}
-              onMaximize={() => maximizeWindow(windowId)}
-              onRestore={() => restoreWindow(windowId)}
-              onPositionChange={(pos) => updateWindowPosition(windowId, pos)}
-              onSizeChange={(size) => updateWindowSize(windowId, size)}
-            >
-              <WindowComponent />
-            </DesktopWindow>
-          </div>
+          <WindowNode
+            key={windowId}
+            windowId={windowId}
+            windowConfig={windowConfig}
+            windowState={windowState}
+            isFocused={focusedWindow === windowId}
+            closeWindow={closeWindow}
+            focusWindow={focusWindow}
+            minimizeWindow={minimizeWindow}
+            maximizeWindow={maximizeWindow}
+            restoreWindow={restoreWindow}
+            updateWindowPosition={updateWindowPosition}
+            updateWindowSize={updateWindowSize}
+          />
         );
       })}
     </div>

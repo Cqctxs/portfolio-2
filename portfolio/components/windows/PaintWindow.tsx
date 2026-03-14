@@ -48,42 +48,48 @@ export default function PaintWindow() {
       contextRef.current = context;
     }
 
+    let resizeTimeout: NodeJS.Timeout;
+
     // Handle resize - save current drawing, resize, then restore
     const handleResize = () => {
-      if (!canvas || !contextRef.current) return;
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        if (!canvas || !contextRef.current) return;
 
-      // Save current canvas content
-      const imageData = contextRef.current.getImageData(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-      );
-      const tempCanvas = document.createElement("canvas");
-      tempCanvas.width = canvas.width;
-      tempCanvas.height = canvas.height;
-      const tempCtx = tempCanvas.getContext("2d");
-      if (tempCtx) {
-        tempCtx.putImageData(imageData, 0, 0);
-      }
+        // Save current canvas content
+        const imageData = contextRef.current.getImageData(
+          0,
+          0,
+          canvas.width,
+          canvas.height
+        );
+        const tempCanvas = document.createElement("canvas");
+        tempCanvas.width = canvas.width;
+        tempCanvas.height = canvas.height;
+        const tempCtx = tempCanvas.getContext("2d");
+        if (tempCtx) {
+          tempCtx.putImageData(imageData, 0, 0);
+        }
 
-      // Resize canvas
-      const newRect = container.getBoundingClientRect();
-      canvas.width = newRect.width;
-      canvas.height = newRect.height;
+        // Resize canvas
+        const newRect = container.getBoundingClientRect();
+        canvas.width = newRect.width;
+        canvas.height = newRect.height;
 
-      // Restore background
-      contextRef.current.fillStyle = "#ffffff";
-      contextRef.current.fillRect(0, 0, canvas.width, canvas.height);
+        // Restore background
+        contextRef.current.fillStyle = "#ffffff";
+        contextRef.current.fillRect(0, 0, canvas.width, canvas.height);
 
-      // Restore previous drawing
-      contextRef.current.drawImage(tempCanvas, 0, 0);
+        // Restore previous drawing
+        contextRef.current.drawImage(tempCanvas, 0, 0);
+      }, 150);
     };
 
     const resizeObserver = new ResizeObserver(handleResize);
     resizeObserver.observe(container);
 
     return () => {
+      clearTimeout(resizeTimeout);
       resizeObserver.disconnect();
     };
   }, []);

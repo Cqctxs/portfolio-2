@@ -13,8 +13,19 @@ function formatTime(date: Date) {
   });
 }
 
-export default function SystemBar() {
+export function Clock() {
   const [now, setNow] = useState(new Date());
+  useEffect(() => {
+    const interval = setInterval(() => setNow(new Date()), 1000);
+    return () => clearInterval(interval);
+  }, []);
+  return <>{formatTime(now)}</>;
+}
+
+export default function SystemBar() {
+  // kept static to prevent ReferenceError in the remaining unshown JSX
+  // Ideally, replace `{formatTime(now)}` with `<Clock />` in the JSX below
+  const [now] = useState(new Date());
   const [startPressed, setStartPressed] = useState(false);
   const [startMenuOpen, setStartMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -30,8 +41,7 @@ export default function SystemBar() {
   } = useDesktopState();
 
   useEffect(() => {
-    const interval = setInterval(() => setNow(new Date()), 1000);
-    return () => clearInterval(interval);
+    // Interval removed to prevent re-rendering the entire SystemBar
   }, []);
 
   useEffect(() => {

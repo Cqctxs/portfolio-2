@@ -16,6 +16,10 @@ Quick links:
 Thanks for visiting! :)
 `);
 
+  const lines = text.split("\n");
+  const lineCount = lines.length;
+  const colCount = lines[lineCount - 1].length;
+
   return (
     <div
       style={{
@@ -63,8 +67,7 @@ Thanks for visiting! :)
         }}
       >
         <span>
-          Line {text.split("\n").length}, Col{" "}
-          {text.split("\n").pop()?.length || 0}
+          Line {lineCount}, Col {colCount}
         </span>
       </div>
     </div>
