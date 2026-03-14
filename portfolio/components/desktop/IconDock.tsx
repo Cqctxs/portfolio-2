@@ -4,16 +4,16 @@ import { desktopIcons } from "@/config/desktop";
 import { useDesktopState } from "@/stores/desktopState";
 import DesktopIcon from "./DesktopIcon";
 
+// Split icons into two groups outside the component
+const mainApps = desktopIcons.filter(
+  (icon) => !["terminal", "notepad", "paint"].includes(icon.id)
+);
+const miscApps = desktopIcons.filter((icon) =>
+  ["terminal", "notepad", "paint"].includes(icon.id)
+);
+
 export default function IconDock() {
   const { openWindow } = useDesktopState();
-
-  // Split icons into two groups
-  const mainApps = desktopIcons.filter(
-    (icon) => !["terminal", "notepad", "paint"].includes(icon.id)
-  );
-  const miscApps = desktopIcons.filter((icon) =>
-    ["terminal", "notepad", "paint"].includes(icon.id)
-  );
 
   return (
     <>

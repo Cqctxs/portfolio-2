@@ -1,17 +1,19 @@
-import AboutWindow from "@/components/windows/AboutWindow";
-import AchievementsWindow from "@/components/windows/AchievementsWindow";
-import ContactWindow from "@/components/windows/ContactWindow";
-import ProjectsWindow from "@/components/windows/ProjectsWindow";
-import ResumeWindow from "@/components/windows/ResumeWindow";
-import TerminalWindow from "@/components/windows/TerminalWindow";
-import NotepadWindow from "@/components/windows/NotepadWindow";
-import PaintWindow from "@/components/windows/PaintWindow";
-import CreditsWindow from "@/components/windows/CreditsWindow";
+import dynamic from "next/dynamic";
 import type {
   DesktopIconConfig,
   DesktopWindowConfig,
   DesktopWindowId,
 } from "@/types/desktop";
+
+const AboutWindow = dynamic(() => import("@/components/windows/AboutWindow"));
+const AchievementsWindow = dynamic(() => import("@/components/windows/AchievementsWindow"));
+const ContactWindow = dynamic(() => import("@/components/windows/ContactWindow"));
+const ProjectsWindow = dynamic(() => import("@/components/windows/ProjectsWindow"));
+const ResumeWindow = dynamic(() => import("@/components/windows/ResumeWindow"));
+const TerminalWindow = dynamic(() => import("@/components/windows/TerminalWindow"));
+const NotepadWindow = dynamic(() => import("@/components/windows/NotepadWindow"));
+const PaintWindow = dynamic(() => import("@/components/windows/PaintWindow"));
+const CreditsWindow = dynamic(() => import("@/components/windows/CreditsWindow"));
 
 export const desktopWindows: DesktopWindowConfig[] = [
   {

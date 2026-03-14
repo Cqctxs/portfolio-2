@@ -13,8 +13,18 @@ function formatTime(date: Date) {
   });
 }
 
-export default function SystemBar() {
+function Clock() {
   const [now, setNow] = useState(new Date());
+
+  useEffect(() => {
+    const interval = setInterval(() => setNow(new Date()), 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return <span>{formatTime(now)}</span>;
+}
+
+export default function SystemBar() {
   const [startPressed, setStartPressed] = useState(false);
   const [startMenuOpen, setStartMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -28,11 +38,6 @@ export default function SystemBar() {
     focusWindow,
     openWindow,
   } = useDesktopState();
-
-  useEffect(() => {
-    const interval = setInterval(() => setNow(new Date()), 1000);
-    return () => clearInterval(interval);
-  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {

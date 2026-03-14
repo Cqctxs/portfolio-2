@@ -29,48 +29,44 @@ export function Model({ icosphereRef, cactusRef, onLoad, ...props }) {
           geometry={nodes.Plane.geometry}
           material={materials["Material.004"]}
         />
-        <mesh
-          ref={cactusRef}
-          name="Cactus1"
-          geometry={nodes.Cactus1.geometry}
-          material={materials["Material.003"]}
-          position={[-0.252, 0, 0]}
-        />
-        <mesh
-          ref={cactusRef}
-          name="Cactus1003"
-          geometry={nodes.Cactus1003.geometry}
-          material={materials["Material.003"]}
-          position={[0.299, 0, 0]}
-        />
-        <mesh
-          ref={cactusRef}
-          name="Cactus1004"
-          geometry={nodes.Cactus1004.geometry}
-          material={materials["Material.003"]}
-          position={[0.315, 0, 0]}
-        />
-        <mesh
-          ref={cactusRef}
-          name="Cactus1005"
-          geometry={nodes.Cactus1005.geometry}
-          material={materials["Material.003"]}
-          position={[-0.173, 0, 0]}
-        />
-        <mesh
-          ref={cactusRef}
-          name="Cactus1006"
-          geometry={nodes.Cactus1006.geometry}
-          material={materials["Material.003"]}
-          position={[0.236, 0, 0]}
-        />
-        <mesh
-          ref={cactusRef}
-          name="Cactus1007"
-          geometry={nodes.Cactus1007.geometry}
-          material={materials["Material.003"]}
-          position={[-0.504, 0, 0]}
-        />
+        <group ref={cactusRef}>
+          <mesh
+            name="Cactus1"
+            geometry={nodes.Cactus1.geometry}
+            material={materials["Material.003"]}
+            position={[-0.252, 0, 0]}
+          />
+          <mesh
+            name="Cactus1003"
+            geometry={nodes.Cactus1003.geometry}
+            material={materials["Material.003"]}
+            position={[0.299, 0, 0]}
+          />
+          <mesh
+            name="Cactus1004"
+            geometry={nodes.Cactus1004.geometry}
+            material={materials["Material.003"]}
+            position={[0.315, 0, 0]}
+          />
+          <mesh
+            name="Cactus1005"
+            geometry={nodes.Cactus1005.geometry}
+            material={materials["Material.003"]}
+            position={[-0.173, 0, 0]}
+          />
+          <mesh
+            name="Cactus1006"
+            geometry={nodes.Cactus1006.geometry}
+            material={materials["Material.003"]}
+            position={[0.236, 0, 0]}
+          />
+          <mesh
+            name="Cactus1007"
+            geometry={nodes.Cactus1007.geometry}
+            material={materials["Material.003"]}
+            position={[-0.504, 0, 0]}
+          />
+        </group>
         <mesh
           name="Plane001"
           geometry={nodes.Plane001.geometry}
@@ -124,16 +120,15 @@ export function CameraAnimation({ icosphereRef, mouseXRef, mouseYRef }) {
       icosphereRef.current.position.z = -321.833 + zOffset;
     }
 
-    // Smooth parallax effect with lerp (linear interpolation)
-    // This creates smooth, performant movement
+    // Smooth parallax effect with damp for frame-rate independence
     const targetX = mouseXRef.current * parallaxFactorX;
     const targetY = mouseYRef.current * parallaxFactorY;
 
-    // Lerp factor - higher value = faster response (0.05 = smooth, 0.1 = snappier)
-    const lerpFactor = 0.05;
+    // Damping factor - higher value = faster response (e.g., 5 = smooth, 10 = snappier)
+    const damping = 5;
 
-    currentX.current += (targetX - currentX.current) * lerpFactor;
-    currentY.current += (targetY - currentY.current) * lerpFactor;
+    currentX.current = THREE.MathUtils.damp(currentX.current, targetX, damping, delta);
+    currentY.current = THREE.MathUtils.damp(currentY.current, targetY, damping, delta);
 
     camera.position.x = currentX.current;
     camera.position.y = 0.74 + currentY.current;
