@@ -24,14 +24,24 @@ export default function DesktopBackground() {
     /* Track mouse position for interactive camera movement */
   }
   useEffect(() => {
-    const handleMouseMove = (event: MouseEvent) => {
-      // Normalize mouse position relative to screen center (-1 to 1)
-      mouseXRef.current = (event.clientX / window.innerWidth) * 2 - 1;
-      mouseYRef.current = (event.clientY / window.innerHeight) * 2 - 1; // Invert Y axis
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+
+    const handleResize = () => {
+      width = window.innerWidth;
+      height = window.innerHeight;
     };
 
+    const handleMouseMove = (event: MouseEvent) => {
+      // Normalize mouse position relative to screen center (-1 to 1)
+      mouseXRef.current = (event.clientX / width) * 2 - 1;
+      mouseYRef.current = (event.clientY / height) * 2 - 1; // Invert Y axis
+    };
+
+    window.addEventListener("resize", handleResize);
     window.addEventListener("mousemove", handleMouseMove);
     return () => {
+      window.removeEventListener("resize", handleResize);
       window.removeEventListener("mousemove", handleMouseMove);
     };
   }, []);
@@ -78,9 +88,9 @@ export default function DesktopBackground() {
               key="godrays" // Force remount when model loads
               sun={icosphereRef.current}
               blendFunction={BlendFunction.SCREEN}
-              samples={100} // Higher samples = smoother rays (increased from 60)
-              density={0.98} // Higher density = smoother gradient (increased from 0.96)
-              decay={0.96} // Slightly higher for smoother falloff
+              samples={40} // Reduced for performance
+              density={0.96} // Adjusted for lower samples
+              decay={0.95} // Adjusted for lower samples
               weight={0.2} // Intensity (0-1)
               exposure={0.3} // Brightness (0-1)
               clampMax={1} // Maximum brightness

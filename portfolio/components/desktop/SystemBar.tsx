@@ -5,12 +5,14 @@ import { useDesktopState } from "@/stores/desktopState";
 import { desktopWindowRecord } from "@/config/desktop";
 import type { DesktopWindowId } from "@/types/desktop";
 
+const timeFormatter = new Intl.DateTimeFormat(undefined, {
+  hour: "2-digit",
+  minute: "2-digit",
+  second: "2-digit",
+});
+
 function formatTime(date: Date) {
-  return date.toLocaleTimeString([], {
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
-  });
+  return timeFormatter.format(date);
 }
 
 export default function SystemBar() {
@@ -111,21 +113,7 @@ export default function SystemBar() {
 
           {/* Menu Items */}
           <div style={{ padding: "2px", minWidth: "180px" }}>
-            {(
-              [
-                {
-                  icon: "/icons/win98/terminal.ico",
-                  label: "Terminal",
-                  id: "terminal",
-                },
-                {
-                  icon: "/icons/win98/notepad.ico",
-                  label: "Notepad",
-                  id: "notepad",
-                },
-                { icon: "/icons/win98/paint.ico", label: "Paint", id: "paint" },
-              ] as { icon: string; label: string; id: DesktopWindowId }[]
-            ).map((item, index) => (
+            {MENU_ITEMS_TOP.map((item, index) => (
               <button
                 key={index}
                 onClick={() => {
@@ -180,30 +168,7 @@ export default function SystemBar() {
             />
 
             {/* More Applications */}
-            {(
-              [
-                {
-                  icon: "/icons/win98/projects.ico",
-                  label: "Projects",
-                  id: "projects",
-                },
-                {
-                  icon: "/icons/win98/achievements.ico",
-                  label: "Achievements",
-                  id: "achievements",
-                },
-                {
-                  icon: "/icons/win98/resume.ico",
-                  label: "Resume",
-                  id: "resume",
-                },
-                {
-                  icon: "/icons/win98/contact.ico",
-                  label: "Contact",
-                  id: "contact",
-                },
-              ] as { icon: string; label: string; id: DesktopWindowId }[]
-            ).map((item, index) => (
+            {MENU_ITEMS_BOTTOM.map((item, index) => (
               <button
                 key={index}
                 onClick={() => {

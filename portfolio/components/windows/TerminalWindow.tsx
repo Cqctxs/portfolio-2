@@ -1,11 +1,31 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, memo } from "react";
 
 type Command = {
   input: string;
   output: string[];
 };
+
+const CommandHistory = memo(({ commands }: { commands: Command[] }) => {
+  return (
+    <>
+      {commands.map((cmd, idx) => (
+        <div key={idx}>
+          {cmd.input && (
+            <div>
+              <span style={{ color: "#ffffff" }}>C:\&gt; </span>
+              <span>{cmd.input}</span>
+            </div>
+          )}
+          {cmd.output.map((line, lineIdx) => (
+            <div key={lineIdx}>{line}</div>
+          ))}
+        </div>
+      ))}
+    </>
+  );
+});
 
 export default function TerminalWindow() {
   const [commands, setCommands] = useState<Command[]>([
@@ -125,7 +145,7 @@ export default function TerminalWindow() {
         ];
     }
 
-    setCommands([...commands, { input: cmd, output }]);
+    setCommands((prev) => [...prev, { input: cmd, output }]);
     setInput("");
   };
 
@@ -155,19 +175,7 @@ export default function TerminalWindow() {
           cursor: "text",
         }}
       >
-        {commands.map((cmd, idx) => (
-          <div key={idx}>
-            {cmd.input && (
-              <div>
-                <span style={{ color: "#ffffff" }}>C:\&gt; </span>
-                <span>{cmd.input}</span>
-              </div>
-            )}
-            {cmd.output.map((line, lineIdx) => (
-              <div key={lineIdx}>{line}</div>
-            ))}
-          </div>
-        ))}
+        <CommandHistory commands={commands} />
         {/* Current input line */}
         <div style={{ display: "flex" }}>
           <span style={{ color: "#ffffff" }}>C:\&gt; </span>

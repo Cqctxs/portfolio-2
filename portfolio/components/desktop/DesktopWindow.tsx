@@ -119,65 +119,76 @@ export default function DesktopWindow({
   );
 
   useEffect(() => {
+    let animationFrameId: number | null = null;
+
     const handleMouseMove = (e: MouseEvent) => {
-      if (isDragging) {
-        const newX = Math.max(
-          0,
-          Math.min(e.clientX - dragOffset.current.x, window.innerWidth - 100)
-        );
-        const newY = Math.max(
-          0,
-          Math.min(e.clientY - dragOffset.current.y, window.innerHeight - 100)
-        );
-        setDragPreview((prev) => (prev ? { ...prev, x: newX, y: newY } : null));
+      if (animationFrameId !== null) {
+        cancelAnimationFrame(animationFrameId);
       }
 
-      if (isResizing) {
-        const deltaX = e.clientX - resizeStart.current.x;
-        const deltaY = e.clientY - resizeStart.current.y;
-
-        let newWidth = resizeStart.current.width;
-        let newHeight = resizeStart.current.height;
-        let newX = resizeStart.current.posX;
-        let newY = resizeStart.current.posY;
-
-        if (resizeDirection.includes("e")) {
-          newWidth = Math.max(MIN_WIDTH, resizeStart.current.width + deltaX);
+      animationFrameId = requestAnimationFrame(() => {
+        if (isDragging) {
+          const newX = Math.max(
+            0,
+            Math.min(e.clientX - dragOffset.current.x, window.innerWidth - 100)
+          );
+          const newY = Math.max(
+            0,
+            Math.min(e.clientY - dragOffset.current.y, window.innerHeight - 100)
+          );
+          setDragPreview((prev) => (prev ? { ...prev, x: newX, y: newY } : null));
         }
-        if (resizeDirection.includes("w")) {
-          const potentialWidth = resizeStart.current.width - deltaX;
-          if (potentialWidth >= MIN_WIDTH) {
-            newWidth = potentialWidth;
-            newX = resizeStart.current.posX + deltaX;
+
+        if (isResizing) {
+          const deltaX = e.clientX - resizeStart.current.x;
+          const deltaY = e.clientY - resizeStart.current.y;
+
+          let newWidth = resizeStart.current.width;
+          let newHeight = resizeStart.current.height;
+          let newX = resizeStart.current.posX;
+          let newY = resizeStart.current.posY;
+
+          if (resizeDirection.includes("e")) {
+            newWidth = Math.max(MIN_WIDTH, resizeStart.current.width + deltaX);
           }
-        }
-        if (resizeDirection.includes("s")) {
-          newHeight = Math.max(MIN_HEIGHT, resizeStart.current.height + deltaY);
-        }
-        if (resizeDirection.includes("n")) {
-          const potentialHeight = resizeStart.current.height - deltaY;
-          if (potentialHeight >= MIN_HEIGHT) {
-            newHeight = potentialHeight;
-            newY = resizeStart.current.posY + deltaY;
+          if (resizeDirection.includes("w")) {
+            const potentialWidth = resizeStart.current.width - deltaX;
+            if (potentialWidth >= MIN_WIDTH) {
+              newWidth = potentialWidth;
+              newX = resizeStart.current.posX + deltaX;
+            }
           }
+          if (resizeDirection.includes("s")) {
+            newHeight = Math.max(MIN_HEIGHT, resizeStart.current.height + deltaY);
+          }
+          if (resizeDirection.includes("n")) {
+            const potentialHeight = resizeStart.current.height - deltaY;
+            if (potentialHeight >= MIN_HEIGHT) {
+              newHeight = potentialHeight;
+              newY = resizeStart.current.posY + deltaY;
+            }
+          }
+
+          // Constrain to viewport
+          const maxWidth = window.innerWidth - newX - 10;
+          const maxHeight = window.innerHeight - newY - 50;
+          newWidth = Math.min(newWidth, maxWidth);
+          newHeight = Math.min(newHeight, maxHeight);
+
+          setDragPreview({
+            x: newX,
+            y: newY,
+            width: newWidth,
+            height: newHeight,
+          });
         }
-
-        // Constrain to viewport
-        const maxWidth = window.innerWidth - newX - 10;
-        const maxHeight = window.innerHeight - newY - 50;
-        newWidth = Math.min(newWidth, maxWidth);
-        newHeight = Math.min(newHeight, maxHeight);
-
-        setDragPreview({
-          x: newX,
-          y: newY,
-          width: newWidth,
-          height: newHeight,
-        });
-      }
+      });
     };
 
     const handleMouseUp = () => {
+      if (animationFrameId !== null) {
+        cancelAnimationFrame(animationFrameId);
+      }
       if (isDragging && dragPreview) {
         onPositionChange({ x: dragPreview.x, y: dragPreview.y });
       }
@@ -200,6 +211,9 @@ export default function DesktopWindow({
     }
 
     return () => {
+      if (animationFrameId !== null) {
+        cancelAnimationFrame(animationFrameId);
+      }
       document.removeEventListener("mousemove", handleMouseMove);
       document.removeEventListener("mouseup", handleMouseUp);
       document.body.style.userSelect = "";

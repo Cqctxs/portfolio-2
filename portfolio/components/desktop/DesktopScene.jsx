@@ -129,8 +129,9 @@ export function CameraAnimation({ icosphereRef, mouseXRef, mouseYRef }) {
     const targetX = mouseXRef.current * parallaxFactorX;
     const targetY = mouseYRef.current * parallaxFactorY;
 
-    // Lerp factor - higher value = faster response (0.05 = smooth, 0.1 = snappier)
-    const lerpFactor = 0.05;
+    // Frame-rate independent lerp using delta time and exponential decay
+    const damping = 3; // controls the speed of the easing
+    const lerpFactor = 1 - Math.exp(-damping * delta);
 
     currentX.current += (targetX - currentX.current) * lerpFactor;
     currentY.current += (targetY - currentY.current) * lerpFactor;
