@@ -4,16 +4,12 @@ import { desktopIcons } from "@/config/desktop";
 import { useDesktopState } from "@/stores/desktopState";
 import DesktopIcon from "./DesktopIcon";
 
+const MISC_APP_IDS = new Set(["terminal", "notepad", "paint"]);
+const mainApps = desktopIcons.filter((icon) => !MISC_APP_IDS.has(icon.id));
+const miscApps = desktopIcons.filter((icon) => MISC_APP_IDS.has(icon.id));
+
 export default function IconDock() {
   const { openWindow } = useDesktopState();
-
-  // Split icons into two groups
-  const mainApps = desktopIcons.filter(
-    (icon) => !["terminal", "notepad", "paint"].includes(icon.id)
-  );
-  const miscApps = desktopIcons.filter((icon) =>
-    ["terminal", "notepad", "paint"].includes(icon.id)
-  );
 
   return (
     <>

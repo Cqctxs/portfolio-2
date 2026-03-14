@@ -125,7 +125,10 @@ export default function TerminalWindow() {
         ];
     }
 
-    setCommands([...commands, { input: cmd, output }]);
+    setCommands((prev) => {
+      const newCommands = [...prev, { input: cmd, output }];
+      return newCommands.slice(-50); // Keep only the last 50 commands
+    });
     setInput("");
   };
 

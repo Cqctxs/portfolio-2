@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useState, memo } from "react";
 
 type DesktopIconProps = {
   label: string;
@@ -8,7 +8,7 @@ type DesktopIconProps = {
   onActivate: () => void;
 };
 
-export default function DesktopIcon({
+const DesktopIcon = memo(function DesktopIcon({
   label,
   iconSrc,
   onActivate,
@@ -73,4 +73,6 @@ export default function DesktopIcon({
       </span>
     </button>
   );
-}
+});
+
+export default DesktopIcon;

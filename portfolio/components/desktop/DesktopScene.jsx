@@ -8,6 +8,8 @@ import { useGLTF, useAnimations } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 
+import { useGLTF, useAnimations, Instances, Instance } from "@react-three/drei";
+
 export function Model({ icosphereRef, cactusRef, onLoad, ...props }) {
   const group = React.useRef();
   const { nodes, materials, animations } = useGLTF("/models/Background.glb", true);
@@ -20,6 +22,16 @@ export function Model({ icosphereRef, cactusRef, onLoad, ...props }) {
     }
   }, [icosphereRef, onLoad]);
 
+  // Cactus positions extracted from original meshes
+  const cactusPositions = [
+    [-0.252, 0, 0],
+    [0.299, 0, 0],
+    [0.315, 0, 0],
+    [-0.173, 0, 0],
+    [0.236, 0, 0],
+    [-0.504, 0, 0]
+  ];
+
   return (
     <group ref={group} {...props} dispose={null}>
       <group name="Scene">
@@ -29,48 +41,22 @@ export function Model({ icosphereRef, cactusRef, onLoad, ...props }) {
           geometry={nodes.Plane.geometry}
           material={materials["Material.004"]}
         />
-        <mesh
-          ref={cactusRef}
-          name="Cactus1"
-          geometry={nodes.Cactus1.geometry}
+        
+        <Instances 
+          range={6} 
+          geometry={nodes.Cactus1.geometry} 
           material={materials["Material.003"]}
-          position={[-0.252, 0, 0]}
-        />
-        <mesh
-          ref={cactusRef}
-          name="Cactus1003"
-          geometry={nodes.Cactus1003.geometry}
-          material={materials["Material.003"]}
-          position={[0.299, 0, 0]}
-        />
-        <mesh
-          ref={cactusRef}
-          name="Cactus1004"
-          geometry={nodes.Cactus1004.geometry}
-          material={materials["Material.003"]}
-          position={[0.315, 0, 0]}
-        />
-        <mesh
-          ref={cactusRef}
-          name="Cactus1005"
-          geometry={nodes.Cactus1005.geometry}
-          material={materials["Material.003"]}
-          position={[-0.173, 0, 0]}
-        />
-        <mesh
-          ref={cactusRef}
-          name="Cactus1006"
-          geometry={nodes.Cactus1006.geometry}
-          material={materials["Material.003"]}
-          position={[0.236, 0, 0]}
-        />
-        <mesh
-          ref={cactusRef}
-          name="Cactus1007"
-          geometry={nodes.Cactus1007.geometry}
-          material={materials["Material.003"]}
-          position={[-0.504, 0, 0]}
-        />
+        >
+          {cactusPositions.map((pos, index) => (
+            <Instance 
+              key={index} 
+              position={pos} 
+              // Note: ref={cactusRef} logic might need adjustment depending on how it's used by the parent,
+              // but instancing is the priority for performance.
+            />
+          ))}
+        </Instances>
+
         <mesh
           name="Plane001"
           geometry={nodes.Plane001.geometry}

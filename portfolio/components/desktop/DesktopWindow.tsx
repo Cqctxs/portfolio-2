@@ -50,22 +50,13 @@ export default function DesktopWindow({
   const [isDragging, setIsDragging] = useState(false);
   const [isResizing, setIsResizing] = useState(false);
   const [resizeDirection, setResizeDirection] = useState<string>("");
-  const [dragPreview, setDragPreview] = useState<{
+  const dragPreviewData = useRef<{
     x: number;
     y: number;
     width: number;
     height: number;
   } | null>(null);
-  const dragOffset = useRef({ x: 0, y: 0 });
-  const resizeStart = useRef({
-    x: 0,
-    y: 0,
-    width: 0,
-    height: 0,
-    posX: 0,
-    posY: 0,
-  });
-  const windowRef = useRef<HTMLElement>(null);
+  const dragPreviewRef = useRef<HTMLDivElement>(null);
 
   // Handle dragging (disabled when maximized)
   const handleMouseDown = useCallback(
@@ -80,12 +71,22 @@ export default function DesktopWindow({
         x: e.clientX - position.x,
         y: e.clientY - position.y,
       };
-      setDragPreview({
+      
+      const initialPreview = {
         x: position.x,
         y: position.y,
         width: size.width,
         height: size.height,
-      });
+      };
+      dragPreviewData.current = initialPreview;
+      
+      if (dragPreviewRef.current) {
+        dragPreviewRef.current.style.display = "block";
+        dragPreviewRef.current.style.left = `${initialPreview.x}px`;
+        dragPreviewRef.current.style.top = `${initialPreview.y}px`;
+        dragPreviewRef.current.style.width = `${initialPreview.width}px`;
+        dragPreviewRef.current.style.height = `${initialPreview.height}px`;
+      }
     },
     [position, size, onFocus, isMaximized]
   );
@@ -108,18 +109,30 @@ export default function DesktopWindow({
         posX: position.x,
         posY: position.y,
       };
-      setDragPreview({
+      
+      const initialPreview = {
         x: position.x,
         y: position.y,
         width: size.width,
         height: size.height,
-      });
+      };
+      dragPreviewData.current = initialPreview;
+      
+      if (dragPreviewRef.current) {
+        dragPreviewRef.current.style.display = "block";
+        dragPreviewRef.current.style.left = `${initialPreview.x}px`;
+        dragPreviewRef.current.style.top = `${initialPreview.y}px`;
+        dragPreviewRef.current.style.width = `${initialPreview.width}px`;
+        dragPreviewRef.current.style.height = `${initialPreview.height}px`;
+      }
     },
     [size, position, onFocus, isMaximized]
   );
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
+      if (!dragPreviewData.current) return;
+
       if (isDragging) {
         const newX = Math.max(
           0,
@@ -129,7 +142,8 @@ export default function DesktopWindow({
           0,
           Math.min(e.clientY - dragOffset.current.y, window.innerHeight - 100)
         );
-        setDragPreview((prev) => (prev ? { ...prev, x: newX, y: newY } : null));
+        dragPreviewData.current.x = newX;
+        dragPreviewData.current.y = newY;
       }
 
       if (isResizing) {
@@ -168,29 +182,38 @@ export default function DesktopWindow({
         newWidth = Math.min(newWidth, maxWidth);
         newHeight = Math.min(newHeight, maxHeight);
 
-        setDragPreview({
-          x: newX,
-          y: newY,
-          width: newWidth,
-          height: newHeight,
-        });
+        dragPreviewData.current.x = newX;
+        dragPreviewData.current.y = newY;
+        dragPreviewData.current.width = newWidth;
+        dragPreviewData.current.height = newHeight;
+      }
+
+      if (dragPreviewRef.current) {
+        dragPreviewRef.current.style.left = `${dragPreviewData.current.x}px`;
+        dragPreviewRef.current.style.top = `${dragPreviewData.current.y}px`;
+        dragPreviewRef.current.style.width = `${dragPreviewData.current.width}px`;
+        dragPreviewRef.current.style.height = `${dragPreviewData.current.height}px`;
       }
     };
 
     const handleMouseUp = () => {
-      if (isDragging && dragPreview) {
-        onPositionChange({ x: dragPreview.x, y: dragPreview.y });
+      const preview = dragPreviewData.current;
+      if (isDragging && preview) {
+        onPositionChange({ x: preview.x, y: preview.y });
       }
-      if (isResizing && dragPreview) {
-        onSizeChange({ width: dragPreview.width, height: dragPreview.height });
+      if (isResizing && preview) {
+        onSizeChange({ width: preview.width, height: preview.height });
         if (resizeDirection.includes("w") || resizeDirection.includes("n")) {
-          onPositionChange({ x: dragPreview.x, y: dragPreview.y });
+          onPositionChange({ x: preview.x, y: preview.y });
         }
       }
       setIsDragging(false);
       setIsResizing(false);
       setResizeDirection("");
-      setDragPreview(null);
+      dragPreviewData.current = null;
+      if (dragPreviewRef.current) {
+        dragPreviewRef.current.style.display = "none";
+      }
     };
 
     if (isDragging || isResizing) {
@@ -208,7 +231,6 @@ export default function DesktopWindow({
     isDragging,
     isResizing,
     resizeDirection,
-    dragPreview,
     onPositionChange,
     onSizeChange,
   ]);
@@ -221,21 +243,17 @@ export default function DesktopWindow({
   return (
     <>
       {/* Drag/Resize outline preview */}
-      {dragPreview && (isDragging || isResizing) && (
-        <div
-          style={{
-            position: "fixed",
-            left: dragPreview.x,
-            top: dragPreview.y,
-            width: dragPreview.width,
-            height: dragPreview.height,
-            border: "2px dashed #000000",
-            background: "transparent",
-            pointerEvents: "none",
-            zIndex: zIndex + 1000,
-          }}
-        />
-      )}
+      <div
+        ref={dragPreviewRef}
+        style={{
+          display: "none",
+          position: "fixed",
+          border: "2px dashed #000000",
+          background: "transparent",
+          pointerEvents: "none",
+          zIndex: zIndex + 1000,
+        }}
+      />
       <section
         ref={windowRef}
         role="dialog"

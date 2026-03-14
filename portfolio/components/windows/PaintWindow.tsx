@@ -53,18 +53,12 @@ export default function PaintWindow() {
       if (!canvas || !contextRef.current) return;
 
       // Save current canvas content
-      const imageData = contextRef.current.getImageData(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-      );
       const tempCanvas = document.createElement("canvas");
       tempCanvas.width = canvas.width;
       tempCanvas.height = canvas.height;
       const tempCtx = tempCanvas.getContext("2d");
       if (tempCtx) {
-        tempCtx.putImageData(imageData, 0, 0);
+        tempCtx.drawImage(canvas, 0, 0);
       }
 
       // Resize canvas
@@ -89,14 +83,9 @@ export default function PaintWindow() {
   }, []);
 
   const getCanvasCoordinates = (e: React.MouseEvent<HTMLCanvasElement>) => {
-    const canvas = canvasRef.current;
-    if (!canvas) return { x: 0, y: 0 };
-
-    const rect = canvas.getBoundingClientRect();
-
     return {
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
+      x: e.nativeEvent.offsetX,
+      y: e.nativeEvent.offsetY,
     };
   };
 
@@ -117,12 +106,14 @@ export default function PaintWindow() {
     const context = contextRef.current;
     if (!context) return;
 
-    context.lineTo(coords.x, coords.y);
-    context.strokeStyle = isEraser ? "#ffffff" : color;
-    context.lineWidth = brushSize;
-    context.lineCap = "round";
-    context.lineJoin = "round";
-    context.stroke();
+    requestAnimationFrame(() => {
+      context.lineTo(coords.x, coords.y);
+      context.strokeStyle = isEraser ? "#ffffff" : color;
+      context.lineWidth = brushSize;
+      context.lineCap = "round";
+      context.lineJoin = "round";
+      context.stroke();
+    });
   };
 
   const stopDrawing = () => {
