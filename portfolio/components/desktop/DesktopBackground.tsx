@@ -24,15 +24,24 @@ export default function DesktopBackground() {
     /* Track mouse position for interactive camera movement */
   }
   useEffect(() => {
+    let animationFrameId: number;
+
     const handleMouseMove = (event: MouseEvent) => {
-      // Normalize mouse position relative to screen center (-1 to 1)
-      mouseXRef.current = (event.clientX / window.innerWidth) * 2 - 1;
-      mouseYRef.current = (event.clientY / window.innerHeight) * 2 - 1; // Invert Y axis
+      // Cancel the previous animation frame request
+      cancelAnimationFrame(animationFrameId);
+
+      // Schedule the update for the next animation frame
+      animationFrameId = requestAnimationFrame(() => {
+        mouseXRef.current = (event.clientX / window.innerWidth) * 2 - 1;
+        mouseYRef.current = (event.clientY / window.innerHeight) * 2 - 1;
+      });
     };
 
     window.addEventListener("mousemove", handleMouseMove);
+
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
+      cancelAnimationFrame(animationFrameId); // Clean up on unmount
     };
   }, []);
 
@@ -78,23 +87,23 @@ export default function DesktopBackground() {
               key="godrays" // Force remount when model loads
               sun={icosphereRef.current}
               blendFunction={BlendFunction.SCREEN}
-              samples={100} // Higher samples = smoother rays (increased from 60)
-              density={0.98} // Higher density = smoother gradient (increased from 0.96)
-              decay={0.96} // Slightly higher for smoother falloff
-              weight={0.2} // Intensity (0-1)
-              exposure={0.3} // Brightness (0-1)
-              clampMax={1} // Maximum brightness
+              samples={50} // Reduced for performance
+              density={0.98}
+              decay={0.96}
+              weight={0.2}
+              exposure={0.3}
+              clampMax={1}
             />
           ) : (
             <></>
           )}
           {/* Bloom Effect */}
           <Bloom
-            intensity={1.5}
-            luminanceThreshold={0.2}
+            intensity={1.0} // Reduced intensity
+            luminanceThreshold={0.85} // Increased threshold for performance
             luminanceSmoothing={0.9}
             mipmapBlur={true}
-            radius={0.65}
+            radius={0.5} // Reduced radius
           />
           {/* Scanlines */}
           <Scanline
