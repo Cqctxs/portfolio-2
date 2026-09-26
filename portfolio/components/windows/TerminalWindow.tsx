@@ -20,7 +20,6 @@ export default function TerminalWindow() {
     },
   ]);
   const [input, setInput] = useState("");
-  const [cursorVisible, setCursorVisible] = useState(true);
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -29,13 +28,6 @@ export default function TerminalWindow() {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
   }, [commands]);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCursorVisible((v) => !v);
-    }, 500);
-    return () => clearInterval(interval);
-  }, []);
 
   const executeCommand = (cmd: string) => {
     const trimmed = cmd.trim().toLowerCase();
@@ -142,6 +134,11 @@ export default function TerminalWindow() {
         overflow: "hidden",
       }}
     >
+      <style>{`
+        @keyframes terminal-blink {
+          50% { opacity: 0; }
+        }
+      `}</style>
       {/* Terminal Output */}
       <div
         ref={scrollRef}
@@ -178,11 +175,12 @@ export default function TerminalWindow() {
                 display: "inline-block",
                 width: "8px",
                 height: "2px",
-                backgroundColor: cursorVisible ? "#ffffff" : "transparent",
+                backgroundColor: "#ffffff",
                 marginLeft: "0px",
                 verticalAlign: "baseline",
                 position: "relative",
                 top: "2px",
+                animation: "terminal-blink 1s step-start infinite",
               }}
             />
             <input

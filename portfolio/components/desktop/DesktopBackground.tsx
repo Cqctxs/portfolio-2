@@ -78,7 +78,7 @@ export default function DesktopBackground() {
               key="godrays" // Force remount when model loads
               sun={icosphereRef.current}
               blendFunction={BlendFunction.SCREEN}
-              samples={100} // Higher samples = smoother rays (increased from 60)
+              samples={60} // Reduced samples for better performance without sacrificing much visual quality
               density={0.98} // Higher density = smoother gradient (increased from 0.96)
               decay={0.96} // Slightly higher for smoother falloff
               weight={0.2} // Intensity (0-1)
