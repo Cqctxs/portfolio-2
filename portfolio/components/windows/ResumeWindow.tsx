@@ -22,8 +22,7 @@ export default function ResumeWindow() {
       >
         <div style={{ fontSize: "14px", fontWeight: "bold" }}>Sean Zhao</div>
         <div style={{ fontSize: "11px", marginTop: "2px" }}>
-          Computer Engineering Student | Cybersecurity Enthusiast | Full-Stack
-          Developer
+          Computer Engineering Student | Software Developer
         </div>
       </div>
 
@@ -89,10 +88,10 @@ export default function ResumeWindow() {
             <div style={{ padding: "8px", borderBottom: "1px solid #c0c0c0" }}>
               <div style={{ fontWeight: "bold" }}>University of Toronto</div>
               <div>
-                Bachelor of Applied Science in Computer Engineering + PEY Co-op
+                Bachelor of Applied Science in Computer Engineering
               </div>
               <div style={{ color: "#808080", fontSize: "10px" }}>
-                Sept. 2025 - April 2030 | GPA: 3.94/4.00
+                Expected April 2029 | GPA: 3.97/4.00
               </div>
               <div
                 style={{
@@ -101,19 +100,132 @@ export default function ResumeWindow() {
                   fontSize: "10px",
                 }}
               >
-                Coursework: Computer Fundamentals, Calculus, Linear Algebra,
-                Electrical Fundamentals
+                Dean&apos;s Honour List | ECE Top Student Award
               </div>
             </div>
-            {/* High School */}
+          </div>
+        </div>
+
+        {/* Experience Section */}
+        <div style={{ marginBottom: "12px" }}>
+          <div
+            style={{
+              background: "#000080",
+              color: "#ffffff",
+              padding: "2px 8px",
+              fontWeight: "bold",
+              fontSize: "11px",
+            }}
+          >
+            EXPERIENCE
+          </div>
+          <div
+            style={{
+              border: "2px solid",
+              borderColor: "#808080 #ffffff #ffffff #808080",
+              borderTop: "none",
+            }}
+          >
             <div style={{ padding: "8px" }}>
-              <div style={{ fontWeight: "bold" }}>
-                William Lyon Mackenzie C.I.
-              </div>
-              <div>MaCS Program Graduate - Specialized Math &amp; CS</div>
+              <div style={{ fontWeight: "bold" }}>Data Security Developer Intern</div>
+              <div>1Password</div>
               <div style={{ color: "#808080", fontSize: "10px" }}>
-                Sept. 2021 - June 2025
+                May - August 2026 | Toronto, ON
               </div>
+              <ul
+                style={{
+                  margin: "4px 0 0",
+                  paddingLeft: "16px",
+                  fontSize: "10px",
+                }}
+              >
+                <li>
+                  Developed and tested production data security software in Rust
+                </li>
+                <li>
+                  Evaluated performance and compatibility across supported
+                  platforms during a security upgrade
+                </li>
+                <li>Received the Intern Trailblazer Award</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        {/* Projects Section */}
+        <div style={{ marginBottom: "12px" }}>
+          <div
+            style={{
+              background: "#000080",
+              color: "#ffffff",
+              padding: "2px 8px",
+              fontWeight: "bold",
+              fontSize: "11px",
+            }}
+          >
+            PROJECTS
+          </div>
+          <div
+            style={{
+              border: "2px solid",
+              borderColor: "#808080 #ffffff #ffffff #808080",
+              borderTop: "none",
+            }}
+          >
+            <div style={{ padding: "8px", borderBottom: "1px solid #c0c0c0" }}>
+              <div style={{ fontWeight: "bold" }}>Pilot</div>
+              <div>Reusable browser drivers for apps and coding agents</div>
+            </div>
+            <div style={{ padding: "8px", borderBottom: "1px solid #c0c0c0" }}>
+              <div style={{ fontWeight: "bold" }}>GameNet</div>
+              <div>Rust relay for self-hosted game servers</div>
+            </div>
+            <div style={{ padding: "8px" }}>
+              <div style={{ fontWeight: "bold" }}>Alias</div>
+              <div>Executable analysis with readable code and security summaries</div>
+            </div>
+          </div>
+        </div>
+
+        {/* Technical Skills Section */}
+        <div style={{ marginBottom: "12px" }}>
+          <div
+            style={{
+              background: "#000080",
+              color: "#ffffff",
+              padding: "2px 8px",
+              fontWeight: "bold",
+              fontSize: "11px",
+            }}
+          >
+            TECHNICAL SKILLS
+          </div>
+          <div
+            style={{
+              border: "2px solid",
+              borderColor: "#808080 #ffffff #ffffff #808080",
+              borderTop: "none",
+              padding: "8px",
+              display: "flex",
+              flexDirection: "column",
+              gap: "4px",
+            }}
+          >
+            <div>
+              <span style={{ fontWeight: "bold" }}>Languages:</span> Rust, C,
+              C++, Python, TypeScript, JavaScript, Java
+            </div>
+            <div>
+              <span style={{ fontWeight: "bold" }}>Systems &amp; Backend:</span>{" "}
+              Linux, Docker, Tokio, QUIC, TLS 1.3, Node.js, Express.js, FastAPI
+            </div>
+            <div>
+              <span style={{ fontWeight: "bold" }}>Web &amp; Data:</span> React,
+              Next.js, PostgreSQL, MongoDB, OpenCV, MediaPipe
+            </div>
+            <div>
+              <span style={{ fontWeight: "bold" }}>AI &amp; Security:</span> MCP,
+              browser driver generation, applied cryptography, Ghidra
             </div>
           </div>
         </div>
@@ -149,25 +261,25 @@ export default function ResumeWindow() {
             >
               <div style={{ fontWeight: "bold" }}>National Champion</div>
               <div style={{ fontSize: "10px", color: "#808080" }}>
-                1st Place
+                CyberTitan 1st Place
               </div>
             </div>
             <div style={{ padding: "8px", borderBottom: "1px solid #c0c0c0" }}>
               <div style={{ fontWeight: "bold" }}>Hackathon Winner</div>
               <div style={{ fontSize: "10px", color: "#808080" }}>
-                Competition Winner
+                HackMIT 2026, UofTHacks 13
               </div>
             </div>
             <div style={{ padding: "8px", borderRight: "1px solid #c0c0c0" }}>
-              <div style={{ fontWeight: "bold" }}>Speed Boost</div>
+              <div style={{ fontWeight: "bold" }}>Dean&apos;s Honour List</div>
               <div style={{ fontSize: "10px", color: "#808080" }}>
-                10x Performance
+                Faculty of Applied Science
               </div>
             </div>
             <div style={{ padding: "8px" }}>
-              <div style={{ fontWeight: "bold" }}>AI Integration</div>
+              <div style={{ fontWeight: "bold" }}>Perfect Score</div>
               <div style={{ fontSize: "10px", color: "#808080" }}>
-                ML/AI Experience
+                CCC Junior 2023
               </div>
             </div>
           </div>
@@ -177,7 +289,7 @@ export default function ResumeWindow() {
         <div style={{ textAlign: "center", marginTop: "16px" }}>
           <a
             href="/resume.pdf"
-            download="Sean_Zhao_Resume.pdf"
+            download="Sean_Zhao_Resume_Public_SWE.pdf"
             target="_blank"
             rel="noopener noreferrer"
             style={{
@@ -201,7 +313,7 @@ export default function ResumeWindow() {
                 "#ffffff #808080 #808080 #ffffff";
             }}
           >
-            Download Full Resume (PDF)
+            Download SWE Resume (PDF)
           </a>
         </div>
 
@@ -214,7 +326,7 @@ export default function ResumeWindow() {
             color: "#808080",
           }}
         >
-          Last updated: November 2025
+          Last updated: September 2026
         </div>
       </div>
     </div>

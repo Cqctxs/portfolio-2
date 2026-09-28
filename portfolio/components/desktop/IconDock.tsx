@@ -1,19 +1,27 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { desktopIcons } from "@/config/desktop";
 import { useDesktopState } from "@/stores/desktopState";
+import type { DesktopIconConfig, DesktopWindowId } from "@/types/desktop";
 import DesktopIcon from "./DesktopIcon";
+
+const MISC_IDS = new Set<string>(["terminal", "notepad", "paint"]);
 
 export default function IconDock() {
   const { openWindow } = useDesktopState();
+  const router = useRouter();
 
-  // Split icons into two groups
-  const mainApps = desktopIcons.filter(
-    (icon) => !["terminal", "notepad", "paint"].includes(icon.id)
-  );
-  const miscApps = desktopIcons.filter((icon) =>
-    ["terminal", "notepad", "paint"].includes(icon.id)
-  );
+  const mainApps = desktopIcons.filter((icon) => !MISC_IDS.has(icon.id));
+  const miscApps = desktopIcons.filter((icon) => MISC_IDS.has(icon.id));
+
+  const activate = (icon: DesktopIconConfig) => {
+    if (icon.href) {
+      router.push(icon.href);
+      return;
+    }
+    openWindow(icon.id as DesktopWindowId);
+  };
 
   return (
     <>
@@ -24,7 +32,7 @@ export default function IconDock() {
             key={icon.id}
             label={icon.label}
             iconSrc={icon.iconSrc}
-            onActivate={() => openWindow(icon.id)}
+            onActivate={() => activate(icon)}
           />
         ))}
       </nav>
@@ -36,7 +44,7 @@ export default function IconDock() {
             key={icon.id}
             label={icon.label}
             iconSrc={icon.iconSrc}
-            onActivate={() => openWindow(icon.id)}
+            onActivate={() => activate(icon)}
           />
         ))}
       </nav>

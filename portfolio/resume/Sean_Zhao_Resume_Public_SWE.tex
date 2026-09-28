@@ -1,0 +1,76 @@
+\documentclass[letterpaper,11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\input{glyphtounicode}
+\pdfgentounicode=1
+\pagestyle{empty}
+\urlstyle{same}
+\raggedright
+\raggedbottom
+\setlength{\parindent}{0pt}
+\titleformat{\section}{\bfseries\large}{}{0em}{}[\titlerule]
+\titlespacing*{\section}{0pt}{6pt}{5pt}
+\newcommand{\entry}[4]{\textbf{#1}\hfill #2\\\textit{\small #3}\hfill\textit{\small #4}\vspace{-4pt}}
+\newcommand{\project}[3]{\textbf{#1} $|$ \textit{\small #2}\hfill #3\vspace{-4pt}}
+\newenvironment{bullets}{\begin{itemize}[leftmargin=0.17in,itemsep=0pt,topsep=4pt,parsep=0pt]\small}{\end{itemize}\vspace{1pt}}
+\begin{document}
+\begin{center}
+\textbf{\Huge Sean Zhao}\\[2pt]
+\small +1-647-333-1548 $|$ \href{mailto:yixiang.s.zhao@gmail.com}{yixiang.s.zhao@gmail.com} $|$
+\href{https://linkedin.com/in/cqctxs}{linkedin.com/in/cqctxs} $|$
+\href{https://github.com/Cqctxs}{github.com/Cqctxs} $|$
+\href{https://lostcactus.xyz}{lostcactus.xyz}
+\end{center}
+\vspace{-9pt}
+\section{Education}
+\entry{University of Toronto}{Toronto, ON}{Bachelor of Applied Science in Computer Engineering}{Expected Apr. 2029}
+\begin{bullets}
+\item GPA: 3.97/4.00; Dean's Honour List; ECE Top Student Award
+\item Relevant coursework: Computer Fundamentals (C); Programming Fundamentals (C++ object-oriented programming, data structures and algorithms; in progress); Digital Systems (in progress)
+\end{bullets}
+\section{Experience}
+\entry{Data Security Developer Intern}{May 2026 -- Aug. 2026}{1Password}{Toronto, ON}
+\begin{bullets}
+\item Developed and tested production data security software in Rust, contributing from design through implementation
+\item Evaluated performance and compatibility across supported platforms during a security upgrade
+\item Received the Intern Trailblazer Award for innovation and adoption of new technologies
+\end{bullets}
+\section{Projects}
+\project{\href{https://github.com/Cqctxs/Pilot}{\underline{Pilot}}}{TypeScript, JavaScript, Playwright, MCP}{Sept. 2026}
+\begin{bullets}
+\item Built a tool that lets apps and coding agents retrieve data from websites without official APIs through shared commands such as jobs.search
+\item Built a Playwright-based agent that generates and validates reusable JavaScript drivers; saved drivers run without new AI model calls, and Pilot repairs them after site changes
+\item Integrated drivers with Codex and Claude Code through Model Context Protocol (MCP); measured 50\% fewer tokens in an app-building test using existing drivers than without Pilot
+\end{bullets}
+\project{\href{https://github.com/Cqctxs/gamenet}{\underline{GameNet}}}{Rust, Tokio, QUIC, TLS 1.3, ML-KEM}{Jan. -- Sept. 2026}
+\begin{bullets}
+\item Built a TCP tunnel that lets friends join self-hosted game servers with normal clients; a public relay forwards each player to the host over a separate QUIC stream
+\item Secured the host-to-relay link with verified TLS 1.3 certificates and mandatory X25519MLKEM768 hybrid key exchange
+\item Added expiring port claims, connection limits, host-token rotation and theft recovery, with automated tests for failure paths
+\item Benchmarked synthetic TCP echo from the same EC2 client to a Mac host: 44--47 ms median open-connection reply via GameNet versus 213--215 ms via Pinggy, a similar TCP tunnel
+\end{bullets}
+\project{\href{https://github.com/Leo-Zh9/Static_Binary_Decompiler_Framework}{\underline{Alias}}}{Next.js, FastAPI, Ghidra, LLM4Decompile, Gemini, Docker, Modal}{Jan. 2026}
+\begin{bullets}
+\item Built a tool that analyzes executables without running them, showing readable C, a plain-English explanation of behavior, and potential security risks
+\item Combined Ghidra decompilation, LLM4Decompile refinement and Gemini analysis; deployed containerized inference on Modal
+\end{bullets}
+\section{Awards}
+{\small
+\textbf{UofTHacks 13 (2026)}: Best Cybersecurity Hack (1Password sponsor track) for Alias\\
+\textbf{HackMIT 2026}: The Token Company LLM Price-Saving Challenge winner for Pilot\\
+\textbf{CyberTitan Nationals (2025)}: 1st place overall\\
+\textbf{CyberPatriot National Finals (2025)}: Cisco 2nd place; 6th overall\\
+\textbf{Canadian Computing Competition}: Junior perfect score (2023); Senior Distinction (2024, 2025)
+}
+\section{Technical Skills}
+{\small
+\textbf{Languages}: Rust, C, C++, Python, TypeScript, JavaScript, Java\\
+\textbf{Systems \& Backend}: Linux, Docker, Git, Tokio, QUIC, TLS 1.3, Node.js, Express.js, FastAPI\\
+\textbf{Web \& Data}: React, Next.js, PostgreSQL, MongoDB, OpenCV, MediaPipe\\
+\textbf{AI \& Security}: MCP, LLM driver generation and validation, applied cryptography, Ghidra
+}
+\end{document}

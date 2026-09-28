@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
+import { useRouter } from "next/navigation";
 import { useDesktopState } from "@/stores/desktopState";
 import { desktopWindowRecord } from "@/config/desktop";
 import type { DesktopWindowId } from "@/types/desktop";
@@ -19,6 +20,7 @@ export default function SystemBar() {
   const [startMenuOpen, setStartMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const startButtonRef = useRef<HTMLButtonElement>(null);
+  const router = useRouter();
 
   const {
     openWindows,
@@ -242,6 +244,44 @@ export default function SystemBar() {
                 <span>{item.label}</span>
               </button>
             ))}
+
+            {/* Route-based entries (e.g. Blog) */}
+            <button
+              onClick={() => {
+                router.push("/blog");
+                setStartMenuOpen(false);
+              }}
+              style={{
+                width: "100%",
+                display: "flex",
+                alignItems: "center",
+                gap: "8px",
+                padding: "4px 8px",
+                fontSize: "11px",
+                background: "transparent",
+                border: "none",
+                textAlign: "left",
+                cursor: "pointer",
+                color: "#000000",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = "#000080";
+                e.currentTarget.style.color = "#ffffff";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "transparent";
+                e.currentTarget.style.color = "#000000";
+              }}
+            >
+              <img
+                src="/icons/win98/pen.ico"
+                alt=""
+                width="16"
+                height="16"
+                style={{ imageRendering: "pixelated" }}
+              />
+              <span>Blog</span>
+            </button>
 
             {/* Separator */}
             <div

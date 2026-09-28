@@ -3,6 +3,88 @@
 export default function ProjectsWindow() {
   const projects = [
     {
+      title: "Pilot",
+      award: "HackMIT 2026 — The Token Company LLM Price-Saving Challenge winner",
+      description:
+        "A tool that lets apps and coding agents retrieve website data through reusable commands, even when a site has no official API.",
+      highlights: [
+        "Generated and validated reusable browser drivers with Playwright",
+        "Reused saved drivers without new AI model calls and repaired them after site changes",
+        "Connected drivers to Codex and Claude Code through Model Context Protocol (MCP)",
+        "Measured 50% fewer tokens in an app-building test using existing drivers",
+      ],
+      tech: ["TypeScript", "JavaScript", "Playwright", "MCP"],
+      github: "https://github.com/Cqctxs/Pilot",
+      linkText: "View on GitHub",
+      date: "Sept 2026",
+    },
+    {
+      title: "GameNet",
+      award: "Self-hosted game server networking",
+      description:
+        "A Rust tunnel that lets friends join self-hosted game servers with ordinary clients through a public relay.",
+      highlights: [
+        "Forwarded each player over an independent QUIC stream",
+        "Secured the host link with verified TLS 1.3 certificates and hybrid key exchange",
+        "Added expiring port claims, connection limits, and host-token recovery",
+        "Tested failure paths and benchmarked relay response times",
+      ],
+      tech: ["Rust", "Tokio", "QUIC", "TLS 1.3", "ML-KEM"],
+      github: "https://github.com/Cqctxs/gamenet",
+      linkText: "View on GitHub",
+      date: "Jan–Sept 2026",
+    },
+    {
+      title: "Alias",
+      award: "Best Cybersecurity Hack (1Password) - UofTHacks 13",
+      description:
+        "AI-powered binary analysis tool that transforms executables into readable C code and flags potential security risks before you run them.",
+      highlights: [
+        "Built binary decompilation pipeline with Ghidra + LLM4Decompile",
+        "Two-pass AI refactoring with Gemini 3 Pro and Gemini Flash",
+        "Integrated Gemini AI to generate plain-English security verdicts",
+        "Deployed via Docker on Modal for scalable inference",
+      ],
+      tech: [
+        "Next.js",
+        "TypeScript",
+        "FastAPI",
+        "Ghidra",
+        "LLM4Decompile",
+        "Gemini AI",
+        "Docker",
+        "Modal",
+      ],
+      github: "https://github.com/Leo-Zh9/Static_Binary_Decompiler_Framework",
+      linkText: "View on GitHub",
+      date: "Jan 2026",
+    },
+    {
+      title: "Benchy",
+      award: "AI Performance Optimizer - GenAI Genesis",
+      description:
+        "Production-ready developer tool that analyzes, benchmarks, and optimizes code with AI, producing a CodeMark performance score.",
+      highlights: [
+        "Tree-sitter AST parsing + Gemini 2.5 Pro to identify bottlenecks",
+        "LangGraph agent orchestration with PydanticAI structured output",
+        "Safe, isolated benchmark execution in Modal cloud containers",
+        "React Flow call graph with performance heatmap visualization",
+      ],
+      tech: [
+        "Next.js",
+        "FastAPI",
+        "LangGraph",
+        "PydanticAI",
+        "Gemini 2.5 Pro",
+        "Tree-sitter",
+        "Modal",
+        "React Flow",
+      ],
+      github: "https://github.com/Cqctxs/genai-genisis",
+      linkText: "View on GitHub",
+      date: "2026",
+    },
+    {
       title: "Patchy",
       award: "Best App Made with Vellum - Hack the 6ix 2025",
       description:

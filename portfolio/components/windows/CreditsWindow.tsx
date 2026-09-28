@@ -97,10 +97,7 @@ export default function CreditsWindow() {
             color: "#808080",
           }}
         >
-          <p>
-            Built with ❤️ using modern web technologies
-            <br />© 2026 - Designed and developed from scratch
-          </p>
+          <p>© 2026 - Designed and developed by Sean Zhao</p>
         </div>
       </div>
     </div>

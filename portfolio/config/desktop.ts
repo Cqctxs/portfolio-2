@@ -70,13 +70,25 @@ export const desktopWindows: DesktopWindowConfig[] = [
   },
 ] as const;
 
-export const desktopIcons: DesktopIconConfig[] = desktopWindows
+const windowIcons: DesktopIconConfig[] = desktopWindows
   .filter((window) => window.id !== "credits") // Exclude credits from desktop icons
   .map(({ id, title, iconSrc }) => ({
     id,
     label: title,
     iconSrc,
   }));
+
+// Link-style icons that navigate to their own route instead of opening a window.
+const routeIcons: DesktopIconConfig[] = [
+  {
+    id: "blog",
+    label: "Blog",
+    iconSrc: "/icons/win98/pen.ico",
+    href: "/blog",
+  },
+];
+
+export const desktopIcons: DesktopIconConfig[] = [...windowIcons, ...routeIcons];
 
 export const desktopWindowRecord = desktopWindows.reduce(
   (acc, windowConfig) => {

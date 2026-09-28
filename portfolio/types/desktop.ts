@@ -18,8 +18,12 @@ export interface DesktopWindowConfig {
   component: ComponentType;
 }
 
+export type DesktopIconId = DesktopWindowId | "blog";
+
 export interface DesktopIconConfig {
-  id: DesktopWindowId;
+  id: DesktopIconId;
   label: string;
   iconSrc: string;
+  /** If present, clicking the icon navigates here instead of opening a window. */
+  href?: string;
 }

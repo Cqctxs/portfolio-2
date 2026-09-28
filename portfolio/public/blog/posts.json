@@ -1,0 +1,9 @@
+[
+  {
+    "id": "welcome",
+    "title": "Welcome to my blog",
+    "content": "Hey there! This is a little corner of my portfolio where I jot down thoughts on **hackathons**, *cybersecurity*, and whatever projects I'm tinkering with.\n\nEverything here is written in **Markdown** — the same flavor you'd use on GitHub or Reddit.\n\n## What you'll find here\n\n- Hackathon recaps and build logs\n- Notes on AI, systems, and security\n- Random musings from a CompE student\n\n### Quick markdown cheat sheet\n\n1. `# Heading`, `## Subheading`\n2. `**bold**`, `*italic*`, `` `code` ``\n3. `- bullet` or `1. numbered` for lists\n4. `> quote` for blockquotes\n5. ``` ```lang ``` ``` for fenced code blocks\n6. `[text](https://url)` for links\n\n```ts\n// Yes, even code blocks render nicely.\nfunction hello(name: string) {\n  return `Hello, ${name}!`;\n}\n```\n\n> \"The best way to learn is to build, break, and blog about it.\"\n\nThanks for stopping by :)",
+    "createdAt": 1729900800000,
+    "updatedAt": 1729900800000
+  }
+]
