@@ -353,7 +353,7 @@ export default function ResumeWindow() {
             color: "#808080",
           }}
         >
-          Last updated: September 2026
+          Last updated: October 2026
         </div>
       </div>
     </div>
