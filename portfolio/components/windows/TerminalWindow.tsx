@@ -58,7 +58,7 @@ export default function TerminalWindow() {
       case "about":
         output = [
           "Hey! I'm Sean Zhao",
-          "Computer Engineering @ UofT (Class of 2030)",
+          "Computer Engineering @ UofT (Class of 2029)",
           "Cybersecurity nerd, hackathon enthusiast, full-stack dev",
           "I love building things that solve real problems!",
         ];
@@ -67,20 +67,22 @@ export default function TerminalWindow() {
         output = [
           "Some stuff I've built:",
           "",
+          "Cuprite - Automatic GPU offload for Rust (in progress)",
+          "Pilot - Reusable browser drivers for AI agents (Won @ HackMIT 2026)",
+          "GameNet - Secure Rust relay for self-hosted game servers",
+          "Alias - AI binary analysis (Best Cybersecurity Hack @ UofTHacks 13)",
           "Patchy - AI security scanner (Won Best App @ Hack the 6ix)",
-          "Cursequence - Card battler game (Won Best Game @ Counterspell)",
-          "Wanderlust - AI travel planner (Gemini Developer Competition)",
           "",
           "Check out the Projects window for more!",
         ];
         break;
       case "skills":
         output = [
-          "Languages: JavaScript, TypeScript, Python, Java, C/C++",
+          "Languages: Rust, C, C++, Python, TypeScript, JavaScript, Java",
+          "Systems: Linux, Docker, Tokio, QUIC, TLS 1.3, CUDA",
+          "Backend: Node.js, Express.js, FastAPI, PostgreSQL, MongoDB",
           "Frontend: React, Next.js, TailwindCSS",
-          "Backend: Node.js, Express.js, MongoDB",
-          "AI/APIs: OpenAI, Gemini, Vellum, GitHub API",
-          "Cloud: GCP, Oracle Cloud, Docker, Vercel",
+          "AI & Security: MCP, Playwright, Gemini, OpenAI, Ghidra",
         ];
         break;
       case "contact":

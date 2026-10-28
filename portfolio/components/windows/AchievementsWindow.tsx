@@ -3,6 +3,24 @@
 export default function AchievementsWindow() {
   const achievements = [
     {
+      title: "HackMIT 2026",
+      subtitle: "The Token Company LLM Price-Saving Challenge Winner",
+      description: '"Pilot" - reusable browser drivers for AI agents',
+      date: "Sept 2026",
+    },
+    {
+      title: "1Password Intern Trailblazer Award",
+      subtitle: "Data Security Developer Intern",
+      description: "For innovation and adoption of new technologies",
+      date: "Aug 2026",
+    },
+    {
+      title: "UofTHacks 13",
+      subtitle: "Best Cybersecurity Hack (1Password)",
+      description: '"Alias" - AI binary analysis tool',
+      date: "Jan 2026",
+    },
+    {
       title: "CyberTitan National Champions",
       subtitle: "1st Place Overall",
       description: "Canada's national youth cybersecurity competition",

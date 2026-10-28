@@ -173,15 +173,42 @@ export default function ResumeWindow() {
             }}
           >
             <div style={{ padding: "8px", borderBottom: "1px solid #c0c0c0" }}>
-              <div style={{ fontWeight: "bold" }}>Pilot</div>
+              <div style={{ fontWeight: "bold" }}>
+                <a
+                  href="https://github.com/Cqctxs/Pilot"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: "#0000ff", textDecoration: "underline" }}
+                >
+                  Pilot
+                </a>
+              </div>
               <div>Reusable browser drivers for apps and coding agents</div>
             </div>
             <div style={{ padding: "8px", borderBottom: "1px solid #c0c0c0" }}>
-              <div style={{ fontWeight: "bold" }}>GameNet</div>
+              <div style={{ fontWeight: "bold" }}>
+                <a
+                  href="https://github.com/Cqctxs/gamenet"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: "#0000ff", textDecoration: "underline" }}
+                >
+                  GameNet
+                </a>
+              </div>
               <div>Rust relay for self-hosted game servers</div>
             </div>
             <div style={{ padding: "8px" }}>
-              <div style={{ fontWeight: "bold" }}>Alias</div>
+              <div style={{ fontWeight: "bold" }}>
+                <a
+                  href="https://github.com/Leo-Zh9/Static_Binary_Decompiler_Framework"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: "#0000ff", textDecoration: "underline" }}
+                >
+                  Alias
+                </a>
+              </div>
               <div>Executable analysis with readable code and security summaries</div>
             </div>
           </div>

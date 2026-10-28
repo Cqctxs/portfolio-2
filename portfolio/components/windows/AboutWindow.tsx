@@ -76,8 +76,10 @@ export default function AboutWindow() {
           Highlights
         </legend>
         <ul style={{ margin: 0, paddingLeft: "16px" }}>
+          <li>Data Security Developer Intern @ 1Password - Intern Trailblazer Award (2026)</li>
+          <li>HackMIT Winner - The Token Company Challenge (2026)</li>
+          <li>UofTHacks 13 - Best Cybersecurity Hack (2026)</li>
           <li>CyberTitan National Champion (2025)</li>
-          <li>Hack the 6ix Winner - Best App with Vellum (2025)</li>
           <li>CyberPatriot National Finals - 2nd Place Cisco (2025)</li>
           <li>CCC Junior Perfect Score (2023)</li>
         </ul>
@@ -94,7 +96,8 @@ export default function AboutWindow() {
           What I&apos;m Up To
         </legend>
         <ul style={{ margin: 0, paddingLeft: "16px" }}>
-          <li>First-year Computer Engineering @ UofT</li>
+          <li>Second-year Computer Engineering @ UofT</li>
+          <li>Building Cuprite: automatic GPU offload for Rust</li>
           <li>Learning lower-level systems & hardware</li>
           <li>Always down to hack at a hackathon</li>
           <li>Building projects that solve real problems</li>

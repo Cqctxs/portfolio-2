@@ -3,6 +3,23 @@
 export default function ProjectsWindow() {
   const projects = [
     {
+      title: "Cuprite",
+      award: "Work in progress — automatic GPU acceleration for Rust",
+      description:
+        "A rustc driver that finds loops in ordinary Rust code that can run on the GPU and rewrites them to offload to CUDA, falling back to the CPU whenever the GPU can't take the work.",
+      highlights: [
+        "Hooks into rustc to analyze MIR and decide which functions are safe GPU candidates, giving a reason for every rejection",
+        "Rewrites accepted functions to call a runtime that runs them on CUDA, leaving the original CPU path untouched on failure",
+        "Built a backend-generic GPU memory manager that keeps data resident on the device between passes",
+        "Differential tests check every GPU result against the CPU's",
+        "Early stage: currently recognizes in-place multiply-add loops over u32 slices",
+      ],
+      tech: ["Rust", "rustc internals (MIR)", "CUDA", "cudarc"],
+      github: "https://github.com/Cqctxs/cuprite",
+      linkText: "View on GitHub",
+      date: "Oct 2026 – present",
+    },
+    {
       title: "Pilot",
       award: "HackMIT 2026 — The Token Company LLM Price-Saving Challenge winner",
       description:
